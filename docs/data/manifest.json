@@ -1,329 +1,329 @@
 {
-  "repo": "SergioCyber/malackathon-2026-incidente-gsec",
-  "tag_base": "dataset-v1",
-  "wave_tag_prefix": "oleada-",
-  "generated_at": "2026-10-13T08:46:22+00:00",
-  "seed": 2026,
-  "window": {
-    "start": "2026-09-07T00:00:00+02:00",
-    "end": "2026-10-06T12:00:00+02:00"
-  },
-  "event_start": "2026-10-15T10:15:00+02:00",
-  "deadline": "2026-10-15T19:30:00+02:00",
-  "contact": "el canal de la organización del Malackathon (por confirmar)",
-  "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
-  "totals": {
-    "rows": 9160288,
-    "files": 244,
-    "bytes_compressed": 276912448
-  },
   "assets": [
     {
+      "files": 31,
+      "format": "CSV gzip",
       "kind": "source",
-      "name": "base_firewall.tar.gz",
-      "source": "firewall",
       "label": "Cortafuegos perimetral e interno",
-      "format": "CSV gzip",
+      "name": "base_firewall.tar.gz",
       "rows": 2471081,
-      "files": 31,
+      "sha256": "df07a3142a19baf5309ff7da22c17167d7c23fdf17869a70f519af6ce977acf9",
       "size": 64753640,
-      "sha256": "df07a3142a19baf5309ff7da22c17167d7c23fdf17869a70f519af6ce977acf9"
+      "source": "firewall"
     },
     {
+      "files": 1,
+      "format": "CSV gzip",
       "kind": "source",
-      "name": "base_vpn.tar.gz",
-      "source": "vpn",
       "label": "Concentrador VPN del laboratorio",
-      "format": "CSV gzip",
+      "name": "base_vpn.tar.gz",
       "rows": 54579,
-      "files": 1,
+      "sha256": "6d1e387e0b20db4a128fe79c7c324109cb42673555aa2ce16a7545689342c2d6",
       "size": 1031623,
-      "sha256": "6d1e387e0b20db4a128fe79c7c324109cb42673555aa2ce16a7545689342c2d6"
+      "source": "vpn"
     },
     {
+      "files": 31,
+      "format": "CSV gzip",
       "kind": "source",
-      "name": "base_proxy.tar.gz",
-      "source": "proxy",
       "label": "Proxy web",
-      "format": "CSV gzip",
+      "name": "base_proxy.tar.gz",
       "rows": 1960640,
-      "files": 31,
+      "sha256": "5f8dbe6f88cd62e86d3f468cff6a33fdb38be29374f4fa7e7754be868d9582a2",
       "size": 70718002,
-      "sha256": "5f8dbe6f88cd62e86d3f468cff6a33fdb38be29374f4fa7e7754be868d9582a2"
+      "source": "proxy"
     },
     {
+      "files": 31,
+      "format": "JSONL gzip",
       "kind": "source",
-      "name": "base_dns.tar.gz",
-      "source": "dns",
       "label": "Resolutores DNS (internos + sandbox)",
-      "format": "JSONL gzip",
+      "name": "base_dns.tar.gz",
       "rows": 2427238,
-      "files": 31,
+      "sha256": "2c3865d90dd0f38583766a7d5199b011b1f6db2af58f62d8673463af7c8f91fb",
       "size": 43572527,
-      "sha256": "2c3865d90dd0f38583766a7d5199b011b1f6db2af58f62d8673463af7c8f91fb"
+      "source": "dns"
     },
     {
-      "kind": "source",
-      "name": "base_email.tar.gz",
-      "source": "email",
-      "label": "Pasarela de correo + muestras .eml",
-      "format": "CSV gzip · EML",
-      "rows": 47432,
       "files": 12,
+      "format": "CSV gzip · EML",
+      "kind": "source",
+      "label": "Pasarela de correo + muestras .eml",
+      "name": "base_email.tar.gz",
+      "rows": 47432,
+      "sha256": "ffbf43ed47298ca534cfc16e6e69b1f6af7c334eff50dd95b1630a4487f975bd",
       "size": 2346513,
-      "sha256": "ffbf43ed47298ca534cfc16e6e69b1f6af7c334eff50dd95b1630a4487f975bd"
+      "source": "email"
     },
     {
+      "files": 31,
+      "format": "JSONL gzip",
       "kind": "source",
-      "name": "base_edr.tar.gz",
-      "source": "edr",
       "label": "Telemetría de endpoint (tipo Sysmon)",
-      "format": "JSONL gzip",
+      "name": "base_edr.tar.gz",
       "rows": 1113050,
-      "files": 31,
+      "sha256": "0584acdcfa5dfe2d2361f6e5192d10dc19fe701a2b91ce579a87294ef1740e3f",
       "size": 60533051,
-      "sha256": "0584acdcfa5dfe2d2361f6e5192d10dc19fe701a2b91ce579a87294ef1740e3f"
+      "source": "edr"
     },
     {
+      "files": 31,
+      "format": "JSONL gzip",
       "kind": "source",
-      "name": "base_winsec.tar.gz",
-      "source": "winsec",
       "label": "Registro de seguridad de Windows",
-      "format": "JSONL gzip",
+      "name": "base_winsec.tar.gz",
       "rows": 705127,
-      "files": 31,
+      "sha256": "3905cbfbf14ab820ad6869ec20cbe2fe3592fa1a8fc91053e087b5c7fb78482c",
       "size": 21547771,
-      "sha256": "3905cbfbf14ab820ad6869ec20cbe2fe3592fa1a8fc91053e087b5c7fb78482c"
+      "source": "winsec"
     },
     {
+      "files": 31,
+      "format": "CSV gzip",
       "kind": "source",
-      "name": "base_dbaudit.tar.gz",
-      "source": "dbaudit",
       "label": "Auditoría de la BD de inteligencia (pgaudit)",
-      "format": "CSV gzip",
+      "name": "base_dbaudit.tar.gz",
       "rows": 240949,
-      "files": 31,
+      "sha256": "b2181da9e63d9edbefa85bceeaf112aeab71bfb0f962d5902fc2f846b5cbf574",
       "size": 5439489,
-      "sha256": "b2181da9e63d9edbefa85bceeaf112aeab71bfb0f962d5902fc2f846b5cbf574"
+      "source": "dbaudit"
     },
     {
-      "kind": "source",
-      "name": "base_sandbox.tar.gz",
-      "source": "sandbox",
-      "label": "Detonaciones del sandbox farm",
-      "format": "JSONL gzip",
-      "rows": 52844,
       "files": 31,
-      "size": 5804658,
-      "sha256": "b11b385906b6648c1478186f4e7d55220edd1be4a0e5f452bca50b9a9545626c"
-    },
-    {
+      "format": "JSONL gzip",
       "kind": "source",
-      "name": "base_badges.tar.gz",
-      "source": "badges",
-      "label": "Accesos físicos (tarjetas)",
+      "label": "Detonaciones del sandbox farm",
+      "name": "base_sandbox.tar.gz",
+      "rows": 52844,
+      "sha256": "b11b385906b6648c1478186f4e7d55220edd1be4a0e5f452bca50b9a9545626c",
+      "size": 5804658,
+      "source": "sandbox"
+    },
+    {
+      "files": 1,
       "format": "CSV gzip",
+      "kind": "source",
+      "label": "Accesos físicos (tarjetas)",
+      "name": "base_badges.tar.gz",
       "rows": 55077,
-      "files": 1,
+      "sha256": "e78b454d731e78d3588573966ac0ba240fbbbbbc54ffe6d858a39b9795acfa5d",
       "size": 485201,
-      "sha256": "e78b454d731e78d3588573966ac0ba240fbbbbbc54ffe6d858a39b9795acfa5d"
+      "source": "badges"
     },
     {
-      "kind": "context",
-      "name": "base_contexto.tar.gz",
-      "source": "contexto",
-      "label": "Inventario, turnos, casos, tickets, feed de IOCs, GeoIP sintético y notas de guardia",
-      "format": "CSV · TXT",
-      "rows": 32271,
       "files": 13,
+      "format": "CSV · TXT",
+      "kind": "context",
+      "label": "Inventario, turnos, casos, tickets, feed de IOCs, GeoIP sintético y notas de guardia",
+      "name": "base_contexto.tar.gz",
+      "rows": 32271,
+      "sha256": "c4afeff55cebd650477e73e9ad80a2ddd74be857d4edde6fc1d8024766ad1730",
       "size": 670428,
-      "sha256": "c4afeff55cebd650477e73e9ad80a2ddd74be857d4edde6fc1d8024766ad1730"
+      "source": "contexto"
     },
     {
-      "kind": "doc",
-      "name": "README_DATASET_ES.md",
-      "source": "doc",
-      "label": "Diccionario de datos",
-      "format": "Markdown",
-      "rows": null,
       "files": 1,
+      "format": "Markdown",
+      "kind": "doc",
+      "label": "Diccionario de datos",
+      "name": "README_DATASET_ES.md",
+      "rows": null,
+      "sha256": "2b6e053a8a3bbdb365b0366ab58e1c71b2b49c6e6247a11c284d24b1b9d377ba",
       "size": 9545,
-      "sha256": "2b6e053a8a3bbdb365b0366ab58e1c71b2b49c6e6247a11c284d24b1b9d377ba"
+      "source": "doc"
     }
   ],
+  "contact": "el canal de la organización del Malackathon (por confirmar)",
+  "deadline": "2026-10-15T19:30:00+02:00",
+  "event_start": "2026-10-15T10:15:00+02:00",
+  "generated_at": "2026-10-13T08:46:22+00:00",
+  "repo": "SergioCyber/malackathon-2026-incidente-gsec",
+  "seed": 2026,
+  "sources": [
+    {
+      "description": "Cortafuegos perimetral e interno (flujos permitidos y denegados, zonas de origen/destino)",
+      "format": "CSV gzip",
+      "id": "firewall",
+      "path": "firewall/fw_AAAA-MM-DD.csv.gz",
+      "rows": 2471081
+    },
+    {
+      "description": "Concentrador VPN (conexiones, autenticación, MFA, sesiones)",
+      "format": "CSV gzip",
+      "id": "vpn",
+      "path": "vpn/vpn_events.csv.gz",
+      "rows": 54579
+    },
+    {
+      "description": "Proxy web corporativo (peticiones HTTP/HTTPS de puestos, servidores y la línea sucia de la sandbox)",
+      "format": "CSV gzip",
+      "id": "proxy",
+      "path": "proxy/proxy_AAAA-MM-DD.csv.gz",
+      "rows": 1960640
+    },
+    {
+      "description": "Resolutores DNS internos y resolutor de la granja de sandbox (consultas y respuestas)",
+      "format": "JSONL gzip",
+      "id": "dns",
+      "path": "dns/dns_AAAA-MM-DD.jsonl.gz",
+      "rows": 2427238
+    },
+    {
+      "description": "Pasarela de correo: mensajes entrantes y salientes, veredictos, adjuntos y acciones",
+      "format": "CSV gzip",
+      "id": "email",
+      "path": "email/gateway_events.csv.gz",
+      "rows": 47432
+    },
+    {
+      "description": "Telemetría de endpoint tipo Sysmon (procesos, red, ficheros, registro)",
+      "format": "JSONL gzip",
+      "id": "edr",
+      "path": "edr/edr_AAAA-MM-DD.jsonl.gz",
+      "rows": 1113050
+    },
+    {
+      "description": "Registro de seguridad de Windows (inicios de sesión, servicios, recursos compartidos)",
+      "format": "JSONL gzip",
+      "id": "winsec",
+      "path": "winsec/winsec_AAAA-MM-DD.jsonl.gz",
+      "rows": 705127
+    },
+    {
+      "description": "Auditoría de la base de datos de inteligencia `intel` (PostgreSQL + pgaudit)",
+      "format": "CSV gzip",
+      "id": "dbaudit",
+      "path": "dbaudit/intel_audit_AAAA-MM-DD.csv.gz",
+      "rows": 240949
+    },
+    {
+      "description": "Registro de detonaciones de la granja de sandbox (una fila por muestra ejecutada)",
+      "format": "JSONL gzip",
+      "id": "sandbox",
+      "path": "sandbox/detonations_AAAA-MM-DD.jsonl.gz",
+      "rows": 52844
+    },
+    {
+      "description": "Control de accesos físicos (tarjetas)",
+      "format": "CSV gzip",
+      "id": "badges",
+      "path": "badges/accesos_fisicos.csv.gz",
+      "rows": 55077
+    },
+    {
+      "description": "Tickets del servicio de soporte interno",
+      "format": "CSV",
+      "id": "tickets",
+      "path": "extras/tickets.csv",
+      "rows": 350
+    },
+    {
+      "description": "Feed de inteligencia de amenazas (indicadores de compromiso)",
+      "format": "CSV",
+      "id": "ti_feed",
+      "path": "ti/iocs.csv",
+      "rows": 401
+    },
+    {
+      "description": "Algunos mensajes completos (texto plano UTF-8)",
+      "format": "RFC 5322",
+      "id": "email (muestras)",
+      "path": "email/eml/<msg_id>.eml",
+      "rows": null
+    },
+    {
+      "description": "Personas (usuario, departamento, puesto principal, tarjeta)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/users.csv",
+      "rows": 300
+    },
+    {
+      "description": "Equipos (puestos, servidores, VM de sandbox, red)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/hosts.csv",
+      "rows": 467
+    },
+    {
+      "description": "Departamentos y responsables (incluye el pseudo-departamento `SBX`)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/departamentos.csv",
+      "rows": 11
+    },
+    {
+      "description": "Turno de cada persona y día (`M` mañana, `T` tarde, `N` noche, `L` libre, `V` viaje/vacaciones)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/turnos.csv",
+      "rows": 9000
+    },
+    {
+      "description": "Servicios propios publicados en Internet",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/servicios_externos.csv",
+      "rows": 4
+    },
+    {
+      "description": "Organizaciones socias que comparten inteligencia (TLP por defecto)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/socios.csv",
+      "rows": 25
+    },
+    {
+      "description": "Casos de inteligencia (socio, TLP, analista asignado, estado)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/casos.csv",
+      "rows": 1500
+    },
+    {
+      "description": "Personas objetivo de campañas documentadas en los casos (`confidencial` si el caso es TLP:RED)",
+      "format": "CSV",
+      "id": "inventory",
+      "path": "inventory/personas_objetivo.csv",
+      "rows": 20000
+    }
+  ],
+  "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
+  "tag_base": "dataset-v1",
+  "totals": {
+    "bytes_compressed": 276912448,
+    "files": 244,
+    "rows": 9160288
+  },
+  "wave_tag_prefix": "oleada-",
   "waves": [
     {
+      "asset": "wave1.tar.gz",
       "id": "wave1",
-      "tag": "oleada-1",
       "label": "Oleada 1",
       "release_at": "2026-10-15T08:15:00Z",
       "release_at_local": "2026-10-15T10:15:00+02:00",
-      "asset": "wave1.tar.gz"
+      "tag": "oleada-1"
     },
     {
+      "asset": "wave2.tar.gz",
       "id": "wave2",
-      "tag": "oleada-2",
       "label": "Oleada 2",
       "release_at": "2026-10-15T11:15:00Z",
       "release_at_local": "2026-10-15T13:15:00+02:00",
-      "asset": "wave2.tar.gz"
+      "tag": "oleada-2"
     },
     {
+      "asset": "wave3.tar.gz",
       "id": "wave3",
-      "tag": "oleada-3",
       "label": "Oleada 3",
       "release_at": "2026-10-15T14:15:00Z",
       "release_at_local": "2026-10-15T16:15:00+02:00",
-      "asset": "wave3.tar.gz"
+      "tag": "oleada-3"
     }
   ],
-  "sources": [
-    {
-      "id": "firewall",
-      "path": "firewall/fw_AAAA-MM-DD.csv.gz",
-      "format": "CSV gzip",
-      "rows": 2471081,
-      "description": "Cortafuegos perimetral e interno (flujos permitidos y denegados, zonas de origen/destino)"
-    },
-    {
-      "id": "vpn",
-      "path": "vpn/vpn_events.csv.gz",
-      "format": "CSV gzip",
-      "rows": 54579,
-      "description": "Concentrador VPN (conexiones, autenticación, MFA, sesiones)"
-    },
-    {
-      "id": "proxy",
-      "path": "proxy/proxy_AAAA-MM-DD.csv.gz",
-      "format": "CSV gzip",
-      "rows": 1960640,
-      "description": "Proxy web corporativo (peticiones HTTP/HTTPS de puestos, servidores y la línea sucia de la sandbox)"
-    },
-    {
-      "id": "dns",
-      "path": "dns/dns_AAAA-MM-DD.jsonl.gz",
-      "format": "JSONL gzip",
-      "rows": 2427238,
-      "description": "Resolutores DNS internos y resolutor de la granja de sandbox (consultas y respuestas)"
-    },
-    {
-      "id": "email",
-      "path": "email/gateway_events.csv.gz",
-      "format": "CSV gzip",
-      "rows": 47432,
-      "description": "Pasarela de correo: mensajes entrantes y salientes, veredictos, adjuntos y acciones"
-    },
-    {
-      "id": "edr",
-      "path": "edr/edr_AAAA-MM-DD.jsonl.gz",
-      "format": "JSONL gzip",
-      "rows": 1113050,
-      "description": "Telemetría de endpoint tipo Sysmon (procesos, red, ficheros, registro)"
-    },
-    {
-      "id": "winsec",
-      "path": "winsec/winsec_AAAA-MM-DD.jsonl.gz",
-      "format": "JSONL gzip",
-      "rows": 705127,
-      "description": "Registro de seguridad de Windows (inicios de sesión, servicios, recursos compartidos)"
-    },
-    {
-      "id": "dbaudit",
-      "path": "dbaudit/intel_audit_AAAA-MM-DD.csv.gz",
-      "format": "CSV gzip",
-      "rows": 240949,
-      "description": "Auditoría de la base de datos de inteligencia `intel` (PostgreSQL + pgaudit)"
-    },
-    {
-      "id": "sandbox",
-      "path": "sandbox/detonations_AAAA-MM-DD.jsonl.gz",
-      "format": "JSONL gzip",
-      "rows": 52844,
-      "description": "Registro de detonaciones de la granja de sandbox (una fila por muestra ejecutada)"
-    },
-    {
-      "id": "badges",
-      "path": "badges/accesos_fisicos.csv.gz",
-      "format": "CSV gzip",
-      "rows": 55077,
-      "description": "Control de accesos físicos (tarjetas)"
-    },
-    {
-      "id": "tickets",
-      "path": "extras/tickets.csv",
-      "format": "CSV",
-      "rows": 350,
-      "description": "Tickets del servicio de soporte interno"
-    },
-    {
-      "id": "ti_feed",
-      "path": "ti/iocs.csv",
-      "format": "CSV",
-      "rows": 401,
-      "description": "Feed de inteligencia de amenazas (indicadores de compromiso)"
-    },
-    {
-      "id": "email (muestras)",
-      "path": "email/eml/<msg_id>.eml",
-      "format": "RFC 5322",
-      "rows": null,
-      "description": "Algunos mensajes completos (texto plano UTF-8)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/users.csv",
-      "format": "CSV",
-      "rows": 300,
-      "description": "Personas (usuario, departamento, puesto principal, tarjeta)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/hosts.csv",
-      "format": "CSV",
-      "rows": 467,
-      "description": "Equipos (puestos, servidores, VM de sandbox, red)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/departamentos.csv",
-      "format": "CSV",
-      "rows": 11,
-      "description": "Departamentos y responsables (incluye el pseudo-departamento `SBX`)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/turnos.csv",
-      "format": "CSV",
-      "rows": 9000,
-      "description": "Turno de cada persona y día (`M` mañana, `T` tarde, `N` noche, `L` libre, `V` viaje/vacaciones)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/servicios_externos.csv",
-      "format": "CSV",
-      "rows": 4,
-      "description": "Servicios propios publicados en Internet"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/socios.csv",
-      "format": "CSV",
-      "rows": 25,
-      "description": "Organizaciones socias que comparten inteligencia (TLP por defecto)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/casos.csv",
-      "format": "CSV",
-      "rows": 1500,
-      "description": "Casos de inteligencia (socio, TLP, analista asignado, estado)"
-    },
-    {
-      "id": "inventory",
-      "path": "inventory/personas_objetivo.csv",
-      "format": "CSV",
-      "rows": 20000,
-      "description": "Personas objetivo de campañas documentadas en los casos (`confidencial` si el caso es TLP:RED)"
-    }
-  ]
+  "window": {
+    "end": "2026-10-06T12:00:00+02:00",
+    "start": "2026-09-07T00:00:00+02:00"
+  }
 }

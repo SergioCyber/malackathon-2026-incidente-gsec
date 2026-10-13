@@ -15,8 +15,10 @@
 
 ## 2. Equipos y herramientas
 
-- Equipos de 2 a 4 personas. Todo el trabajo se realiza durante la ventana del evento, salvo la
-  lectura del enunciado y la preparación del entorno (instalar herramientas, crear cuentas).
+- Equipos de **4 a 5 personas** (mínimo 4, máximo 5). Cada miembro necesita una cuenta de GitHub:
+  el acceso al repositorio de entrega se concede por usuario. Todo el trabajo se realiza durante la
+  ventana del evento, salvo la lectura del enunciado y la preparación del entorno (instalar
+  herramientas, crear cuentas).
 - **Libertad total de herramientas**, incluidos asistentes de IA. Sois responsables de lo que
   entregáis: una respuesta inventada por un asistente a partir de una pista falsa cuenta como
   trampa. Documentad en la bitácora qué herramientas habéis usado y para qué.
