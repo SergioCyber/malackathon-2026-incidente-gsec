@@ -10,139 +10,148 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>
-  // Theme before first paint: saved choice, else system preference.
   (function () { try { var t = localStorage.getItem('mt-theme'); if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; document.documentElement.dataset.theme = t; } catch (e) { document.documentElement.dataset.theme = 'light'; } })();
 </script>
 <style>
   :root {
-    --blue: #3B4FFF; --blue-d: #2F41E0; --blue-bg: #EEF0FF;
-    --green: #178F4E; --green-bg: #E7F6EC; --red: #D93025; --red-bg: #FCEAE8; --amber: #B26A00; --amber-bg: #FFF3DD;
-    --text: #1F2328; --muted: #656D76; --muted-2: #8C949E; --line: #E3E6EA; --line-2: #D0D5DB;
-    --bg: #F4F5F7; --card: #FFFFFF; --chip: #EFF1F4; --code: #F6F7F9; --hover: #F8F9FA; --shadow: 0 1px 2px rgba(16,24,40,.05);
-    --mono: "Roboto Mono", Menlo, Consolas, monospace;
+    --blue: #3B4FFF; --blue-d: #2E40E6; --blue-bg: #EEF0FF;
+    --green: #1E8E3E; --green-bg: #E6F4EA; --red: #D93025; --red-bg: #FCE8E6; --amber: #B06000; --amber-bg: #FEF3DC;
+    --text: #202124; --muted: #5F6368; --muted-2: #9AA0A6; --line: #E0E3E7; --line-2: #CDD2D8;
+    --bg: #F1F3F4; --card: #FFFFFF; --chip: #F1F3F4; --code: #F8F9FA; --hover: #F8F9FA;
+    --mono: "Roboto Mono", Menlo, Consolas, monospace; --r: 4px;
   }
   [data-theme="dark"] {
-    --blue: #7C8CFF; --blue-d: #98A5FF; --blue-bg: rgba(124,140,255,.14);
-    --green: #3FC178; --green-bg: rgba(63,193,120,.14); --red: #FF7B72; --red-bg: rgba(255,123,114,.14); --amber: #F2B84B; --amber-bg: rgba(242,184,75,.14);
-    --text: #E6EAF0; --muted: #98A2AE; --muted-2: #6E7883; --line: #262D37; --line-2: #333C48;
-    --bg: #0F1216; --card: #161B22; --chip: #1F262F; --code: #0C0F13; --hover: #1B2129; --shadow: none;
+    --blue: #8AB4F8; --blue-d: #AECBFA; --blue-bg: rgba(138,180,248,.14);
+    --green: #5BB974; --green-bg: rgba(91,185,116,.14); --red: #F28B82; --red-bg: rgba(242,139,130,.14); --amber: #FDD663; --amber-bg: rgba(253,214,99,.12);
+    --text: #E8EAED; --muted: #9AA0A6; --muted-2: #6B7178; --line: #2B3036; --line-2: #3C4147;
+    --bg: #121417; --card: #1B1F23; --chip: #26292E; --code: #15181B; --hover: #212529;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 Roboto, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
-  code, .mono { font-family: var(--mono); font-size: 0.93em; }
+  code, .mono { font-family: var(--mono); font-size: .92em; }
   button { font: inherit; cursor: pointer; color: inherit; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .wrap { width: min(1180px, 100% - 40px); margin: 0 auto; }
 
-  /* top bar */
+  /* ----- top bar ----- */
   .nav { position: sticky; top: 0; z-index: 10; background: var(--card); border-bottom: 1px solid var(--line); }
-  .nav .in { max-width: 1240px; margin: 0 auto; height: 56px; padding: 0 20px; display: flex; align-items: center; gap: 18px; }
-  .logo { display: flex; align-items: center; gap: 9px; white-space: nowrap; color: var(--text); }
-  .logo svg { width: 28px; height: 28px; }
-  .logo b { font-weight: 700; letter-spacing: .12em; font-size: 14px; }
-  .search { flex: 1; max-width: 560px; display: flex; align-items: center; gap: 9px; background: var(--chip); border: 1px solid transparent; border-radius: 6px; padding: 7px 11px; }
+  .nav .wrap { height: 56px; display: flex; align-items: center; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 9px; white-space: nowrap; color: var(--text); flex: none; }
+  .logo svg { width: 26px; height: 26px; } .logo b { font-weight: 700; letter-spacing: .12em; font-size: 13.5px; }
+  .search { flex: 1 1 320px; max-width: 520px; height: 36px; display: flex; align-items: center; gap: 8px; background: var(--chip); border: 1px solid transparent; border-radius: var(--r); padding: 0 10px; }
   .search:focus-within { background: var(--card); border-color: var(--blue); }
-  .search input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; color: var(--text); min-width: 0; }
+  .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; color: var(--text); }
   .search input::placeholder { color: var(--muted-2); }
   .search svg { width: 17px; height: 17px; fill: var(--muted); flex: none; }
-  .search kbd { font: 11px/1 var(--mono); color: var(--muted-2); border: 1px solid var(--line-2); border-radius: 4px; padding: 2px 5px; }
-  .nav .right { margin-left: auto; display: flex; align-items: center; gap: 4px; }
-  .nav .right a.lnk { color: var(--muted); font-weight: 500; font-size: 13px; padding: 6px 10px; border-radius: 6px; } .nav .right a.lnk:hover { background: var(--chip); text-decoration: none; color: var(--text); }
-  .iconbtn { width: 34px; height: 34px; border-radius: 6px; border: 1px solid transparent; background: transparent; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); }
+  .search kbd { font: 11px/1 var(--mono); color: var(--muted-2); border: 1px solid var(--line-2); border-radius: 3px; padding: 2px 5px; }
+  .nav .right { margin-left: auto; display: flex; align-items: center; gap: 2px; flex: none; }
+  .nav .lnk { color: var(--muted); font-weight: 500; font-size: 13px; padding: 6px 10px; border-radius: var(--r); } .nav .lnk:hover { background: var(--chip); color: var(--text); text-decoration: none; }
+  .iconbtn { width: 34px; height: 34px; border-radius: var(--r); border: 0; background: transparent; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); }
   .iconbtn:hover { background: var(--chip); color: var(--text); } .iconbtn svg { width: 18px; height: 18px; fill: currentColor; }
-  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line-2); background: var(--card); color: var(--text); font-weight: 500; font-size: 13px; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 32px; padding: 0 12px; border-radius: var(--r); border: 1px solid var(--line-2); background: var(--card); color: var(--text); font-weight: 500; font-size: 13px; white-space: nowrap; }
   .btn:hover { background: var(--hover); text-decoration: none; }
   .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; } .btn.primary:hover { background: var(--blue-d); border-color: var(--blue-d); }
-  [data-theme="dark"] .btn.primary { color: #0F1216; }
-  .btn.sm { padding: 4px 10px; font-size: 12.5px; }
+  [data-theme="dark"] .btn.primary { color: #121417; }
+  .btn.sm { height: 28px; padding: 0 10px; font-size: 12.5px; }
   .btn svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* layout */
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 16px 20px 48px; }
-  .crumbs { font-size: 12.5px; color: var(--muted); margin: 2px 0 10px; display: flex; gap: 6px; align-items: center; }
+  /* ----- page ----- */
+  main.wrap { padding: 14px 0 48px; }
+  .crumbs { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; display: flex; gap: 6px; align-items: center; }
   .crumbs a { color: var(--muted); } .crumbs .sep { color: var(--muted-2); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); }
-  .card h2 { margin: 0; padding: 11px 16px; font-size: 13.5px; font-weight: 500; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
-  .card h2 .sp { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 12.5px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
+  .card > h2 { margin: 0; height: 44px; padding: 0 16px; font-size: 13.5px; font-weight: 500; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
+  .card > h2 .sp { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 12.5px; }
   .card .body { padding: 14px 16px; }
   .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
 
   /* report header */
-  .report { display: grid; grid-template-columns: 120px 1fr 280px; gap: 20px; align-items: start; padding: 18px 20px 14px; }
-  .ring { position: relative; width: 100px; height: 100px; margin: 2px auto 0; }
-  .ring svg { width: 100px; height: 100px; transform: rotate(-90deg); }
-  .ring .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .ring .c b { font-size: 22px; font-weight: 500; line-height: 1; color: var(--green); } .ring .c span { color: var(--muted); font-size: 11px; margin-top: 3px; }
-  .ring-cap { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.3; }
-  .hashline { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; white-space: nowrap; overflow: hidden; }
-  .hashline .tag { color: var(--text); font-weight: 500; }
-  .hashline #hlRepo { overflow: hidden; text-overflow: ellipsis; }
-  .ttl { font-size: 17.5px; font-weight: 500; margin: 5px 0 3px; letter-spacing: -.01em; }
-  .metaline { color: var(--muted); font-size: 13px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .metaline .dot { color: var(--muted-2); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 4px; font-size: 12px; background: var(--chip); color: var(--text); }
-  .verdict { display: flex; align-items: center; gap: 10px; color: var(--green); font-weight: 500; font-size: 13.5px; padding: 11px 20px; border-top: 1px solid var(--line); background: var(--hover); border-radius: 0 0 6px 6px; flex-wrap: wrap; }
-  .verdict svg { width: 17px; height: 17px; fill: var(--green); flex: none; }
-  .verdict .sub { color: var(--muted); font-weight: 400; }
-  .side { border-left: 1px solid var(--line); padding-left: 18px; }
-  .side h4 { margin: 0 0 6px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .wave { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .report { display: grid; grid-template-columns: 112px minmax(0, 1fr) 272px; gap: 20px; align-items: start; padding: 18px 20px; }
+  .gauge { width: 112px; }
+  .gauge svg { width: 112px; height: 64px; display: block; }
+  .gauge .v { text-align: center; margin-top: -30px; font-size: 26px; font-weight: 500; color: var(--green); line-height: 1; }
+  .gauge .k { text-align: center; font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+  .idline { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .idline .tag { color: var(--text); font-weight: 500; }
+  .ttl { font-size: 18px; font-weight: 500; margin: 4px 0 2px; letter-spacing: -.01em; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .meta span + span::before { content: "·"; color: var(--muted-2); margin: 0 7px; }
+  .verdicts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .desc { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; max-width: 76ch; }
+  .vd { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px 0 8px; border-radius: 3px; font-size: 12.5px; font-weight: 500; border: 1px solid transparent; }
+  .vd i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; display: inline-block; }
+  .vd small { font-weight: 400; opacity: .8; }
+  .vd.green { background: var(--green-bg); color: var(--green); } .vd.red { background: var(--red-bg); color: var(--red); } .vd.amber { background: var(--amber-bg); color: var(--amber); } .vd.grey { background: var(--chip); color: var(--muted); }
+  .side { border-left: 1px solid var(--line); padding-left: 20px; min-width: 0; }
+  .side h4 { margin: 0 0 4px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .wave { display: flex; align-items: center; gap: 9px; height: 30px; border-top: 1px solid var(--line); font-size: 13px; }
   .wave:first-of-type { border-top: 0; }
-  .dot-s { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); flex: none; }
-  .dot-s.on { background: var(--green); } .dot-s.base { background: var(--blue); }
+  .dot-s { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); flex: none; } .dot-s.on { background: var(--green); } .dot-s.base { background: var(--blue); }
   .wave .t { margin-left: auto; color: var(--muted); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; }
-  .side .acts { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .side .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+  .stat { padding: 12px 20px; border-left: 1px solid var(--line); } .stat:first-child { border-left: 0; }
+  .stat .k { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); } .stat .v { font-size: 18px; font-weight: 500; margin-top: 2px; } .stat .s { font-size: 12px; color: var(--muted); }
 
   /* tabs */
-  .tabs { display: flex; gap: 2px; margin: 16px 0 0; background: var(--card); border-radius: 6px 6px 0 0; padding: 0 6px; border: 1px solid var(--line); border-bottom: 0; overflow-x: auto; }
-  .tabs button { background: none; border: 0; color: var(--muted); padding: 12px 13px 10px; font-weight: 500; font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .tabs button:hover { color: var(--text); }
-  .tabs button.on { color: var(--blue); border-color: var(--blue); }
+  .tabs { display: flex; gap: 2px; margin: 14px 0 0; background: var(--card); border: 1px solid var(--line); border-bottom: 0; border-radius: var(--r) var(--r) 0 0; padding: 0 8px; overflow-x: auto; }
+  .tabs button { background: none; border: 0; color: var(--muted); height: 44px; padding: 0 13px; font-weight: 500; font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .tabs button:hover { color: var(--text); } .tabs button.on { color: var(--blue); border-color: var(--blue); }
   .tabs button .n { margin-left: 6px; color: var(--muted-2); font-weight: 400; letter-spacing: 0; }
-  .panel { display: none; background: var(--card); border: 1px solid var(--line); border-top: 1px solid var(--line); border-radius: 0 0 6px 6px; padding: 16px; } .panel.on { display: block; }
-  .cols { display: grid; grid-template-columns: 1fr 312px; gap: 16px; align-items: start; }
+  .panel { display: none; background: var(--card); border: 1px solid var(--line); border-radius: 0 0 var(--r) var(--r); padding: 16px; } .panel.on { display: block; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; } .cols > * { min-width: 0; }
+  .stack > * + * { margin-top: 14px; }
 
   /* tables */
-  table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 13px; }
-  th { color: var(--muted); font-weight: 500; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 13px; overflow: hidden; }
+  th { color: var(--muted); font-weight: 500; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; height: 36px; padding-top: 0; padding-bottom: 0; }
   tr:last-child td { border-bottom: 0; }
   tr.row:hover td { background: var(--hover); }
-  .ftype { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 22px; padding: 0 6px; border-radius: 4px; background: var(--chip); font-family: var(--mono); font-size: 10.5px; font-weight: 500; color: var(--muted); }
-  .name b { display: block; font-weight: 500; font-family: var(--mono); font-size: 12.5px; } .name span { color: var(--muted); font-size: 12px; }
+  .fcell { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .ftype { flex: none; width: 46px; height: 24px; border-radius: 3px; background: var(--chip); font-family: var(--mono); font-size: 10.5px; font-weight: 500; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; }
+  .fname { min-width: 0; }
+  .fname b { display: block; font-weight: 500; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fname span { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fname .sha { font-family: var(--mono); font-size: 11.5px; color: var(--muted-2); display: flex; align-items: center; gap: 6px; }
+  .fname .sha em { font-style: normal; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  col.c-rows { width: 104px; } col.c-size { width: 88px; } col.c-int { width: 150px; } col.c-act { width: 104px; }
+  .ok .short { display: none; }
   .ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 500; white-space: nowrap; font-size: 12.5px; }
-  .ok svg { width: 14px; height: 14px; fill: var(--green); }
-  .hash { font-family: var(--mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-  .copy { border: 1px solid var(--line-2); background: transparent; color: var(--muted); border-radius: 4px; padding: 1px 6px; font-size: 11px; }
+  .ok svg { width: 14px; height: 14px; fill: var(--green); flex: none; }
+  .copy { border: 1px solid var(--line-2); background: transparent; color: var(--muted); border-radius: 3px; padding: 0 6px; height: 20px; font-size: 11px; line-height: 18px; flex: none; }
   .copy:hover { color: var(--text); border-color: var(--muted); } .copy.done { color: var(--green); border-color: var(--green); }
   .num { font-variant-numeric: tabular-nums; white-space: nowrap; } .right { text-align: right; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+  .pill { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 11px; font-size: 12px; font-weight: 500; }
   .pill.pending { background: var(--chip); color: var(--muted); } .pill.live { background: var(--green-bg); color: var(--green); }
-  .kv td:first-child { color: var(--muted); width: 220px; } .kv td { padding: 8px 12px; }
-  pre { margin: 0; background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 11px 64px 11px 13px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-all; position: relative; }
-  pre .cm { color: var(--muted-2); } pre .copy { position: absolute; top: 7px; right: 7px; }
+  .kv td:first-child { color: var(--muted); width: 210px; } .kv td { padding: 8px 12px; overflow: visible; }
+  .cmd { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 6px 0 10px; background: var(--code); border: 1px solid var(--line); border-radius: var(--r); font-family: var(--mono); font-size: 12.5px; }
+  .cmd span { flex: 1 1 0; width: 0; min-width: 0; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); } .cmd span::-webkit-scrollbar { display: none; }
+  .cmd .cm { color: var(--muted-2); }
   .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
   .steps li { position: relative; padding: 0 0 14px 30px; font-size: 13px; }
   .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--chip); color: var(--muted); font-size: 11.5px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
-  .steps li:last-child { padding-bottom: 0; }
-  .steps li .h { font-weight: 500; margin-bottom: 4px; }
-  .note { border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 6px; padding: 10px 14px; font-size: 13px; background: var(--card); }
-  .note.red { border-left-color: var(--red); } .note.blue { border-left-color: var(--blue); }
+  .steps li:last-child { padding-bottom: 0; } .steps li .h { font-weight: 500; margin-bottom: 6px; } .steps li .d { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .callout { border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: var(--r); padding: 10px 14px; font-size: 13px; background: var(--card); }
+  .callout.red { border-left-color: var(--red); } .callout.blue { border-left-color: var(--blue); }
   ul.clean { margin: 0; padding-left: 18px; } ul.clean li { margin: 4px 0; }
-  .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--chip); margin: 6px 0; } .bar i { display: block; height: 100%; }
-  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); } .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; }
+  .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--chip); margin: 4px 0 8px; } .bar i { display: block; height: 100%; }
+  .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; font-size: 12px; color: var(--muted); } .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+  .legend em { font-style: normal; float: right; font-variant-numeric: tabular-nums; }
   .cd { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-  footer { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
   footer nav { display: flex; gap: 14px; flex-wrap: wrap; } footer nav a { color: var(--muted); } footer nav a:hover { color: var(--text); }
   .empty { padding: 24px; text-align: center; color: var(--muted); }
-  @media (max-width: 980px) { .report { grid-template-columns: 1fr; } .side { border-left: 0; padding-left: 0; } .cols { grid-template-columns: 1fr; } .search { display: none; } }
+  @media (max-width: 1240px) { .cols { grid-template-columns: minmax(0, 1fr) 288px; } col.c-rows { width: 92px; } col.c-size { width: 80px; } col.c-int { width: 104px; } col.c-act { width: 100px; } .ok .long { display: none; } .ok .short { display: inline; } }
+  @media (max-width: 1100px) { .nav .lnk { display: none; } }
+  @media (max-width: 960px) { .report { grid-template-columns: 112px minmax(0, 1fr); } .side { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; } .cols { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; } .stat { border-top: 1px solid var(--line); } .search { display: none; } }
 </style>
 </head>
 <body>
 
 <header class="nav">
-  <div class="in">
+  <div class="wrap">
     <a class="logo" href="#" title="MalakaTotal">
       <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#3B4FFF"/><path d="M9.5 16.5l4.2 4.2 8.8-9.3" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <b>MALAKATOTAL</b>
@@ -170,30 +179,28 @@
 
   <section class="card">
     <div class="report">
-      <div>
-        <div class="ring"><svg viewBox="0 0 120 120" id="ringSvg"></svg><div class="c"><b id="ringNum">—</b><span>/ <span id="ringDen">—</span></span></div></div>
-        <div class="ring-cap">ficheros con suma<br>SHA-256 publicada</div>
+      <div class="gauge">
+        <svg viewBox="0 0 120 70" id="gaugeSvg"></svg>
+        <div class="v" id="gaugeVal">—</div>
+        <div class="k">integridad<br><span id="gaugeSub">—</span></div>
       </div>
-      <div>
-        <div class="hashline"><span class="tag" id="hlTag">dataset-v1</span><span>·</span><span id="hlRepo">github.com/ORG/REPO</span></div>
-        <div class="ttl">Incidente en el GSEC — telemetría de la red de laboratorio GSEC-LAB, 30 días</div>
-        <div class="metaline" id="metaline"></div>
-        <div class="chips" id="chips"></div>
+      <div style="min-width:0">
+        <div class="idline"><span class="tag" id="hlTag">dataset-v1</span> · <span id="hlRepo">github.com/ORG/REPO</span></div>
+        <div class="ttl">Incidente en el GSEC — telemetría de la red de laboratorio GSEC-LAB</div>
+        <div class="meta" id="metaline"></div>
+        <div class="verdicts" id="verdicts"></div>
+        <p class="desc">Telemetría sintética de 30 días de una red de laboratorio universitaria: cortafuegos, VPN, proxy, DNS, correo, EDR, Windows, auditoría de BD, sandbox y accesos físicos, más el contexto (inventario, turnos, tickets, IOCs). Se publica por oleadas; verifica cada fichero con su SHA-256 antes de analizarlo.</p>
       </div>
       <aside class="side">
         <h4>Publicación</h4>
         <div id="statusList"></div>
         <div class="acts">
           <a class="btn sm primary" href="#downloads" id="btnAll">Descargar</a>
-          <a class="btn sm" id="btnWatch" href="#" target="_blank" rel="noopener">Ver releases</a>
+          <a class="btn sm" id="btnWatch" href="#" target="_blank" rel="noopener">Releases</a>
         </div>
       </aside>
     </div>
-    <div class="verdict">
-      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m-1.2 14.4-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
-      <span>Conjunto sintético: ningún indicador es real.</span>
-      <span class="sub">Contiene cadenas hostiles y pistas falsas a propósito. Comprueba cada descarga con <code>SHA256SUMS</code>.</span>
-    </div>
+    <div class="stats" id="stats"></div>
   </section>
 
   <nav class="tabs" id="tabs" aria-label="Secciones">
@@ -207,33 +214,34 @@
   <!-- Descargas -->
   <section class="panel on" id="tab-downloads">
     <div class="cols">
-      <div>
+      <div class="stack">
         <div class="card">
           <h2>Ficheros de la release <span class="sp" id="dlSummary"></span></h2>
-          <table id="assets"><thead><tr><th></th><th>Fichero</th><th>Formato</th><th class="right">Filas</th><th class="right">Tamaño</th><th>SHA-256</th><th>Integridad</th><th></th></tr></thead><tbody></tbody></table>
+          <table id="assets"><colgroup><col><col class="c-rows"><col class="c-size"><col class="c-int"><col class="c-act"></colgroup>
+            <thead><tr><th>Fichero</th><th class="right">Filas</th><th class="right">Tamaño</th><th>Integridad</th><th></th></tr></thead><tbody></tbody></table>
         </div>
-        <div class="card" style="margin-top:14px">
+        <div class="card">
           <h2>Sumas y documentación</h2>
-          <table id="extras"><tbody></tbody></table>
+          <table id="extras"><colgroup><col><col class="c-int"><col class="c-act"></colgroup><tbody></tbody></table>
         </div>
       </div>
-      <div>
+      <div class="stack">
         <div class="card">
           <h2>Obtener el dataset</h2>
           <div class="body">
             <ol class="steps">
-              <li><div class="h">Clona el repositorio del reto</div><pre id="c1"><button class="copy" data-copy="#c1">copiar</button>git clone <span id="cloneUrl">https://github.com/ORG/REPO</span>.git</pre></li>
-              <li><div class="h">Descarga y verifica (≈ 300 MB)</div><pre id="c2"><button class="copy" data-copy="#c2">copiar</button>python3 starter-kit/fetch_dataset.py</pre><div style="color:var(--muted); font-size:12px; margin-top:6px">Deja los ficheros en <code>output/public</code>. Sin red: <code>--from-dir /Volumes/MALACKATHON</code> (pendrive de la acreditación).</div></li>
-              <li><div class="h">Carga en DuckDB, o en el motor que prefieras</div><pre id="c3"><button class="copy" data-copy="#c3">copiar</button>python3 starter-kit/load_duckdb.py</pre></li>
+              <li><div class="h">Clona el repositorio del reto</div><div class="cmd" id="c1"><span>git clone <span id="cloneUrl">https://github.com/ORG/REPO</span>.git</span><button class="copy" data-copy="#c1">copiar</button></div></li>
+              <li><div class="h">Descarga y verifica (≈ 300 MB)</div><div class="cmd" id="c2"><span>python3 starter-kit/fetch_dataset.py</span><button class="copy" data-copy="#c2">copiar</button></div><div class="d">Deja los ficheros en <code>output/public</code>. Sin red: <code>--from-dir /Volumes/MALACKATHON</code>, el pendrive de la acreditación.</div></li>
+              <li><div class="h">Carga en DuckDB o en el motor que prefieras</div><div class="cmd" id="c3"><span>python3 starter-kit/load_duckdb.py</span><button class="copy" data-copy="#c3">copiar</button></div></li>
             </ol>
-            <div style="border-top:1px solid var(--line); margin-top:14px; padding-top:12px; font-size:12.5px; color:var(--muted)">Descarga manual: baja los ficheros de la tabla y ejecuta <code>shasum -a 256 -c SHA256SUMS</code>. Un hash que no coincide es motivo para descartar el fichero y volver a bajarlo.</div>
           </div>
+          <div class="body" style="border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)">Descarga manual: baja los ficheros de la tabla y ejecuta <code>shasum -a 256 -c SHA256SUMS</code>. Si un hash no coincide, descarta el fichero y vuelve a bajarlo.</div>
         </div>
-        <div class="card" style="margin-top:14px">
+        <div class="card">
           <h2>Ayuda</h2>
           <div class="body" style="font-size:13px">
             <p>Dudas sobre el enunciado o los datos: <span id="contact">canal de la organización</span>. No se responden preguntas sobre la solución.</p>
-            <p style="color:var(--muted)">Si crees que algo del dataset es un <b>error</b> (y no una pista falsa), repórtalo: las correcciones se publican para todos los equipos a la vez, como una nueva release.</p>
+            <p style="color:var(--muted)">Si crees que algo es un <b>error</b> del dataset (y no una pista falsa), repórtalo: las correcciones salen para todos los equipos a la vez, como una nueva release.</p>
           </div>
         </div>
       </div>
@@ -243,25 +251,26 @@
   <!-- Detalles -->
   <section class="panel" id="tab-details">
     <div class="cols">
-      <div>
+      <div class="stack">
         <div class="card"><h2>Propiedades básicas</h2><table class="kv" id="props"><tbody></tbody></table></div>
-        <div class="card" style="margin-top:14px"><h2>Historial</h2><table class="kv" id="history"><tbody></tbody></table></div>
-        <div class="card" style="margin-top:14px">
+        <div class="card"><h2>Historial</h2><table class="kv" id="history"><tbody></tbody></table></div>
+        <div class="card">
           <h2>Fuentes y formatos</h2>
-          <table id="sources"><thead><tr><th>Fuente</th><th>Ruta en el dataset</th><th>Formato</th><th class="right">Filas</th><th>Contenido</th></tr></thead><tbody></tbody></table>
+          <table id="sources"><colgroup><col style="width:150px"><col style="width:250px"><col style="width:96px"><col style="width:96px"><col></colgroup>
+            <thead><tr><th>Fuente</th><th>Ruta</th><th>Formato</th><th class="right">Filas</th><th>Contenido</th></tr></thead><tbody></tbody></table>
         </div>
       </div>
-      <div>
+      <div class="stack">
         <div class="card"><h2>Distribución por fuente</h2><div class="body"><div class="bar" id="bar"></div><div class="legend" id="legend"></div></div></div>
-        <div class="card" style="margin-top:14px"><h2>Convenciones</h2><div class="body" style="font-size:13px">
+        <div class="card"><h2>Convenciones</h2><div class="body" style="font-size:13px">
           <ul class="clean">
-            <li>Marcas de tiempo en <b>UTC</b> (sufijo <code>Z</code>). El laboratorio trabaja en hora peninsular, UTC+2 durante el periodo.</li>
+            <li>Marcas de tiempo en <b>UTC</b> (sufijo <code>Z</code>). El laboratorio trabaja en hora peninsular, UTC+2 en el periodo.</li>
             <li>Un fichero por día y fuente (<code>AAAA-MM-DD</code>), salvo VPN, correo y accesos físicos.</li>
             <li>Red interna RFC 1918; las IP públicas son de rangos de documentación y resuelven en <code>extras/geoip_synthetic.csv</code>.</li>
-            <li>Hay líneas malformadas <b>a propósito</b> (CRLF, truncadas, codificaciones). Un cargador robusto las cuenta y continúa.</li>
+            <li>Hay líneas malformadas <b>a propósito</b> (CRLF, truncadas, codificaciones): un cargador robusto las cuenta y continúa.</li>
           </ul>
         </div></div>
-        <div class="card" style="margin-top:14px"><h2>Documentación</h2><div class="body" style="font-size:13px">
+        <div class="card"><h2>Documentación</h2><div class="body" style="font-size:13px">
           <ul class="clean">
             <li><a id="lnkReadme" href="#" target="_blank" rel="noopener">README_DATASET_ES.md</a> — diccionario de datos</li>
             <li><a id="lnkSchema" href="#" target="_blank" rel="noopener">docs/esquema_canonico.sql</a> — esquema de referencia, opcional</li>
@@ -276,16 +285,16 @@
   <!-- Oleadas -->
   <section class="panel" id="tab-waves">
     <div class="card">
-      <h2>Oleadas <span class="sp">el estado se actualiza solo cuando la organización publica</span></h2>
-      <table id="waveTable"><thead><tr><th>Oleada</th><th>Publicación prevista</th><th>Estado</th><th>Cuenta atrás</th><th>Cargar</th><th></th></tr></thead><tbody></tbody></table>
+      <h2>Oleadas <span class="sp">el estado cambia solo cuando la organización publica</span></h2>
+      <table id="waveTable"><colgroup><col style="width:130px"><col><col style="width:110px"><col style="width:124px"><col style="width:230px"><col style="width:186px"></colgroup>
+        <thead><tr><th>Oleada</th><th>Publicación prevista</th><th>Estado</th><th>Cuenta atrás</th><th>Cargar</th><th></th></tr></thead><tbody></tbody></table>
     </div>
     <div class="cols" style="margin-top:14px">
-      <div class="note blue">Cada oleada es una release independiente (<code>oleada-N</code>) con el mismo formato que el dataset base y telemetría nueva de ese tramo del día. <b>No toda oleada contiene un ataque.</b> Se reporta en <code>oleadaN.json</code>; la hora del <i>push</i> es la hora de detección, así que conviene tener detecciones automáticas corriendo antes de las 10:15.</div>
-      <div class="card"><h2>Cargar una oleada</h2><div class="body">
-        <pre id="wavecmd"><button class="copy" data-copy="#wavecmd">copiar</button><span class="cm"># descarga + verifica → output/waves/waveN</span>
-python3 starter-kit/fetch_dataset.py --wave N
-<span class="cm"># esquemas wave1.*, wave2.* … en el mismo DuckDB</span>
-python3 starter-kit/load_duckdb.py --waves output/waves</pre>
+      <div class="callout blue">Cada oleada es una release independiente (<code>oleada-N</code>) con el mismo formato que el dataset base y telemetría nueva de ese tramo del día. <b>No toda oleada contiene un ataque.</b> Se reporta en <code>oleadaN.json</code>; la hora del <i>push</i> es la hora de detección, así que conviene tener detecciones automáticas corriendo antes de las 10:15.</div>
+      <div class="card"><h2>Cargar una oleada</h2><div class="body" style="display:grid; gap:8px">
+        <div class="cmd" id="w1"><span>python3 starter-kit/fetch_dataset.py --wave N</span><button class="copy" data-copy="#w1">copiar</button></div>
+        <div class="cmd" id="w2"><span>python3 starter-kit/load_duckdb.py --waves output/waves</span><button class="copy" data-copy="#w2">copiar</button></div>
+        <div style="font-size:12px; color:var(--muted)">La segunda orden añade esquemas <code>wave1.*</code>, <code>wave2.*</code>… al mismo fichero DuckDB.</div>
       </div></div>
     </div>
   </section>
@@ -295,7 +304,7 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
     <div class="cols">
       <div class="card">
         <h2>Qué se entrega y dónde</h2>
-        <table>
+        <table><colgroup><col style="width:220px"><col><col style="width:70px"></colgroup>
           <thead><tr><th>Fichero</th><th>Qué es</th><th>Reto</th></tr></thead>
           <tbody>
             <tr><td><code>ENTREGA.md</code></td><td>Accesos, URLs, credenciales de prueba, tecnologías, capturas y diagrama</td><td>1 y 2</td></tr>
@@ -305,17 +314,14 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
             <tr><td><code>informe/</code></td><td>Informe técnico (≤ 6 pág.), resumen ejecutivo (1 pág.), plan de respuesta (≤ 2 pág.)</td><td>3 y C</td></tr>
           </tbody>
         </table>
-        <div class="body" style="border-top:1px solid var(--line)">
-          <p>Todo va en el <b>repositorio privado de entrega</b> del equipo (<span id="channel">lo crea la organización</span>); solo el equipo y el jurado tienen acceso. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</p>
-        </div>
+        <div class="body" style="border-top:1px solid var(--line)">Todo va en el <b>repositorio privado de entrega</b> del equipo (<span id="channel">lo crea la organización</span>); solo el equipo y el jurado tienen acceso. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</div>
       </div>
-      <div>
+      <div class="stack">
         <div class="card"><h2>Validar antes del push</h2><div class="body">
-          <pre id="valcmd"><button class="copy" data-copy="#valcmd">copiar</button>python3 starter-kit/validar_respuestas.py \
-  respuestas.json oleada1.json</pre>
-          <p style="margin-top:8px; color:var(--muted); font-size:12.5px">Comprueba solo el <b>formato</b>, nunca la corrección. El repositorio de entrega repite la validación en cada <i>push</i>; un fichero inválido no puntúa. Especificación: <a id="lnkFormato" href="#" target="_blank" rel="noopener">FORMATO_ENTREGA_ES.md</a>.</p>
+          <div class="cmd" id="v1"><span>python3 starter-kit/validar_respuestas.py respuestas.json oleada1.json</span><button class="copy" data-copy="#v1">copiar</button></div>
+          <p style="margin-top:10px; color:var(--muted); font-size:12.5px">Comprueba solo el <b>formato</b>, nunca la corrección. El repositorio de entrega repite la validación en cada <i>push</i>; un fichero inválido no puntúa. Especificación: <a id="lnkFormato" href="#" target="_blank" rel="noopener">FORMATO_ENTREGA_ES.md</a>.</p>
         </div></div>
-        <div class="note" style="margin-top:14px"><b>Puntuación del cuestionario:</b> +1 acierto, 0 en blanco (<code>null</code>), −1 respuesta-trampa. En blanco nunca resta.</div>
+        <div class="callout"><b>Cuestionario:</b> +1 acierto, 0 en blanco (<code>null</code>), −1 respuesta-trampa. En blanco nunca resta.</div>
       </div>
     </div>
   </section>
@@ -334,7 +340,7 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
         </ul>
         <p style="margin-top:10px"><a id="lnkNormas" href="#" target="_blank" rel="noopener">Normas completas</a></p>
       </div></div>
-      <div class="note red"><b>Sobre el escenario.</b> Obra de ficción con fines docentes. La red, las personas, las cuentas, los socios, los casos y los datos de GSEC-LAB son inventados; la arquitectura corresponde a una red de laboratorio aislada y deliberadamente clásica, <b>no</b> a la infraestructura real de Google ni del GSEC de Málaga. Cualquier parecido con personas o sistemas reales es coincidencia.</div>
+      <div class="callout red"><b>Sobre el escenario.</b> Obra de ficción con fines docentes. La red, las personas, las cuentas, los socios, los casos y los datos de GSEC-LAB son inventados; la arquitectura corresponde a una red de laboratorio aislada y deliberadamente clásica, <b>no</b> a la infraestructura real de Google ni del GSEC de Málaga. Cualquier parecido con personas o sistemas reales es coincidencia.</div>
     </div>
   </section>
 
@@ -352,11 +358,11 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
   const fmtBytes = (b) => { if (b == null) return '—'; const u = ['B','KB','MB','GB']; let i = 0, v = b; while (v >= 1000 && i < u.length - 1) { v /= 1000; i++; } return v.toLocaleString('es-ES', { maximumFractionDigits: v < 10 ? 1 : 0 }) + ' ' + u[i]; };
   const fmtDate = (iso, opts) => { try { return new Date(iso).toLocaleString('es-ES', Object.assign({ dateStyle: 'medium', timeStyle: 'short' }, opts || {})); } catch { return iso; } };
   const ago = (iso) => { const s = (Date.now() - new Date(iso)) / 1000; if (!(s >= 0)) return ''; if (s < 3600) return `hace ${Math.max(1, Math.round(s / 60))} min`; if (s < 86400) return `hace ${Math.round(s / 3600)} h`; return `hace ${Math.round(s / 86400)} días`; };
-  const COLORS = { firewall: '#3B4FFF', proxy: '#1AAB5B', dns: '#F29900', edr: '#E03C31', winsec: '#8E24AA', dbaudit: '#00ACC1', vpn: '#FB8C00', email: '#8D6E63', sandbox: '#9AA0A6', badges: '#5F6368' };
+  const COLORS = { firewall: '#3B4FFF', proxy: '#1E8E3E', dns: '#F29900', edr: '#D93025', winsec: '#8E24AA', dbaudit: '#00ACC1', vpn: '#FB8C00', email: '#8D6E63', sandbox: '#9AA0A6', badges: '#5F6368' };
   const FTYPE = (a) => a.kind === 'doc' ? 'MD' : /jsonl/i.test(a.format) ? 'JSONL' : /csv/i.test(a.format) ? 'CSV' : 'TAR';
   const CHECK = '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
 
-  // theme toggle
+  // theme
   const applyTheme = (t) => { document.documentElement.dataset.theme = t; $('.i-sun').style.display = t === 'dark' ? '' : 'none'; $('.i-moon').style.display = t === 'dark' ? 'none' : ''; };
   applyTheme(document.documentElement.dataset.theme || 'light');
   $('#themeBtn').addEventListener('click', () => { const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; applyTheme(t); try { localStorage.setItem('mt-theme', t); } catch {} });
@@ -369,13 +375,9 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
     if (!r.ok) throw new Error(r.status);
     m = await r.json();
   } catch (e) {
-    const inline = document.getElementById('manifest-inline');   // standalone copy only
-    if (inline && inline.textContent.trim()) {
-      m = JSON.parse(inline.textContent);
-    } else {
-      $('#assets tbody').innerHTML = `<tr><td colspan="8" class="empty">No se ha podido leer <code>data/manifest.json</code> (${esc(e.message)}). Si has abierto el fichero en local, sírvelo con <code>python3 -m http.server</code>.</td></tr>`;
-      return;
-    }
+    const inline = document.getElementById('manifest-inline');
+    if (inline && inline.textContent.trim()) m = JSON.parse(inline.textContent);
+    else { $('#assets tbody').innerHTML = `<tr><td colspan="5" class="empty">No se ha podido leer <code>data/manifest.json</code> (${esc(e.message)}). En local, sírvelo con <code>python3 -m http.server</code>.</td></tr>`; return; }
   }
   const repo = m.repo || 'ORG/REPO';
   const base = `https://github.com/${repo}`;
@@ -386,7 +388,6 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
   const srcAssets = assets.filter(a => a.kind === 'source' && a.rows);
   const waves = m.waves || [];
 
-  // links
   for (const [id, href] of [['repoLink', base], ['fRepo', base], ['btnWatch', `${base}/releases`], ['fReleases', `${base}/releases`],
       ['lnkReadme', dl(m.tag_base, 'README_DATASET_ES.md')], ['lnkSchema', raw('docs/esquema_canonico.sql')], ['lnkStarter', raw('starter-kit/README_ES.md')],
       ['lnkEnunciado', raw('ENUNCIADO.md')], ['lnkEnunciadoTop', raw('ENUNCIADO.md')], ['fEnunciado', raw('ENUNCIADO.md')],
@@ -394,38 +395,38 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
       ['lnkNormas', raw('NORMAS.md')], ['lnkNormasTop', raw('NORMAS.md')], ['fNormas', raw('NORMAS.md')]]) { const el = document.getElementById(id); if (el) el.href = href; }
   $('#cloneUrl').textContent = base; $('#hlTag').textContent = m.tag_base; $('#crumbTag').textContent = m.tag_base;
   $('#hlRepo').textContent = `github.com/${repo}/releases/tag/${m.tag_base}`;
-  if (m.contact) $('#contact').textContent = m.contact;
-  if (m.submission_channel) $('#channel').textContent = m.submission_channel;
+  const inlineCode = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+  if (m.contact) $('#contact').innerHTML = inlineCode(m.contact);
+  if (m.submission_channel) $('#channel').innerHTML = inlineCode(m.submission_channel);
   if (m.deadline) $('#deadlineTxt').textContent = fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)';
   if (m.generated_at) $('#buildInfo').textContent = `Build ${fmtDate(m.generated_at)} (${ago(m.generated_at)}) · semilla ${m.seed ?? '—'}.`;
 
-  // header
-  const withHash = assets.filter(a => a.sha256).length;
-  const R = 50, C = 2 * Math.PI * R, frac = assets.length ? withHash / assets.length : 0;
-  $('#ringSvg').innerHTML = `<circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--line)" stroke-width="10"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--green)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C * frac} ${C}"/>`;
-  $('#ringNum').textContent = withHash; $('#ringDen').textContent = assets.length;
-  $('#metaline').innerHTML = [fmtBytes(t.bytes_compressed), `${fmtInt(t.files)} ficheros`, `${fmtInt(t.rows)} filas`,
-    m.window ? `${fmtDate(m.window.start, { dateStyle: 'medium', timeStyle: undefined })} → ${fmtDate(m.window.end, { dateStyle: 'medium', timeStyle: undefined })}` : null,
-    m.generated_at ? `publicado ${fmtDate(m.generated_at, { dateStyle: 'medium', timeStyle: undefined })}` : null].filter(Boolean).map(esc).join('<span class="dot">·</span>');
-  const fmts = [...new Set(srcAssets.map(a => /jsonl/i.test(a.format) ? 'jsonl' : 'csv'))];
-  $('#chips').innerHTML = ['sintetico', ...fmts, 'gzip', 'sha256', 'es-ES'].map(c => `<span class="chip">${esc(c)}</span>`).join('');
+  // gauge (half ring) = files with a published digest
+  const withHash = assets.filter(a => a.sha256).length, frac = assets.length ? withHash / assets.length : 0;
+  const arc = (p) => { const a = Math.PI * (1 - p), x = 60 + 50 * Math.cos(a), y = 62 - 50 * Math.sin(a); return `M10 62 A50 50 0 0 1 ${x.toFixed(2)} ${y.toFixed(2)}`; };
+  $('#gaugeSvg').innerHTML = `<path d="M10 62 A50 50 0 0 1 110 62" fill="none" stroke="var(--line)" stroke-width="9" stroke-linecap="round"/><path d="${arc(Math.max(frac, 0.001))}" fill="none" stroke="var(--green)" stroke-width="9" stroke-linecap="round"/>`;
+  $('#gaugeVal').textContent = Math.round(frac * 100); $('#gaugeSub').textContent = `${withHash}/${assets.length} ficheros con SHA-256`;
+  $('#metaline').innerHTML = [fmtBytes(t.bytes_compressed), `${fmtInt(t.files)} ficheros`, `${fmtInt(t.rows)} filas`, m.generated_at ? `publicado ${fmtDate(m.generated_at, { dateStyle: 'medium', timeStyle: undefined })}` : null].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('');
+  $('#verdicts').innerHTML = `<span class="vd green"><i></i>Veredicto <small>sintético</small></span><span class="vd red"><i></i>Hostilidad <small>alta · XSS, prompt injection, pistas falsas</small></span><span class="vd amber"><i></i>Uso <small>exclusivo del reto</small></span><span class="vd grey"><i></i>Ficción docente</span>`;
+  const days = m.window ? Math.round((new Date(m.window.end) - new Date(m.window.start)) / 864e5) : null;
+  $('#stats').innerHTML = [['Eventos', fmtInt(t.rows), 'todas las tablas'], ['Fuentes', `${srcAssets.length} + contexto`, 'inventario, tickets, IOCs'],
+    ['Ventana', days ? `${days} días` : '—', m.window ? `${fmtDate(m.window.start, { dateStyle: 'short', timeStyle: undefined })} → ${fmtDate(m.window.end, { dateStyle: 'short', timeStyle: undefined })}` : ''],
+    ['Oleadas', String(waves.length), waves.length ? `${fmtDate(waves[0].release_at, { timeZone: 'Europe/Madrid', dateStyle: 'short', timeStyle: 'short' })} → ${fmtDate(waves[waves.length - 1].release_at, { timeZone: 'Europe/Madrid', timeStyle: 'short', dateStyle: undefined })}` : '']]
+    .map(([k, v, s]) => `<div class="stat"><div class="k">${k}</div><div class="v">${esc(v)}</div><div class="s">${esc(s)}</div></div>`).join('');
 
   // downloads
   $('#assets tbody').innerHTML = assets.filter(a => a.kind !== 'doc').map(a => `
     <tr class="row" data-q="${esc((a.name + ' ' + a.source + ' ' + a.label + ' ' + a.format + ' ' + a.sha256).toLowerCase())}">
-      <td><span class="ftype">${FTYPE(a)}</span></td>
-      <td class="name"><b>${esc(a.name)}</b><span>${esc(a.label)}${a.files ? ` · ${a.files} fichero${a.files > 1 ? 's' : ''}` : ''}</span></td>
-      <td>${esc(a.format)}</td>
+      <td><div class="fcell"><span class="ftype">${FTYPE(a)}</span><div class="fname"><b title="${esc(a.name)}">${esc(a.name)}</b><span>${esc(a.label)} · ${esc(a.format)}${a.files ? ` · ${a.files} fichero${a.files > 1 ? 's' : ''}` : ''}</span><span class="sha" title="${esc(a.sha256)}"><em>${esc((a.sha256 || '').slice(0, 24))}…</em><button class="copy" data-text="${esc(a.sha256)}" title="Copiar SHA-256">copiar</button></span></div></div></td>
       <td class="right num">${fmtInt(a.rows)}</td>
       <td class="right num">${fmtBytes(a.size)}</td>
-      <td><span class="hash" title="${esc(a.sha256)}">${esc((a.sha256 || '').slice(0, 14))}…<button class="copy" data-text="${esc(a.sha256)}" title="Copiar SHA-256">copiar</button></span></td>
-      <td><span class="ok">${CHECK}SHA-256 publicado</span></td>
+      <td><span class="ok">${CHECK}<span class="long">SHA-256 publicado</span><span class="short">SHA-256</span></span></td>
       <td class="right"><a class="btn sm primary" href="${dl(m.tag_base, a.name)}">Descargar</a></td>
-    </tr>`).join('') || '<tr><td colspan="8" class="empty">Sin ficheros en el manifiesto.</td></tr>';
+    </tr>`).join('') || '<tr><td colspan="5" class="empty">Sin ficheros en el manifiesto.</td></tr>';
   $('#nAssets').textContent = assets.length;
   $('#dlSummary').textContent = `${fmtInt(t.rows)} filas · ${fmtBytes(t.bytes_compressed)}`;
   const extras = [['SHA256SUMS', 'Sumas de verificación de todos los ficheros'], ['manifest.json', 'Inventario legible por máquina: nombres, tamaños, hashes, filas'], ['README_DATASET_ES.md', 'Diccionario de datos y convenciones']];
-  $('#extras tbody').innerHTML = extras.map(([n, d]) => `<tr><td class="name" style="width:40%"><b>${n}</b><span>${d}</span></td><td><span class="ok">${CHECK}publicado</span></td><td class="right"><a class="btn sm" href="${dl(m.tag_base, n)}">Descargar</a></td></tr>`).join('');
+  $('#extras tbody').innerHTML = extras.map(([n, d]) => `<tr class="row"><td><div class="fcell"><span class="ftype">${n.endsWith('.md') ? 'MD' : n.endsWith('.json') ? 'JSON' : 'TXT'}</span><div class="fname"><b>${n}</b><span>${d}</span></div></div></td><td><span class="ok">${CHECK}publicado</span></td><td class="right"><a class="btn sm" href="${dl(m.tag_base, n)}">Descargar</a></td></tr>`).join('');
 
   // details
   const kv = (rows) => rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
@@ -434,7 +435,7 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
     ['Tamaño comprimido', fmtBytes(t.bytes_compressed)], ['Ficheros', fmtInt(t.files)], ['Filas, todas las tablas', fmtInt(t.rows)],
     ['Fuentes', `${srcAssets.length} + contexto (inventario, tickets, feed de IOCs)`], ['Formatos', 'CSV gzip · JSONL gzip · CSV · EML · TXT'],
     ['Ventana temporal', m.window ? `<code>${esc(m.window.start)}</code> → <code>${esc(m.window.end)}</code>` : '—'],
-    ['Zona horaria de los registros', 'UTC (<code>Z</code>); el laboratorio opera en hora peninsular'],
+    ['Zona horaria', 'Registros en UTC (<code>Z</code>); el laboratorio opera en hora peninsular'],
     ['Integridad', `<code>SHA256SUMS</code> con ${assets.length} entradas · <code>manifest.json</code>`],
     ['Naturaleza', 'Sintético, obra de ficción docente; datos hostiles a propósito'],
   ]);
@@ -443,19 +444,19 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
     ...waves.map((w, i) => [`Oleada ${i + 1} · <code>${esc(w.tag)}</code>`, `${fmtDate(w.release_at, { timeZone: 'Europe/Madrid' })} (hora peninsular) · <code>${esc(w.release_at)}</code>`]),
     ['Cierre de entregas', m.deadline ? fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)' : '—'],
   ]);
-  $('#sources tbody').innerHTML = (m.sources || []).map(s => `<tr><td><code>${esc(s.id)}</code></td><td><code>${esc(s.path)}</code></td><td>${esc(s.format)}</td><td class="right num">${fmtInt(s.rows)}</td><td style="color:var(--muted)">${esc(s.description)}</td></tr>`).join('');
+  $('#sources tbody').innerHTML = (m.sources || []).map(s => `<tr><td><code>${esc(s.id)}</code></td><td><code title="${esc(s.path)}">${esc(s.path)}</code></td><td>${esc(s.format)}</td><td class="right num">${fmtInt(s.rows)}</td><td style="color:var(--muted); white-space:normal">${esc(s.description)}</td></tr>`).join('');
   const total = srcAssets.reduce((s, a) => s + a.rows, 0) || 1;
   const sorted = srcAssets.slice().sort((x, y) => y.rows - x.rows);
   $('#bar').innerHTML = sorted.map(a => `<i style="width:${100 * a.rows / total}%; background:${COLORS[a.source] || '#888'}" title="${esc(a.source)}: ${fmtInt(a.rows)}"></i>`).join('');
-  $('#legend').innerHTML = sorted.map(a => `<span><i style="background:${COLORS[a.source] || '#888'}"></i>${esc(a.source)} ${(100 * a.rows / total).toFixed(1)} %</span>`).join('');
+  $('#legend').innerHTML = sorted.map(a => `<span><i style="background:${COLORS[a.source] || '#888'}"></i>${esc(a.source)}<em>${(100 * a.rows / total).toFixed(1)} %</em></span>`).join('');
 
   // waves
   const renderWaves = (published) => {
     $('#statusList').innerHTML = `<div class="wave"><span class="dot-s base"></span><span>Dataset base <code>${esc(m.tag_base)}</code></span><span class="t">publicado</span></div>` +
       waves.map(w => { const on = published.has(w.tag); return `<div class="wave"><span class="dot-s ${on ? 'on' : ''}"></span><span>${esc(w.label || w.id)}</span><span class="t">${on ? 'publicada' : fmtDate(w.release_at, { timeZone: 'Europe/Madrid', dateStyle: 'short', timeStyle: 'short' })}</span></div>`; }).join('');
     $('#waveTable tbody').innerHTML = waves.map((w, i) => { const on = published.has(w.tag); const n = i + 1; return `<tr class="row">
-        <td><b>${esc(w.label || 'Oleada ' + n)}</b><div class="hash">${esc(w.tag)}</div></td>
-        <td>${fmtDate(w.release_at, { timeZone: 'Europe/Madrid' })} <span style="color:var(--muted)">(hora peninsular)</span><div class="hash">${esc(w.release_at)}</div></td>
+        <td><b>${esc(w.label || 'Oleada ' + n)}</b><div class="mono" style="color:var(--muted); font-size:12px">${esc(w.tag)}</div></td>
+        <td>${fmtDate(w.release_at, { timeZone: 'Europe/Madrid' })} <span style="color:var(--muted)">(hora peninsular)</span><div class="mono" style="color:var(--muted-2); font-size:11.5px">${esc(w.release_at)}</div></td>
         <td><span class="pill ${on ? 'live' : 'pending'}">${on ? 'Publicada' : 'Pendiente'}</span></td>
         <td class="cd" data-at="${esc(w.release_at)}" data-on="${on ? 1 : 0}">—</td>
         <td><code>fetch_dataset.py --wave ${n}</code></td>
@@ -463,10 +464,7 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
       </tr>`; }).join('');
   };
   renderWaves(new Set());
-  try {  // published waves are non-draft releases; drafts are invisible to the public API
-    const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=20`, { headers: { Accept: 'application/vnd.github+json' } });
-    if (r.ok) { const rel = await r.json(); renderWaves(new Set(rel.filter(x => !x.draft).map(x => x.tag_name))); }
-  } catch { /* offline or private repo: planned schedule stays */ }
+  try { const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=20`, { headers: { Accept: 'application/vnd.github+json' } }); if (r.ok) { const rel = await r.json(); renderWaves(new Set(rel.filter(x => !x.draft).map(x => x.tag_name))); } } catch { /* offline or private repo */ }
   const tick = () => { document.querySelectorAll('.cd').forEach(el => { if (el.dataset.on === '1') { el.textContent = 'disponible'; el.style.color = 'var(--green)'; return; } const d = new Date(el.dataset.at) - Date.now(); if (isNaN(d)) { el.textContent = '—'; return; } if (d <= 0) { el.textContent = 'publicándose…'; el.style.color = 'var(--amber)'; return; } const h = Math.floor(d / 3.6e6), mi = Math.floor(d % 3.6e6 / 6e4), s = Math.floor(d % 6e4 / 1e3); el.textContent = h > 48 ? `${Math.floor(h / 24)} d ${h % 24} h` : `${String(h).padStart(2, '0')}:${String(mi).padStart(2, '0')}:${String(s).padStart(2, '0')}`; }); };
   tick(); setInterval(tick, 1000);
 
@@ -478,7 +476,7 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
   $('#q').addEventListener('input', (e) => { const q = e.target.value.trim().toLowerCase(); document.querySelectorAll('#assets tr.row').forEach(tr => { tr.style.display = !q || tr.dataset.q.includes(q) ? '' : 'none'; }); if (q) showTab('downloads'); });
   document.addEventListener('click', (e) => {
     const b = e.target.closest('.copy'); if (!b) return;
-    const txt = b.dataset.text || (b.dataset.copy ? Array.from(document.querySelector(b.dataset.copy).childNodes).filter(n => n !== b).map(n => n.textContent).join('') : '');
+    const txt = b.dataset.text || (b.dataset.copy ? Array.from(document.querySelector(b.dataset.copy).childNodes).filter(n => n !== b).map(n => n.textContent).join('').trim() : '');
     navigator.clipboard?.writeText(txt).then(() => { b.classList.add('done'); b.textContent = 'copiado'; setTimeout(() => { b.classList.remove('done'); b.textContent = 'copiar'; }, 1400); });
   });
 })();
