@@ -1,8 +1,8 @@
 # Starter kit — «Incidente en el GSEC»
 
-Guía rápida para cargar el dataset público (`output/public`) en una base de datos analítica
-y empezar a consultar en menos de 10 minutos. La documentación de columnas de cada fuente está
-en `output/public/README_DATASET_ES.md`: léela antes de nada.
+Guía rápida para **descargar** el dataset público, cargarlo en una base de datos analítica y
+empezar a consultar en menos de 10 minutos. La documentación de columnas de cada fuente está
+en `output/public/README_DATASET_ES.md` (viene dentro del dataset): léela antes de nada.
 
 > Convenciones importantes
 > - Todas las marcas de tiempo de los *streams* están en **UTC** con milisegundos
@@ -17,6 +17,33 @@ en `output/public/README_DATASET_ES.md`: léela antes de nada.
 >   (VLAN `10.10.60.0/24`, hosts `tipo = sandbox-vm`) detona muestras a diario y genera
 >   tráfico malicioso *legítimo*. Antes de concluir nada sobre un dominio o una IP, comprueba
 >   si aparece en la fuente `sandbox`.
+
+## Paso 0: descargar y verificar el dataset
+
+`fetch_dataset.py` solo necesita Python 3.10+ (biblioteca estándar). Descarga los ficheros de la
+*release* del repositorio público, comprueba su **SHA-256** contra `SHA256SUMS` antes de extraer
+nada y deja exactamente la estructura que esperan los cargadores:
+
+```bash
+python3 starter-kit/fetch_dataset.py                         # dataset base  -> output/public/
+python3 starter-kit/fetch_dataset.py --wave 1                # oleada 1      -> output/waves/wave1/
+python3 starter-kit/fetch_dataset.py --only firewall,proxy,contexto   # solo algunas fuentes
+python3 starter-kit/fetch_dataset.py --from-dir /Volumes/MALACKATHON  # desde el pendrive de la acreditación
+python3 starter-kit/fetch_dataset.py --dest datos --keep     # otra carpeta; conserva los .tar.gz descargados
+```
+
+- El repositorio y la etiqueta de la *release* se leen de `starter-kit/dataset_source.json`; con
+  `--repo ORG/REPO --tag ETIQUETA` se puede apuntar a otra (p. ej. una corrección `dataset-v1.1`).
+- `contexto` es el paquete con inventarios, feed TI, extras y `README_DATASET_ES.md`; las oleadas
+  son un único archivo cada una (`--only` no se aplica).
+- `--from-dir` acepta tanto la carpeta con `SHA256SUMS` (`release/` u `oleada-N/`) como la raíz
+  del pendrive que contiene `release/` y `waves/`.
+- Las descargas se guardan en `<dest>/descargas/<etiqueta>/` (solo `SHA256SUMS` y `manifest.json`
+  salvo con `--keep`). Un archivo cuya suma no coincide se borra y **no** se extrae; la extracción
+  rechaza rutas absolutas, `..`, enlaces y ficheros especiales.
+- Códigos de salida: `0` todo bien · `1` argumentos/configuración · `2` descarga imposible (p. ej. la
+  oleada aún no está publicada) · `3` integridad (suma o archivo inseguro) · `4` disco/permisos.
+- Verificación manual, si descargáis los ficheros a mano desde la web: `shasum -a 256 -c SHA256SUMS`.
 
 ## Estructura del paquete público
 
@@ -40,10 +67,20 @@ en `output/public/README_DATASET_ES.md`: léela antes de nada.
 Las «oleadas» (`output/waves/<id>/`) que se publiquen durante el reto siguen exactamente la
 misma estructura (sin inventarios; pueden traer su propio `extras/tickets.csv`) y se cargan igual.
 
+En la *release* cada fuente viaja en su propio `base_<fuente>.tar.gz` (se extrae dentro de
+`output/public/`); `base_contexto.tar.gz` contiene `inventory/`, `ti/`, `extras/` y
+`README_DATASET_ES.md`; cada oleada es un único `waveN.tar.gz`. El `manifest.json` de la
+*release* (queda en `output/descargas/<etiqueta>/`) lleva las filas y tamaños por fichero y el
+total: comparadlo con lo que carga vuestra base de datos.
+
+Para las **entregas** (`respuestas.json`, `oleadaN.json`) usad `starter-kit/validar_respuestas.py`
+y la guía `starter-kit/FORMATO_ENTREGA_ES.md`; el formato de los ficheros de entrega no tiene nada
+que ver con el del dataset.
+
 ## Opción A (recomendada): DuckDB
 
 ```bash
-python3 -m pip install "duckdb>=1.2"               # Python 3.11+ ; el script no tiene más dependencias
+python3 -m pip install "duckdb>=1.2"               # Python 3.10+ ; el script no tiene más dependencias
 python3 starter-kit/load_duckdb.py --public output/public --db incidente_gsec.duckdb
 # cuando se publiquen oleadas:
 python3 starter-kit/load_duckdb.py --public output/public --db incidente_gsec.duckdb --waves output/waves

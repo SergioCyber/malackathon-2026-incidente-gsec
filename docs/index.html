@@ -92,7 +92,7 @@
   .copy:hover { color: var(--text); border-color: var(--muted); } .copy.ok { color: var(--green); border-color: var(--green); }
   .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .right { text-align: right; }
-  pre { margin: 0; background: #0A0D12; border: 1px solid var(--line); border-radius: 10px; padding: 14px 78px 14px 16px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: #D7DEE6; overflow-x: auto; position: relative; }
+  pre { margin: 0; background: #0A0D12; border: 1px solid var(--line); border-radius: 10px; padding: 14px 78px 14px 16px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: #D7DEE6; white-space: pre-wrap; word-break: break-all; position: relative; }
   pre .cm { color: var(--muted-2); }
   pre .copy { position: absolute; top: 8px; right: 8px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -327,8 +327,13 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
     if (!r.ok) throw new Error(r.status);
     m = await r.json();
   } catch (e) {
-    $('#assets tbody').innerHTML = `<tr><td colspan="7" class="empty">No se ha podido leer <code>data/manifest.json</code> (${esc(e.message)}). Si has abierto el fichero en local, sírvelo con <code>python3 -m http.server</code>.</td></tr>`;
-    return;
+    const inline = document.getElementById('manifest-inline');   // present only in the standalone copy
+    if (inline && inline.textContent.trim()) {
+      m = JSON.parse(inline.textContent);
+    } else {
+      $('#assets tbody').innerHTML = `<tr><td colspan="7" class="empty">No se ha podido leer <code>data/manifest.json</code> (${esc(e.message)}). Si has abierto el fichero en local, sírvelo con <code>python3 -m http.server</code>.</td></tr>`;
+      return;
+    }
   }
   const repo = m.repo || 'ORG/REPO';
   const base = `https://github.com/${repo}`;

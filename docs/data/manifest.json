@@ -2,7 +2,7 @@
   "repo": "SergioCyber/malackathon-2026-incidente-gsec",
   "tag_base": "dataset-v1",
   "wave_tag_prefix": "oleada-",
-  "generated_at": "2026-10-13T08:19:21+00:00",
+  "generated_at": "2026-10-13T08:46:22+00:00",
   "seed": 2026,
   "window": {
     "start": "2026-09-07T00:00:00+02:00",
@@ -13,7 +13,7 @@
   "contact": "el canal de la organización del Malackathon (por confirmar)",
   "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
   "totals": {
-    "rows": 9128017,
+    "rows": 9160288,
     "files": 244,
     "bytes_compressed": 276912448
   },
@@ -137,7 +137,7 @@
       "rows": 32271,
       "files": 13,
       "size": 670428,
-      "sha256": "7ec4a507779317bb4c1f9e67432bd13c2189802683a850e643e74e487086b816"
+      "sha256": "c4afeff55cebd650477e73e9ad80a2ddd74be857d4edde6fc1d8024766ad1730"
     },
     {
       "kind": "doc",
@@ -148,7 +148,7 @@
       "rows": null,
       "files": 1,
       "size": 9545,
-      "sha256": "6afc28a8bccc6c75a58ef209ff9a86cc721fb7a5f551e9c8fbbdecf3cb188c48"
+      "sha256": "2b6e053a8a3bbdb365b0366ab58e1c71b2b49c6e6247a11c284d24b1b9d377ba"
     }
   ],
   "waves": [
@@ -156,7 +156,7 @@
       "id": "wave1",
       "tag": "oleada-1",
       "label": "Oleada 1",
-      "release_at": "2026-10-15T08:15:00.000Z",
+      "release_at": "2026-10-15T08:15:00Z",
       "release_at_local": "2026-10-15T10:15:00+02:00",
       "asset": "wave1.tar.gz"
     },
@@ -164,7 +164,7 @@
       "id": "wave2",
       "tag": "oleada-2",
       "label": "Oleada 2",
-      "release_at": "2026-10-15T11:15:00.000Z",
+      "release_at": "2026-10-15T11:15:00Z",
       "release_at_local": "2026-10-15T13:15:00+02:00",
       "asset": "wave2.tar.gz"
     },
@@ -172,7 +172,7 @@
       "id": "wave3",
       "tag": "oleada-3",
       "label": "Oleada 3",
-      "release_at": "2026-10-15T14:15:00.000Z",
+      "release_at": "2026-10-15T14:15:00Z",
       "release_at_local": "2026-10-15T16:15:00+02:00",
       "asset": "wave3.tar.gz"
     }

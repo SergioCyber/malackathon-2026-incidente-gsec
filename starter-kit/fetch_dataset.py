@@ -35,6 +35,7 @@ import json
 import os
 import re
 import shutil
+import ssl
 import sys
 import tarfile
 import time
@@ -163,6 +164,29 @@ class Downloader:
         self.timeout = timeout
         self.retries = max(1, retries)
         self.quiet = quiet
+        self._context: ssl.SSLContext | None = None
+
+    # Some Python builds (notably python.org installers on macOS before running
+    # "Install Certificates.command") ship WITHOUT a CA bundle, so every HTTPS request fails
+    # with CERTIFICATE_VERIFY_FAILED. We never disable verification; instead we try, in order,
+    # the default context, certifi (if installed) and the OS bundles, and explain the fix.
+    _OS_BUNDLES = ("/etc/ssl/cert.pem", "/private/etc/ssl/cert.pem", "/etc/ssl/certs/ca-certificates.crt",
+                   "/etc/pki/tls/certs/ca-bundle.crt", "/usr/local/etc/openssl/cert.pem", "/opt/homebrew/etc/openssl@3/cert.pem")
+
+    def _contexts(self) -> list[tuple[str, ssl.SSLContext]]:
+        out: list[tuple[str, ssl.SSLContext]] = [("sistema", ssl.create_default_context())]
+        try:
+            import certifi  # type: ignore[import-not-found]  # optional dependency
+            out.append(("certifi", ssl.create_default_context(cafile=certifi.where())))
+        except Exception:  # noqa: S110  (certifi absent or broken: simply not an option)
+            pass
+        for bundle in self._OS_BUNDLES:
+            if os.path.isfile(bundle):
+                try:
+                    out.append((bundle, ssl.create_default_context(cafile=bundle)))
+                except (ssl.SSLError, OSError):
+                    continue
+        return out
 
     def _open(self, name: str) -> Any:  # http.client.HTTPResponse (urllib's return type is private)
         url = self.base + name
@@ -170,7 +194,27 @@ class Downloader:
             raise FetchError(f"URL no permitida: {url}", EXIT_USAGE)
         request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT,  # noqa: S310
                                                        "Accept": "application/octet-stream"})
-        return urllib.request.urlopen(request, timeout=self.timeout)  # noqa: S310  (https://github.com/ only)
+        if self._context is not None:
+            return urllib.request.urlopen(request, timeout=self.timeout, context=self._context)  # noqa: S310
+        last: Exception | None = None
+        for label, ctx in self._contexts():
+            try:
+                response = urllib.request.urlopen(request, timeout=self.timeout, context=ctx)  # noqa: S310  (https://github.com/ only)
+                self._context = ctx
+                if label != "sistema":
+                    self.say(f"  TLS: usando el almacén de certificados «{label}» (el de Python no tiene raíces)")
+                return response
+            except urllib.error.URLError as exc:
+                if isinstance(exc.reason, ssl.SSLCertVerificationError):
+                    last = exc
+                    continue
+                raise
+        raise FetchError(
+            "no se pudo verificar el certificado TLS de github.com porque este Python no tiene raíces de "
+            "confianza instaladas. Soluciones: (1) macOS con Python de python.org: ejecuta "
+            "«/Applications/Python 3.x/Install Certificates.command»; (2) `python3 -m pip install certifi` y "
+            "vuelve a lanzar; (3) usa el pendrive: `--from-dir /Volumes/MALACKATHON`. "
+            f"Detalle: {last}", EXIT_DOWNLOAD)
 
     def fetch(self, name: str, dest: Path | None, expected: str | None = None, *, max_bytes: int | None = None) -> bytes | str:
         """Download ``name``; return the bytes (``dest`` None) or the hex digest of the file written
