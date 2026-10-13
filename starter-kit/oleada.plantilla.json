@@ -1,0 +1,17 @@
+{
+  "formato": "incidente-gsec/oleada/v1",
+  "equipo": "nombre-del-equipo",
+  "oleada": 1,
+  "detectado_en": null,
+  "es_ataque": false,
+  "resumen": "",
+  "entidades": {
+    "usuarios": [],
+    "equipos": [],
+    "ips": [],
+    "dominios": []
+  },
+  "evidencia": [],
+  "mitre": [],
+  "regla_de_deteccion": ""
+}

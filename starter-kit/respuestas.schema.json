@@ -1,0 +1,769 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://incidente-gsec.invalid/schemas/respuestas.schema.json",
+  "title": "Cuestionario «Incidente en el GSEC» (respuestas.json, formato v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "formato",
+    "equipo",
+    "generado",
+    "respuestas"
+  ],
+  "properties": {
+    "formato": {
+      "const": "incidente-gsec/respuestas/v1"
+    },
+    "equipo": {
+      "$ref": "#/$defs/equipo"
+    },
+    "generado": {
+      "$ref": "#/$defs/fecha_hora"
+    },
+    "respuestas": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "una entrada por pregunta; una pregunta ausente o con respuesta null cuenta como en blanco",
+      "properties": {
+        "q01": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "sha256"
+                  ],
+                  "properties": {
+                    "sha256": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "pattern": "^[A-Fa-f0-9]{64}$",
+                      "description": "SHA-256 del binario, 64 caracteres hexadecimales"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q02": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "usuario",
+                    "equipo"
+                  ],
+                  "properties": {
+                    "usuario": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "nombre de cuenta tal y como aparece en users.csv (sin dominio)"
+                    },
+                    "equipo": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "nombre corto del equipo tal y como aparece en hosts.csv"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q03": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "dominio",
+                    "primer_beacon_utc"
+                  ],
+                  "properties": {
+                    "dominio": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 253,
+                      "description": "nombre de dominio del C2 (sin esquema ni ruta)"
+                    },
+                    "primer_beacon_utc": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time",
+                      "description": "fecha-hora UTC ISO-8601 del primer beacon, p. ej. 2026-01-31T10:15:00Z"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q04": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "cuenta",
+                    "como_se_obtuvo"
+                  ],
+                  "properties": {
+                    "cuenta": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "cuenta de administrador local (sin dominio)"
+                    },
+                    "como_se_obtuvo": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "maxLength": 500,
+                      "description": "texto libre: cómo consiguió el atacante esa cuenta"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q05": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "cuenta",
+                    "fichero"
+                  ],
+                  "properties": {
+                    "cuenta": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "cuenta de servicio de la base de datos"
+                    },
+                    "fichero": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "maxLength": 300,
+                      "description": "ruta o nombre del fichero que contenía las credenciales"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q06": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "registros"
+                  ],
+                  "properties": {
+                    "registros": {
+                      "type": [
+                        "integer",
+                        "string",
+                        "null"
+                      ],
+                      "minimum": 0,
+                      "pattern": "^[0-9][0-9 .,_']{0,30}$",
+                      "maxLength": 32,
+                      "description": "número entero de registros (se admiten separadores de miles)"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q07": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "bytes",
+                    "destino"
+                  ],
+                  "properties": {
+                    "bytes": {
+                      "type": [
+                        "integer",
+                        "number",
+                        "string",
+                        "null"
+                      ],
+                      "minimum": 0,
+                      "pattern": "^[0-9][0-9 .,_']{0,30}([eE][+-]?[0-9]{1,3})?\\s*[A-Za-z]{0,6}\\.?$",
+                      "maxLength": 48,
+                      "description": "volumen en bytes (entero) o con unidad: 1.5 GB, 1.4 GiB…"
+                    },
+                    "destino": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 253,
+                      "description": "dominio o IP de destino de la exfiltración"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q08": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "equipos"
+                  ],
+                  "properties": {
+                    "equipos": {
+                      "type": [
+                        "integer",
+                        "string",
+                        "null"
+                      ],
+                      "minimum": 0,
+                      "pattern": "^[0-9][0-9 .,_']{0,30}$",
+                      "maxLength": 32,
+                      "description": "número entero de equipos"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q09": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "usuario",
+                    "equipo"
+                  ],
+                  "properties": {
+                    "usuario": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "nombre de cuenta (sin dominio)"
+                    },
+                    "equipo": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "description": "nombre corto del puesto"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q10": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "vector",
+                    "detalle"
+                  ],
+                  "properties": {
+                    "vector": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "spear-phishing",
+                        "vpn-sin-mfa",
+                        "usb",
+                        "servicio-expuesto",
+                        "insider",
+                        "cadena-de-suministro",
+                        "otro",
+                        null
+                      ],
+                      "description": "vector de entrada (valor cerrado)"
+                    },
+                    "detalle": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "maxLength": 500,
+                      "description": "texto libre: qué, quién, cuándo (no se corrige automáticamente)"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q11": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "es_ataque",
+                    "justificacion"
+                  ],
+                  "properties": {
+                    "es_ataque": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "description": "true si fue actividad maliciosa, false si no"
+                    },
+                    "justificacion": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "maxLength": 500,
+                      "description": "texto libre: en qué os basáis (no se corrige automáticamente)"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        },
+        "q12": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "respuesta"
+          ],
+          "properties": {
+            "respuesta": {
+              "description": "null = en blanco (0 puntos, nunca resta)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "es_maliciosa",
+                    "justificacion"
+                  ],
+                  "properties": {
+                    "es_maliciosa": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "description": "true si la IP es maliciosa, false si no"
+                    },
+                    "justificacion": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "maxLength": 500,
+                      "description": "texto libre: en qué os basáis (no se corrige automáticamente)"
+                    }
+                  }
+                }
+              ]
+            },
+            "confianza": {
+              "$ref": "#/$defs/confianza"
+            },
+            "evidencia": {
+              "$ref": "#/$defs/evidencia"
+            },
+            "comentario": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "iocs": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tipo",
+          "valor"
+        ],
+        "properties": {
+          "tipo": {
+            "enum": [
+              "dominio",
+              "ip",
+              "sha256",
+              "url",
+              "correo",
+              "fichero"
+            ]
+          },
+          "valor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "contexto": {
+            "type": "string",
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "mitre": {
+      "$ref": "#/$defs/mitre"
+    },
+    "enlaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repositorio": {
+          "$ref": "#/$defs/url"
+        },
+        "consola": {
+          "$ref": "#/$defs/url"
+        },
+        "informe": {
+          "$ref": "#/$defs/url"
+        },
+        "video": {
+          "$ref": "#/$defs/url"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "equipo": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9 _.-]{0,58}[A-Za-z0-9])?$",
+      "description": "nombre del equipo: letras, dígitos, espacio, punto, guion o guion bajo"
+    },
+    "fecha_hora": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "ISO-8601 con zona horaria, p. ej. 2026-10-28T16:05:00Z"
+    },
+    "confianza": {
+      "enum": [
+        "alta",
+        "media",
+        "baja",
+        null
+      ]
+    },
+    "evidencia": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "description": "consultas, identificadores de evento o rutas de fichero que sustentan la respuesta"
+    },
+    "mitre": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$",
+        "description": "identificador ATT&CK, p. ej. T1566.002"
+      }
+    },
+    "url": {
+      "type": "string",
+      "maxLength": 512,
+      "pattern": "^https://[^\\s]{1,500}$",
+      "description": "URL https"
+    }
+  }
+}

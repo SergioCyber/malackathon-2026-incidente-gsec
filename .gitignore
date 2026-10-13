@@ -1,0 +1,5 @@
+output/
+*.duckdb
+*.duckdb.wal
+__pycache__/
+.DS_Store

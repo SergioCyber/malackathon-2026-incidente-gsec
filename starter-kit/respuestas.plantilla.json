@@ -1,0 +1,115 @@
+{
+  "formato": "incidente-gsec/respuestas/v1",
+  "equipo": "nombre-del-equipo",
+  "generado": null,
+  "respuestas": {
+    "q01": {
+      "respuesta": {
+        "sha256": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q02": {
+      "respuesta": {
+        "usuario": null,
+        "equipo": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q03": {
+      "respuesta": {
+        "dominio": null,
+        "primer_beacon_utc": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q04": {
+      "respuesta": {
+        "cuenta": null,
+        "como_se_obtuvo": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q05": {
+      "respuesta": {
+        "cuenta": null,
+        "fichero": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q06": {
+      "respuesta": {
+        "registros": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q07": {
+      "respuesta": {
+        "bytes": null,
+        "destino": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q08": {
+      "respuesta": {
+        "equipos": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q09": {
+      "respuesta": {
+        "usuario": null,
+        "equipo": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q10": {
+      "respuesta": {
+        "vector": null,
+        "detalle": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q11": {
+      "respuesta": {
+        "es_ataque": null,
+        "justificacion": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    },
+    "q12": {
+      "respuesta": {
+        "es_maliciosa": null,
+        "justificacion": null
+      },
+      "confianza": null,
+      "evidencia": [],
+      "comentario": ""
+    }
+  },
+  "iocs": [],
+  "mitre": [],
+  "enlaces": {}
+}

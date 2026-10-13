@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://incidente-gsec.invalid/schemas/oleada.schema.json",
+  "title": "Reporte de oleada «Incidente en el GSEC» (oleadaN.json, formato v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "formato",
+    "equipo",
+    "oleada",
+    "detectado_en",
+    "es_ataque",
+    "resumen",
+    "entidades",
+    "evidencia"
+  ],
+  "properties": {
+    "formato": {
+      "const": "incidente-gsec/oleada/v1"
+    },
+    "equipo": {
+      "$ref": "#/$defs/equipo"
+    },
+    "oleada": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "detectado_en": {
+      "$ref": "#/$defs/fecha_hora"
+    },
+    "es_ataque": {
+      "type": "boolean",
+      "description": "true = la oleada contiene actividad maliciosa"
+    },
+    "resumen": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "qué ha pasado, en vuestras palabras"
+    },
+    "entidades": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "usuarios",
+        "equipos",
+        "ips",
+        "dominios"
+      ],
+      "properties": {
+        "usuarios": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          }
+        },
+        "equipos": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          }
+        },
+        "ips": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          }
+        },
+        "dominios": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          }
+        }
+      }
+    },
+    "evidencia": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      }
+    },
+    "mitre": {
+      "$ref": "#/$defs/mitre"
+    },
+    "regla_de_deteccion": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "consulta SQL, regla Sigma o descripción de la detección"
+    }
+  },
+  "$defs": {
+    "equipo": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9 _.-]{0,58}[A-Za-z0-9])?$",
+      "description": "nombre del equipo: letras, dígitos, espacio, punto, guion o guion bajo"
+    },
+    "fecha_hora": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "ISO-8601 con zona horaria, p. ej. 2026-10-28T16:05:00Z"
+    },
+    "confianza": {
+      "enum": [
+        "alta",
+        "media",
+        "baja",
+        null
+      ]
+    },
+    "evidencia": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "description": "consultas, identificadores de evento o rutas de fichero que sustentan la respuesta"
+    },
+    "mitre": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$",
+        "description": "identificador ATT&CK, p. ej. T1566.002"
+      }
+    },
+    "url": {
+      "type": "string",
+      "maxLength": 512,
+      "pattern": "^https://[^\\s]{1,500}$",
+      "description": "URL https"
+    }
+  }
+}

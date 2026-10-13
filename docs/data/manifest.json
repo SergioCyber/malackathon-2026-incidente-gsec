@@ -1,0 +1,329 @@
+{
+  "repo": "SergioCyber/malackathon-2026-incidente-gsec",
+  "tag_base": "dataset-v1",
+  "wave_tag_prefix": "oleada-",
+  "generated_at": "2026-10-13T08:06:30+00:00",
+  "seed": 2026,
+  "window": {
+    "start": "2026-09-07T00:00:00+02:00",
+    "end": "2026-10-06T12:00:00+02:00"
+  },
+  "event_start": "2026-10-28T09:00:00+02:00",
+  "deadline": "2026-10-29T21:00:00+02:00",
+  "contact": "el canal de la organización del Malackathon (por confirmar)",
+  "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
+  "totals": {
+    "rows": 9128017,
+    "files": 244,
+    "bytes_compressed": 276912338
+  },
+  "assets": [
+    {
+      "kind": "source",
+      "name": "base_firewall.tar.gz",
+      "source": "firewall",
+      "label": "Cortafuegos perimetral e interno",
+      "format": "CSV gzip",
+      "rows": 2471081,
+      "files": 31,
+      "size": 64753640,
+      "sha256": "df07a3142a19baf5309ff7da22c17167d7c23fdf17869a70f519af6ce977acf9"
+    },
+    {
+      "kind": "source",
+      "name": "base_vpn.tar.gz",
+      "source": "vpn",
+      "label": "Concentrador VPN del laboratorio",
+      "format": "CSV gzip",
+      "rows": 54579,
+      "files": 1,
+      "size": 1031623,
+      "sha256": "6d1e387e0b20db4a128fe79c7c324109cb42673555aa2ce16a7545689342c2d6"
+    },
+    {
+      "kind": "source",
+      "name": "base_proxy.tar.gz",
+      "source": "proxy",
+      "label": "Proxy web",
+      "format": "CSV gzip",
+      "rows": 1960640,
+      "files": 31,
+      "size": 70718002,
+      "sha256": "5f8dbe6f88cd62e86d3f468cff6a33fdb38be29374f4fa7e7754be868d9582a2"
+    },
+    {
+      "kind": "source",
+      "name": "base_dns.tar.gz",
+      "source": "dns",
+      "label": "Resolutores DNS (internos + sandbox)",
+      "format": "JSONL gzip",
+      "rows": 2427238,
+      "files": 31,
+      "size": 43572527,
+      "sha256": "2c3865d90dd0f38583766a7d5199b011b1f6db2af58f62d8673463af7c8f91fb"
+    },
+    {
+      "kind": "source",
+      "name": "base_email.tar.gz",
+      "source": "email",
+      "label": "Pasarela de correo + muestras .eml",
+      "format": "CSV gzip · EML",
+      "rows": 47432,
+      "files": 12,
+      "size": 2346513,
+      "sha256": "ffbf43ed47298ca534cfc16e6e69b1f6af7c334eff50dd95b1630a4487f975bd"
+    },
+    {
+      "kind": "source",
+      "name": "base_edr.tar.gz",
+      "source": "edr",
+      "label": "Telemetría de endpoint (tipo Sysmon)",
+      "format": "JSONL gzip",
+      "rows": 1113050,
+      "files": 31,
+      "size": 60533051,
+      "sha256": "0584acdcfa5dfe2d2361f6e5192d10dc19fe701a2b91ce579a87294ef1740e3f"
+    },
+    {
+      "kind": "source",
+      "name": "base_winsec.tar.gz",
+      "source": "winsec",
+      "label": "Registro de seguridad de Windows",
+      "format": "JSONL gzip",
+      "rows": 705127,
+      "files": 31,
+      "size": 21547771,
+      "sha256": "3905cbfbf14ab820ad6869ec20cbe2fe3592fa1a8fc91053e087b5c7fb78482c"
+    },
+    {
+      "kind": "source",
+      "name": "base_dbaudit.tar.gz",
+      "source": "dbaudit",
+      "label": "Auditoría de la BD de inteligencia (pgaudit)",
+      "format": "CSV gzip",
+      "rows": 240949,
+      "files": 31,
+      "size": 5439489,
+      "sha256": "b2181da9e63d9edbefa85bceeaf112aeab71bfb0f962d5902fc2f846b5cbf574"
+    },
+    {
+      "kind": "source",
+      "name": "base_sandbox.tar.gz",
+      "source": "sandbox",
+      "label": "Detonaciones del sandbox farm",
+      "format": "JSONL gzip",
+      "rows": 52844,
+      "files": 31,
+      "size": 5804658,
+      "sha256": "b11b385906b6648c1478186f4e7d55220edd1be4a0e5f452bca50b9a9545626c"
+    },
+    {
+      "kind": "source",
+      "name": "base_badges.tar.gz",
+      "source": "badges",
+      "label": "Accesos físicos (tarjetas)",
+      "format": "CSV gzip",
+      "rows": 55077,
+      "files": 1,
+      "size": 485201,
+      "sha256": "e78b454d731e78d3588573966ac0ba240fbbbbbc54ffe6d858a39b9795acfa5d"
+    },
+    {
+      "kind": "context",
+      "name": "base_contexto.tar.gz",
+      "source": "contexto",
+      "label": "Inventario, turnos, casos, tickets, feed de IOCs, GeoIP sintético y notas de guardia",
+      "format": "CSV · TXT",
+      "rows": 32271,
+      "files": 13,
+      "size": 670401,
+      "sha256": "9a39fb97f304d98ebe80af919460b7d1d7e6c6452c6b7c4cfb0547fabedf7e03"
+    },
+    {
+      "kind": "doc",
+      "name": "README_DATASET_ES.md",
+      "source": "doc",
+      "label": "Diccionario de datos",
+      "format": "Markdown",
+      "rows": null,
+      "files": 1,
+      "size": 9462,
+      "sha256": "2cd51b6a720cac61560608e7c06ea04c0e49307eac57d7875306d3670e07af2b"
+    }
+  ],
+  "waves": [
+    {
+      "id": "wave1",
+      "tag": "oleada-1",
+      "label": "Oleada 1",
+      "release_at": "2026-10-28T16:00:00.000Z",
+      "release_at_local": "2026-10-28T18:00:00+02:00",
+      "asset": "wave1.tar.gz"
+    },
+    {
+      "id": "wave2",
+      "tag": "oleada-2",
+      "label": "Oleada 2",
+      "release_at": "2026-10-29T08:00:00.000Z",
+      "release_at_local": "2026-10-29T10:00:00+02:00",
+      "asset": "wave2.tar.gz"
+    },
+    {
+      "id": "wave3",
+      "tag": "oleada-3",
+      "label": "Oleada 3",
+      "release_at": "2026-10-29T14:00:00.000Z",
+      "release_at_local": "2026-10-29T16:00:00+02:00",
+      "asset": "wave3.tar.gz"
+    }
+  ],
+  "sources": [
+    {
+      "id": "firewall",
+      "path": "firewall/fw_AAAA-MM-DD.csv.gz",
+      "format": "CSV gzip",
+      "rows": 2471081,
+      "description": "Cortafuegos perimetral e interno (flujos permitidos y denegados, zonas de origen/destino)"
+    },
+    {
+      "id": "vpn",
+      "path": "vpn/vpn_events.csv.gz",
+      "format": "CSV gzip",
+      "rows": 54579,
+      "description": "Concentrador VPN (conexiones, autenticación, MFA, sesiones)"
+    },
+    {
+      "id": "proxy",
+      "path": "proxy/proxy_AAAA-MM-DD.csv.gz",
+      "format": "CSV gzip",
+      "rows": 1960640,
+      "description": "Proxy web corporativo (peticiones HTTP/HTTPS de puestos, servidores y la línea sucia de la sandbox)"
+    },
+    {
+      "id": "dns",
+      "path": "dns/dns_AAAA-MM-DD.jsonl.gz",
+      "format": "JSONL gzip",
+      "rows": 2427238,
+      "description": "Resolutores DNS internos y resolutor de la granja de sandbox (consultas y respuestas)"
+    },
+    {
+      "id": "email",
+      "path": "email/gateway_events.csv.gz",
+      "format": "CSV gzip",
+      "rows": 47432,
+      "description": "Pasarela de correo: mensajes entrantes y salientes, veredictos, adjuntos y acciones"
+    },
+    {
+      "id": "edr",
+      "path": "edr/edr_AAAA-MM-DD.jsonl.gz",
+      "format": "JSONL gzip",
+      "rows": 1113050,
+      "description": "Telemetría de endpoint tipo Sysmon (procesos, red, ficheros, registro)"
+    },
+    {
+      "id": "winsec",
+      "path": "winsec/winsec_AAAA-MM-DD.jsonl.gz",
+      "format": "JSONL gzip",
+      "rows": 705127,
+      "description": "Registro de seguridad de Windows (inicios de sesión, servicios, recursos compartidos)"
+    },
+    {
+      "id": "dbaudit",
+      "path": "dbaudit/intel_audit_AAAA-MM-DD.csv.gz",
+      "format": "CSV gzip",
+      "rows": 240949,
+      "description": "Auditoría de la base de datos de inteligencia `intel` (PostgreSQL + pgaudit)"
+    },
+    {
+      "id": "sandbox",
+      "path": "sandbox/detonations_AAAA-MM-DD.jsonl.gz",
+      "format": "JSONL gzip",
+      "rows": 52844,
+      "description": "Registro de detonaciones de la granja de sandbox (una fila por muestra ejecutada)"
+    },
+    {
+      "id": "badges",
+      "path": "badges/accesos_fisicos.csv.gz",
+      "format": "CSV gzip",
+      "rows": 55077,
+      "description": "Control de accesos físicos (tarjetas)"
+    },
+    {
+      "id": "tickets",
+      "path": "extras/tickets.csv",
+      "format": "CSV",
+      "rows": 350,
+      "description": "Tickets del servicio de soporte interno"
+    },
+    {
+      "id": "ti_feed",
+      "path": "ti/iocs.csv",
+      "format": "CSV",
+      "rows": 401,
+      "description": "Feed de inteligencia de amenazas (indicadores de compromiso)"
+    },
+    {
+      "id": "email (muestras)",
+      "path": "email/eml/<msg_id>.eml",
+      "format": "RFC 5322",
+      "rows": null,
+      "description": "Algunos mensajes completos (texto plano UTF-8)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/users.csv",
+      "format": "CSV",
+      "rows": 300,
+      "description": "Personas (usuario, departamento, puesto principal, tarjeta)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/hosts.csv",
+      "format": "CSV",
+      "rows": 467,
+      "description": "Equipos (puestos, servidores, VM de sandbox, red)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/departamentos.csv",
+      "format": "CSV",
+      "rows": 11,
+      "description": "Departamentos y responsables (incluye el pseudo-departamento `SBX`)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/turnos.csv",
+      "format": "CSV",
+      "rows": 9000,
+      "description": "Turno de cada persona y día (`M` mañana, `T` tarde, `N` noche, `L` libre, `V` viaje/vacaciones)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/servicios_externos.csv",
+      "format": "CSV",
+      "rows": 4,
+      "description": "Servicios propios publicados en Internet"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/socios.csv",
+      "format": "CSV",
+      "rows": 25,
+      "description": "Organizaciones socias que comparten inteligencia (TLP por defecto)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/casos.csv",
+      "format": "CSV",
+      "rows": 1500,
+      "description": "Casos de inteligencia (socio, TLP, analista asignado, estado)"
+    },
+    {
+      "id": "inventory",
+      "path": "inventory/personas_objetivo.csv",
+      "format": "CSV",
+      "rows": 20000,
+      "description": "Personas objetivo de campañas documentadas en los casos (`confidencial` si el caso es TLP:RED)"
+    }
+  ]
+}
