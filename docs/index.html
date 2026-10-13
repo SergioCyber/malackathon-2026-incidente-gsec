@@ -3,115 +3,139 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MalakaTotal · Incidente en el GSEC — IV Malackathon</title>
-<meta name="description" content="Portal de descarga de la telemetría del reto «Incidente en el GSEC» (IV Malackathon). Datos sintéticos, ficción docente.">
+<title>dataset-v1 · Incidente en el GSEC — MalakaTotal</title>
+<meta name="description" content="Telemetría del reto «Incidente en el GSEC» (IV Malackathon): descargas verificadas, oleadas, formato de entrega y normas. Datos sintéticos.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%233B4FFF'/%3E%3Cpath d='M9.5 16.5l4.2 4.2 8.8-9.3' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // Theme before first paint: saved choice, else system preference.
+  (function () { try { var t = localStorage.getItem('mt-theme'); if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; document.documentElement.dataset.theme = t; } catch (e) { document.documentElement.dataset.theme = 'light'; } })();
+</script>
 <style>
   :root {
     --blue: #3B4FFF; --blue-d: #2F41E0; --blue-bg: #EEF0FF;
-    --green: #1AAB5B; --green-bg: #E8F7EE; --red: #E03C31; --red-bg: #FDECEA; --amber: #F29900; --amber-bg: #FFF4DF;
-    --text: #1B1F24; --muted: #6B7280; --muted-2: #9AA0A6; --line: #E5E8EC; --line-2: #D9DEE3;
-    --bg: #F6F7F9; --card: #FFFFFF; --chip: #F1F3F5; --mono: "Roboto Mono", Menlo, Consolas, monospace;
+    --green: #178F4E; --green-bg: #E7F6EC; --red: #D93025; --red-bg: #FCEAE8; --amber: #B26A00; --amber-bg: #FFF3DD;
+    --text: #1F2328; --muted: #656D76; --muted-2: #8C949E; --line: #E3E6EA; --line-2: #D0D5DB;
+    --bg: #F4F5F7; --card: #FFFFFF; --chip: #EFF1F4; --code: #F6F7F9; --hover: #F8F9FA; --shadow: 0 1px 2px rgba(16,24,40,.05);
+    --mono: "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --blue: #7C8CFF; --blue-d: #98A5FF; --blue-bg: rgba(124,140,255,.14);
+    --green: #3FC178; --green-bg: rgba(63,193,120,.14); --red: #FF7B72; --red-bg: rgba(255,123,114,.14); --amber: #F2B84B; --amber-bg: rgba(242,184,75,.14);
+    --text: #E6EAF0; --muted: #98A2AE; --muted-2: #6E7883; --line: #262D37; --line-2: #333C48;
+    --bg: #0F1216; --card: #161B22; --chip: #1F262F; --code: #0C0F13; --hover: #1B2129; --shadow: none;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
   code, .mono { font-family: var(--mono); font-size: 0.93em; }
-  button { font: inherit; cursor: pointer; }
+  button { font: inherit; cursor: pointer; color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  /* ---- top bar ---- */
-  .nav { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid var(--line); }
-  .nav .in { max-width: 1240px; margin: 0 auto; height: 58px; padding: 0 20px; display: flex; align-items: center; gap: 20px; }
-  .logo { display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--text); }
-  .logo svg { width: 30px; height: 30px; }
-  .logo b { font-weight: 700; letter-spacing: .14em; font-size: 15px; }
-  .logo span { color: var(--muted); font-size: 12.5px; letter-spacing: 0; margin-left: 2px; }
-  .search { flex: 1; max-width: 620px; display: flex; align-items: center; gap: 10px; background: var(--chip); border: 1px solid transparent; border-radius: 6px; padding: 8px 12px; }
-  .search:focus-within { background: #fff; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,79,255,.12); }
-  .search input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; color: var(--text); }
-  .search svg { width: 18px; height: 18px; fill: var(--muted); flex: none; }
-  .nav .right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
-  .nav .right a.lnk { color: var(--muted); font-weight: 500; font-size: 13px; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--line-2); background: #fff; color: var(--text); font-weight: 500; font-size: 13px; white-space: nowrap; }
-  .btn:hover { background: var(--chip); text-decoration: none; }
-  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; } .btn.primary:hover { background: var(--blue-d); }
-  .btn.sm { padding: 5px 10px; font-size: 12.5px; }
-  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+  /* top bar */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--card); border-bottom: 1px solid var(--line); }
+  .nav .in { max-width: 1240px; margin: 0 auto; height: 56px; padding: 0 20px; display: flex; align-items: center; gap: 18px; }
+  .logo { display: flex; align-items: center; gap: 9px; white-space: nowrap; color: var(--text); }
+  .logo svg { width: 28px; height: 28px; }
+  .logo b { font-weight: 700; letter-spacing: .12em; font-size: 14px; }
+  .search { flex: 1; max-width: 560px; display: flex; align-items: center; gap: 9px; background: var(--chip); border: 1px solid transparent; border-radius: 6px; padding: 7px 11px; }
+  .search:focus-within { background: var(--card); border-color: var(--blue); }
+  .search input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; color: var(--text); min-width: 0; }
+  .search input::placeholder { color: var(--muted-2); }
+  .search svg { width: 17px; height: 17px; fill: var(--muted); flex: none; }
+  .search kbd { font: 11px/1 var(--mono); color: var(--muted-2); border: 1px solid var(--line-2); border-radius: 4px; padding: 2px 5px; }
+  .nav .right { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+  .nav .right a.lnk { color: var(--muted); font-weight: 500; font-size: 13px; padding: 6px 10px; border-radius: 6px; } .nav .right a.lnk:hover { background: var(--chip); text-decoration: none; color: var(--text); }
+  .iconbtn { width: 34px; height: 34px; border-radius: 6px; border: 1px solid transparent; background: transparent; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); }
+  .iconbtn:hover { background: var(--chip); color: var(--text); } .iconbtn svg { width: 18px; height: 18px; fill: currentColor; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line-2); background: var(--card); color: var(--text); font-weight: 500; font-size: 13px; white-space: nowrap; }
+  .btn:hover { background: var(--hover); text-decoration: none; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; } .btn.primary:hover { background: var(--blue-d); border-color: var(--blue-d); }
+  [data-theme="dark"] .btn.primary { color: #0F1216; }
+  .btn.sm { padding: 4px 10px; font-size: 12.5px; }
+  .btn svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* ---- layout ---- */
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 18px 20px 56px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
-  .card h2 { margin: 0; padding: 12px 16px; font-size: 14px; font-weight: 500; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
+  /* layout */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 16px 20px 48px; }
+  .crumbs { font-size: 12.5px; color: var(--muted); margin: 2px 0 10px; display: flex; gap: 6px; align-items: center; }
+  .crumbs a { color: var(--muted); } .crumbs .sep { color: var(--muted-2); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); }
+  .card h2 { margin: 0; padding: 11px 16px; font-size: 13.5px; font-weight: 500; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
   .card h2 .sp { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 12.5px; }
   .card .body { padding: 14px 16px; }
   .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
 
-  /* ---- report header (VT file report) ---- */
-  .report { display: grid; grid-template-columns: 128px 1fr 300px; gap: 22px; align-items: start; padding: 20px 20px 16px; }
-  .ring { position: relative; width: 108px; height: 108px; margin: 4px auto 0; }
-  .ring svg { width: 108px; height: 108px; transform: rotate(-90deg); }
+  /* report header */
+  .report { display: grid; grid-template-columns: 120px 1fr 280px; gap: 20px; align-items: start; padding: 18px 20px 14px; }
+  .ring { position: relative; width: 100px; height: 100px; margin: 2px auto 0; }
+  .ring svg { width: 100px; height: 100px; transform: rotate(-90deg); }
   .ring .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .ring .c b { font-size: 24px; font-weight: 500; line-height: 1; color: var(--green); } .ring .c span { color: var(--muted); font-size: 11px; margin-top: 3px; }
+  .ring .c b { font-size: 22px; font-weight: 500; line-height: 1; color: var(--green); } .ring .c span { color: var(--muted); font-size: 11px; margin-top: 3px; }
   .ring-cap { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.3; }
-  .hashline { font-family: var(--mono); font-size: 13.5px; color: var(--text); display: flex; align-items: center; gap: 8px; white-space: nowrap; overflow: hidden; }
-  .hashline .tag { font-weight: 500; }
-  .hashline .sep { color: var(--muted-2); }
+  .hashline { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; white-space: nowrap; overflow: hidden; }
+  .hashline .tag { color: var(--text); font-weight: 500; }
   .hashline #hlRepo { overflow: hidden; text-overflow: ellipsis; }
-  .ttl { font-size: 18px; font-weight: 500; margin: 6px 0 4px; letter-spacing: -.01em; }
+  .ttl { font-size: 17.5px; font-weight: 500; margin: 5px 0 3px; letter-spacing: -.01em; }
   .metaline { color: var(--muted); font-size: 13px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .metaline .dot { color: var(--muted-2); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; font-size: 12px; background: var(--chip); color: var(--text); border: 1px solid var(--line); }
-  .chip.red { background: var(--red-bg); color: var(--red); border-color: transparent; } .chip.green { background: var(--green-bg); color: var(--green); border-color: transparent; }
-  .chip.blue { background: var(--blue-bg); color: var(--blue); border-color: transparent; } .chip.amber { background: var(--amber-bg); color: #9a5b00; border-color: transparent; }
-  .verdict { display: flex; align-items: center; gap: 10px; color: var(--green); font-weight: 500; font-size: 14px; padding: 12px 20px; border-top: 1px solid var(--line); background: #FBFCFD; border-radius: 0 0 6px 6px; }
-  .verdict svg { width: 18px; height: 18px; fill: var(--green); flex: none; }
-  .verdict span.sub { color: var(--muted); font-weight: 400; }
-  .side { border-left: 1px solid var(--line); padding-left: 20px; }
-  .side h4 { margin: 0 0 8px; font-size: 11.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .wave { display: flex; align-items: center; gap: 9px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 4px; font-size: 12px; background: var(--chip); color: var(--text); }
+  .verdict { display: flex; align-items: center; gap: 10px; color: var(--green); font-weight: 500; font-size: 13.5px; padding: 11px 20px; border-top: 1px solid var(--line); background: var(--hover); border-radius: 0 0 6px 6px; flex-wrap: wrap; }
+  .verdict svg { width: 17px; height: 17px; fill: var(--green); flex: none; }
+  .verdict .sub { color: var(--muted); font-weight: 400; }
+  .side { border-left: 1px solid var(--line); padding-left: 18px; }
+  .side h4 { margin: 0 0 6px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .wave { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
   .wave:first-of-type { border-top: 0; }
-  .dot-s { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); flex: none; }
+  .dot-s { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); flex: none; }
   .dot-s.on { background: var(--green); } .dot-s.base { background: var(--blue); }
   .wave .t { margin-left: auto; color: var(--muted); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; }
-  .side .acts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .side .acts { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 
-  /* ---- tabs ---- */
-  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: 18px 0 0; background: #fff; border-radius: 6px 6px 0 0; padding: 0 8px; border: 1px solid var(--line); border-bottom: 0; overflow-x: auto; }
-  .tabs button { background: none; border: 0; color: var(--muted); padding: 13px 14px 11px; font-weight: 500; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
+  /* tabs */
+  .tabs { display: flex; gap: 2px; margin: 16px 0 0; background: var(--card); border-radius: 6px 6px 0 0; padding: 0 6px; border: 1px solid var(--line); border-bottom: 0; overflow-x: auto; }
+  .tabs button { background: none; border: 0; color: var(--muted); padding: 12px 13px 10px; font-weight: 500; font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .tabs button:hover { color: var(--text); }
   .tabs button.on { color: var(--blue); border-color: var(--blue); }
   .tabs button .n { margin-left: 6px; color: var(--muted-2); font-weight: 400; letter-spacing: 0; }
-  .panel { display: none; background: #fff; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 6px 6px; padding: 18px; } .panel.on { display: block; }
-  .cols { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
+  .panel { display: none; background: var(--card); border: 1px solid var(--line); border-top: 1px solid var(--line); border-radius: 0 0 6px 6px; padding: 16px; } .panel.on { display: block; }
+  .cols { display: grid; grid-template-columns: 1fr 312px; gap: 16px; align-items: start; }
 
-  /* ---- tables (vendor-analysis look) ---- */
+  /* tables */
   table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 13px; }
-  th { color: var(--muted); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 13px; }
+  th { color: var(--muted); font-weight: 500; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
   tr:last-child td { border-bottom: 0; }
-  tr.row:hover td { background: #FAFBFC; }
-  .ftype { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 24px; padding: 0 6px; border-radius: 4px; background: var(--chip); border: 1px solid var(--line); font-family: var(--mono); font-size: 10.5px; font-weight: 500; color: var(--muted); }
+  tr.row:hover td { background: var(--hover); }
+  .ftype { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 22px; padding: 0 6px; border-radius: 4px; background: var(--chip); font-family: var(--mono); font-size: 10.5px; font-weight: 500; color: var(--muted); }
   .name b { display: block; font-weight: 500; font-family: var(--mono); font-size: 12.5px; } .name span { color: var(--muted); font-size: 12px; }
-  .ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 500; white-space: nowrap; }
-  .ok svg { width: 15px; height: 15px; fill: var(--green); }
+  .ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 500; white-space: nowrap; font-size: 12.5px; }
+  .ok svg { width: 14px; height: 14px; fill: var(--green); }
   .hash { font-family: var(--mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-  .copy { border: 1px solid var(--line-2); background: #fff; color: var(--muted); border-radius: 4px; padding: 1px 6px; font-size: 11px; }
-  .copy:hover { color: var(--text); border-color: var(--muted); } .copy.ok2 { color: var(--green); border-color: var(--green); }
+  .copy { border: 1px solid var(--line-2); background: transparent; color: var(--muted); border-radius: 4px; padding: 1px 6px; font-size: 11px; }
+  .copy:hover { color: var(--text); border-color: var(--muted); } .copy.done { color: var(--green); border-color: var(--green); }
   .num { font-variant-numeric: tabular-nums; white-space: nowrap; } .right { text-align: right; }
   .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; }
-  .pill.pending { background: var(--chip); color: var(--muted); } .pill.live { background: var(--green-bg); color: var(--green); } .pill.base { background: var(--blue-bg); color: var(--blue); }
-  .kv { width: 100%; } .kv td:first-child { color: var(--muted); width: 220px; } .kv td { padding: 8px 12px; font-size: 13px; }
-  pre { margin: 0; background: #F6F7F9; border: 1px solid var(--line); border-radius: 6px; padding: 12px 70px 12px 14px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-all; position: relative; }
-  pre .cm { color: var(--muted-2); } pre .copy { position: absolute; top: 8px; right: 8px; }
-  .note { background: var(--amber-bg); border: 1px solid #F6DFB0; border-radius: 6px; padding: 10px 14px; font-size: 13px; }
-  .note.red { background: var(--red-bg); border-color: #F5C6C2; } .note.blue { background: var(--blue-bg); border-color: #CDD3FF; }
+  .pill.pending { background: var(--chip); color: var(--muted); } .pill.live { background: var(--green-bg); color: var(--green); }
+  .kv td:first-child { color: var(--muted); width: 220px; } .kv td { padding: 8px 12px; }
+  pre { margin: 0; background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 11px 64px 11px 13px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-all; position: relative; }
+  pre .cm { color: var(--muted-2); } pre .copy { position: absolute; top: 7px; right: 7px; }
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { position: relative; padding: 0 0 14px 30px; font-size: 13px; }
+  .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--chip); color: var(--muted); font-size: 11.5px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li .h { font-weight: 500; margin-bottom: 4px; }
+  .note { border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 6px; padding: 10px 14px; font-size: 13px; background: var(--card); }
+  .note.red { border-left-color: var(--red); } .note.blue { border-left-color: var(--blue); }
   ul.clean { margin: 0; padding-left: 18px; } ul.clean li { margin: 4px 0; }
-  .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--chip); margin: 8px 0 6px; } .bar i { display: block; height: 100%; }
+  .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--chip); margin: 6px 0; } .bar i { display: block; height: 100%; }
   .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); } .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; }
   .cd { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-  footer { margin-top: 28px; color: var(--muted); font-size: 12px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
-  .empty { padding: 26px; text-align: center; color: var(--muted); }
+  footer { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  footer nav { display: flex; gap: 14px; flex-wrap: wrap; } footer nav a { color: var(--muted); } footer nav a:hover { color: var(--text); }
+  .empty { padding: 24px; text-align: center; color: var(--muted); }
   @media (max-width: 980px) { .report { grid-template-columns: 1fr; } .side { border-left: 0; padding-left: 0; } .cols { grid-template-columns: 1fr; } .search { display: none; } }
 </style>
 </head>
@@ -119,33 +143,40 @@
 
 <header class="nav">
   <div class="in">
-    <a class="logo" href="#">
+    <a class="logo" href="#" title="MalakaTotal">
       <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#3B4FFF"/><path d="M9.5 16.5l4.2 4.2 8.8-9.3" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <b>MALAKATOTAL</b><span>· Portal del incidente en el GSEC</span>
+      <b>MALAKATOTAL</b>
     </a>
-    <label class="search">
+    <label class="search" title="Buscar en los ficheros de la release">
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"/></svg>
-      <input id="q" type="search" placeholder="Fichero, fuente, formato o hash…" autocomplete="off">
+      <input id="q" type="search" placeholder="Fichero, fuente, formato o SHA-256" autocomplete="off" spellcheck="false">
+      <kbd>/</kbd>
     </label>
     <div class="right">
       <a class="lnk" href="#" id="lnkEnunciadoTop" target="_blank" rel="noopener">Enunciado</a>
+      <a class="lnk" href="#" id="lnkFormatoTop" target="_blank" rel="noopener">Formato de entrega</a>
       <a class="lnk" href="#" id="lnkNormasTop" target="_blank" rel="noopener">Normas</a>
-      <a class="btn sm" id="repoLink" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5"/></svg>Repositorio</a>
+      <button class="iconbtn" id="themeBtn" type="button" title="Cambiar tema" aria-label="Cambiar tema">
+        <svg class="i-sun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0-5 2.5 3h-5zM12 22l-2.5-3h5zM2 12l3-2.5v5zm20 0-3 2.5v-5zM4.2 4.2l3.9.4-2.5 2.5zm15.6 0-1.4 3.9-2.5-2.5zM4.2 19.8l1.4-3.9 2.5 2.5zm15.6 0-3.9-.4 2.5-2.5z"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" style="display:none"><path d="M12.3 2a9.9 9.9 0 0 0 0 20 10 10 0 0 0 8.9-5.5A8 8 0 0 1 12.3 2"/></svg>
+      </button>
+      <a class="btn sm" id="repoLink" href="#" target="_blank" rel="noopener" style="margin-left:6px"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5"/></svg>Repositorio</a>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <!-- ======================= report header ======================= -->
+  <div class="crumbs"><a href="#">MalakaTotal</a><span class="sep">/</span><span>Releases</span><span class="sep">/</span><span id="crumbTag" class="mono">dataset-v1</span></div>
+
   <section class="card">
     <div class="report">
       <div>
         <div class="ring"><svg viewBox="0 0 120 120" id="ringSvg"></svg><div class="c"><b id="ringNum">—</b><span>/ <span id="ringDen">—</span></span></div></div>
-        <div class="ring-cap">ficheros con suma<br>SHA‑256 publicada</div>
+        <div class="ring-cap">ficheros con suma<br>SHA-256 publicada</div>
       </div>
       <div>
-        <div class="hashline"><span class="tag" id="hlTag">dataset-v1</span><span class="sep">·</span><span id="hlRepo" style="color:var(--muted)">github.com/ORG/REPO</span></div>
-        <div class="ttl" id="title">Incidente en el GSEC — telemetría de la red de laboratorio GSEC‑LAB (30 días)</div>
+        <div class="hashline"><span class="tag" id="hlTag">dataset-v1</span><span>·</span><span id="hlRepo">github.com/ORG/REPO</span></div>
+        <div class="ttl">Incidente en el GSEC — telemetría de la red de laboratorio GSEC-LAB, 30 días</div>
         <div class="metaline" id="metaline"></div>
         <div class="chips" id="chips"></div>
       </div>
@@ -153,20 +184,19 @@
         <h4>Publicación</h4>
         <div id="statusList"></div>
         <div class="acts">
-          <a class="btn sm primary" href="#downloads" id="btnAll">Descargar dataset</a>
-          <a class="btn sm" id="btnWatch" href="#" target="_blank" rel="noopener">Avisos de oleadas</a>
+          <a class="btn sm primary" href="#downloads" id="btnAll">Descargar</a>
+          <a class="btn sm" id="btnWatch" href="#" target="_blank" rel="noopener">Ver releases</a>
         </div>
       </aside>
     </div>
     <div class="verdict">
       <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m-1.2 14.4-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
-      <span>Ningún proveedor marcaría este conjunto: es <b>sintético</b> y de ficción docente.</span>
-      <span class="sub">Los indicadores que contiene son inventados. Verifica cada descarga con <code>SHA256SUMS</code>.</span>
+      <span>Conjunto sintético: ningún indicador es real.</span>
+      <span class="sub">Contiene cadenas hostiles y pistas falsas a propósito. Comprueba cada descarga con <code>SHA256SUMS</code>.</span>
     </div>
   </section>
 
-  <!-- ======================= tabs ======================= -->
-  <nav class="tabs" id="tabs">
+  <nav class="tabs" id="tabs" aria-label="Secciones">
     <button data-tab="downloads" class="on">Descargas <span class="n" id="nAssets">0</span></button>
     <button data-tab="details">Detalles</button>
     <button data-tab="waves">Oleadas <span class="n">3</span></button>
@@ -174,87 +204,67 @@
     <button data-tab="rules">Normas</button>
   </nav>
 
-  <!-- ---------- Descargas ---------- -->
+  <!-- Descargas -->
   <section class="panel on" id="tab-downloads">
     <div class="cols">
       <div>
         <div class="card">
           <h2>Ficheros de la release <span class="sp" id="dlSummary"></span></h2>
-          <table id="assets"><thead><tr><th></th><th>Fichero</th><th>Formato</th><th class="right">Filas</th><th class="right">Tamaño</th><th>SHA‑256</th><th>Integridad</th><th></th></tr></thead><tbody></tbody></table>
+          <table id="assets"><thead><tr><th></th><th>Fichero</th><th>Formato</th><th class="right">Filas</th><th class="right">Tamaño</th><th>SHA-256</th><th>Integridad</th><th></th></tr></thead><tbody></tbody></table>
         </div>
         <div class="card" style="margin-top:14px">
-          <h2>Integridad y documentación</h2>
+          <h2>Sumas y documentación</h2>
           <table id="extras"><tbody></tbody></table>
         </div>
       </div>
       <div>
         <div class="card">
-          <h2>Inicio rápido</h2>
+          <h2>Obtener el dataset</h2>
           <div class="body">
-            <p style="color:var(--muted); font-size:12.5px">El kit descarga <b>todo</b>, comprueba los SHA‑256 y lo deja listo para cargar.</p>
-            <pre id="quick"><button class="copy" data-copy="#quick">copiar</button><span class="cm"># clonar el repositorio del reto</span>
-git clone <span id="cloneUrl">https://github.com/ORG/REPO</span>.git
-cd <span id="repoName">REPO</span>
-
-<span class="cm"># descargar + verificar (≈ 300 MB) → output/public</span>
-python3 starter-kit/fetch_dataset.py
-
-<span class="cm"># cargar en DuckDB (≈ 20 s)</span>
-python3 starter-kit/load_duckdb.py</pre>
-            <p style="margin-top:10px; color:var(--muted); font-size:12.5px">Sin wifi: <code>fetch_dataset.py --from-dir /Volumes/MALACKATHON</code> lee el pendrive de la acreditación.</p>
+            <ol class="steps">
+              <li><div class="h">Clona el repositorio del reto</div><pre id="c1"><button class="copy" data-copy="#c1">copiar</button>git clone <span id="cloneUrl">https://github.com/ORG/REPO</span>.git</pre></li>
+              <li><div class="h">Descarga y verifica (≈ 300 MB)</div><pre id="c2"><button class="copy" data-copy="#c2">copiar</button>python3 starter-kit/fetch_dataset.py</pre><div style="color:var(--muted); font-size:12px; margin-top:6px">Deja los ficheros en <code>output/public</code>. Sin red: <code>--from-dir /Volumes/MALACKATHON</code> (pendrive de la acreditación).</div></li>
+              <li><div class="h">Carga en DuckDB, o en el motor que prefieras</div><pre id="c3"><button class="copy" data-copy="#c3">copiar</button>python3 starter-kit/load_duckdb.py</pre></li>
+            </ol>
+            <div style="border-top:1px solid var(--line); margin-top:14px; padding-top:12px; font-size:12.5px; color:var(--muted)">Descarga manual: baja los ficheros de la tabla y ejecuta <code>shasum -a 256 -c SHA256SUMS</code>. Un hash que no coincide es motivo para descartar el fichero y volver a bajarlo.</div>
           </div>
         </div>
         <div class="card" style="margin-top:14px">
-          <h2>Verificar a mano</h2>
-          <div class="body">
-            <pre id="verify"><button class="copy" data-copy="#verify">copiar</button>shasum -a 256 -c SHA256SUMS</pre>
-            <p style="margin-top:8px; color:var(--muted); font-size:12.5px">Si un hash no coincide, descarta el fichero y vuelve a descargarlo.</p>
-          </div>
-        </div>
-        <div class="card" style="margin-top:14px">
-          <h2>Soporte</h2>
+          <h2>Ayuda</h2>
           <div class="body" style="font-size:13px">
-            <p>Dudas sobre el enunciado o los datos: <span id="contact">canal de la organización</span>.</p>
-            <p style="color:var(--muted)">No se responden preguntas sobre la solución. Un <b>error</b> del dataset (no una trampa) se corrige para todos los equipos a la vez.</p>
+            <p>Dudas sobre el enunciado o los datos: <span id="contact">canal de la organización</span>. No se responden preguntas sobre la solución.</p>
+            <p style="color:var(--muted)">Si crees que algo del dataset es un <b>error</b> (y no una pista falsa), repórtalo: las correcciones se publican para todos los equipos a la vez, como una nueva release.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ---------- Detalles ---------- -->
+  <!-- Detalles -->
   <section class="panel" id="tab-details">
     <div class="cols">
       <div>
-        <div class="card">
-          <h2>Propiedades básicas</h2>
-          <table class="kv" id="props"><tbody></tbody></table>
-        </div>
-        <div class="card" style="margin-top:14px">
-          <h2>Historial</h2>
-          <table class="kv" id="history"><tbody></tbody></table>
-        </div>
+        <div class="card"><h2>Propiedades básicas</h2><table class="kv" id="props"><tbody></tbody></table></div>
+        <div class="card" style="margin-top:14px"><h2>Historial</h2><table class="kv" id="history"><tbody></tbody></table></div>
         <div class="card" style="margin-top:14px">
           <h2>Fuentes y formatos</h2>
           <table id="sources"><thead><tr><th>Fuente</th><th>Ruta en el dataset</th><th>Formato</th><th class="right">Filas</th><th>Contenido</th></tr></thead><tbody></tbody></table>
         </div>
       </div>
       <div>
-        <div class="card"><h2>Distribución por fuente</h2><div class="body">
-          <div class="bar" id="bar"></div><div class="legend" id="legend"></div>
-        </div></div>
+        <div class="card"><h2>Distribución por fuente</h2><div class="body"><div class="bar" id="bar"></div><div class="legend" id="legend"></div></div></div>
         <div class="card" style="margin-top:14px"><h2>Convenciones</h2><div class="body" style="font-size:13px">
           <ul class="clean">
-            <li>Marcas de tiempo en <b>UTC</b> (sufijo <code>Z</code>); el laboratorio trabaja en hora peninsular (UTC+2 en el periodo).</li>
-            <li>Un fichero por día y fuente (<code>AAAA-MM-DD</code>) salvo VPN, correo y accesos físicos.</li>
-            <li>Red interna RFC 1918; IP públicas de rangos de documentación, resueltas en <code>extras/geoip_synthetic.csv</code>.</li>
-            <li>Líneas malformadas <b>a propósito</b> (CRLF, truncadas, codificaciones): un cargador robusto las cuenta y sigue.</li>
+            <li>Marcas de tiempo en <b>UTC</b> (sufijo <code>Z</code>). El laboratorio trabaja en hora peninsular, UTC+2 durante el periodo.</li>
+            <li>Un fichero por día y fuente (<code>AAAA-MM-DD</code>), salvo VPN, correo y accesos físicos.</li>
+            <li>Red interna RFC 1918; las IP públicas son de rangos de documentación y resuelven en <code>extras/geoip_synthetic.csv</code>.</li>
+            <li>Hay líneas malformadas <b>a propósito</b> (CRLF, truncadas, codificaciones). Un cargador robusto las cuenta y continúa.</li>
           </ul>
         </div></div>
         <div class="card" style="margin-top:14px"><h2>Documentación</h2><div class="body" style="font-size:13px">
           <ul class="clean">
             <li><a id="lnkReadme" href="#" target="_blank" rel="noopener">README_DATASET_ES.md</a> — diccionario de datos</li>
-            <li><a id="lnkSchema" href="#" target="_blank" rel="noopener">docs/esquema_canonico.sql</a> — esquema de referencia (opcional)</li>
+            <li><a id="lnkSchema" href="#" target="_blank" rel="noopener">docs/esquema_canonico.sql</a> — esquema de referencia, opcional</li>
             <li><a id="lnkStarter" href="#" target="_blank" rel="noopener">starter-kit/README_ES.md</a> — kit de arranque</li>
             <li><a id="lnkEnunciado" href="#" target="_blank" rel="noopener">ENUNCIADO.md</a> — el reto completo</li>
           </ul>
@@ -263,23 +273,24 @@ python3 starter-kit/load_duckdb.py</pre>
     </div>
   </section>
 
-  <!-- ---------- Oleadas ---------- -->
+  <!-- Oleadas -->
   <section class="panel" id="tab-waves">
-    <div class="note blue" style="margin-bottom:14px">Durante el evento se publican <b>tres oleadas</b> de telemetría nueva a las horas anunciadas, cada una como <i>release</i> independiente (<code>oleada‑N</code>) con el mismo formato que el dataset base. <b>No toda oleada contiene un ataque.</b> Reporta cada una en <code>oleadaN.json</code>: la hora del <i>push</i> es la hora de detección.</div>
     <div class="card">
-      <h2>Oleadas <span class="sp">se actualiza solo cuando la organización publica</span></h2>
+      <h2>Oleadas <span class="sp">el estado se actualiza solo cuando la organización publica</span></h2>
       <table id="waveTable"><thead><tr><th>Oleada</th><th>Publicación prevista</th><th>Estado</th><th>Cuenta atrás</th><th>Cargar</th><th></th></tr></thead><tbody></tbody></table>
     </div>
-    <div class="card" style="margin-top:14px"><h2>Cargar una oleada</h2><div class="body">
-      <pre id="wavecmd"><button class="copy" data-copy="#wavecmd">copiar</button><span class="cm"># descarga + verifica la oleada N en output/waves/waveN</span>
+    <div class="cols" style="margin-top:14px">
+      <div class="note blue">Cada oleada es una release independiente (<code>oleada-N</code>) con el mismo formato que el dataset base y telemetría nueva de ese tramo del día. <b>No toda oleada contiene un ataque.</b> Se reporta en <code>oleadaN.json</code>; la hora del <i>push</i> es la hora de detección, así que conviene tener detecciones automáticas corriendo antes de las 10:15.</div>
+      <div class="card"><h2>Cargar una oleada</h2><div class="body">
+        <pre id="wavecmd"><button class="copy" data-copy="#wavecmd">copiar</button><span class="cm"># descarga + verifica → output/waves/waveN</span>
 python3 starter-kit/fetch_dataset.py --wave N
-
-<span class="cm"># añade las oleadas como esquemas wave1.*, wave2.* … en el mismo DuckDB</span>
+<span class="cm"># esquemas wave1.*, wave2.* … en el mismo DuckDB</span>
 python3 starter-kit/load_duckdb.py --waves output/waves</pre>
-    </div></div>
+      </div></div>
+    </div>
   </section>
 
-  <!-- ---------- Entrega ---------- -->
+  <!-- Entrega -->
   <section class="panel" id="tab-delivery">
     <div class="cols">
       <div class="card">
@@ -288,48 +299,48 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
           <thead><tr><th>Fichero</th><th>Qué es</th><th>Reto</th></tr></thead>
           <tbody>
             <tr><td><code>ENTREGA.md</code></td><td>Accesos, URLs, credenciales de prueba, tecnologías, capturas y diagrama</td><td>1 y 2</td></tr>
-            <tr><td><code>respuestas.json</code></td><td>Cuestionario de 12 preguntas · <b>formato obligatorio</b> · corrección automática (+1 / 0 / −1)</td><td>3</td></tr>
-            <tr><td><code>oleada1.json</code> … <code>oleada3.json</code></td><td>Un reporte por oleada · la hora del <i>push</i> es la hora de detección</td><td>A</td></tr>
-            <tr><td><code>BITACORA.md</code></td><td>Bitácora de investigación desde el primer día (los <i>commits</i> son la marca temporal)</td><td>3</td></tr>
+            <tr><td><code>respuestas.json</code></td><td>Cuestionario de 12 preguntas. Formato obligatorio; corrección automática (+1 / 0 / −1)</td><td>3</td></tr>
+            <tr><td><code>oleada1.json</code> … <code>oleada3.json</code></td><td>Un reporte por oleada; la hora del <i>push</i> es la hora de detección</td><td>A</td></tr>
+            <tr><td><code>BITACORA.md</code></td><td>Bitácora de investigación desde el primer día; los <i>commits</i> son la marca temporal</td><td>3</td></tr>
             <tr><td><code>informe/</code></td><td>Informe técnico (≤ 6 pág.), resumen ejecutivo (1 pág.), plan de respuesta (≤ 2 pág.)</td><td>3 y C</td></tr>
           </tbody>
         </table>
         <div class="body" style="border-top:1px solid var(--line)">
-          <p>Todo va en el <b>repositorio privado de entrega</b> de vuestro equipo (<span id="channel">lo crea la organización</span>). Solo vuestro equipo y el jurado tienen acceso. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</p>
+          <p>Todo va en el <b>repositorio privado de entrega</b> del equipo (<span id="channel">lo crea la organización</span>); solo el equipo y el jurado tienen acceso. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</p>
         </div>
       </div>
       <div>
         <div class="card"><h2>Validar antes del push</h2><div class="body">
           <pre id="valcmd"><button class="copy" data-copy="#valcmd">copiar</button>python3 starter-kit/validar_respuestas.py \
   respuestas.json oleada1.json</pre>
-          <p style="margin-top:8px; color:var(--muted); font-size:12.5px">Solo comprueba el <b>formato</b> (nunca la corrección). El repositorio de entrega repite la validación en cada <i>push</i>; un fichero inválido no puntúa. Formato completo: <a id="lnkFormato" href="#" target="_blank" rel="noopener">FORMATO_ENTREGA_ES.md</a>.</p>
+          <p style="margin-top:8px; color:var(--muted); font-size:12.5px">Comprueba solo el <b>formato</b>, nunca la corrección. El repositorio de entrega repite la validación en cada <i>push</i>; un fichero inválido no puntúa. Especificación: <a id="lnkFormato" href="#" target="_blank" rel="noopener">FORMATO_ENTREGA_ES.md</a>.</p>
         </div></div>
-        <div class="note" style="margin-top:14px"><b>Regla de oro:</b> +1 acierto · 0 en blanco (<code>null</code>) · −1 respuesta‑trampa. En blanco nunca resta: si no estáis seguros, no adivinéis.</div>
+        <div class="note" style="margin-top:14px"><b>Puntuación del cuestionario:</b> +1 acierto, 0 en blanco (<code>null</code>), −1 respuesta-trampa. En blanco nunca resta.</div>
       </div>
     </div>
   </section>
 
-  <!-- ---------- Normas ---------- -->
+  <!-- Normas -->
   <section class="panel" id="tab-rules">
     <div class="cols">
       <div class="card"><h2>Normas en breve</h2><div class="body">
         <ul class="clean" style="font-size:13.5px">
-          <li><b>Los datos son sintéticos y solo para este reto.</b> No se publican ni redistribuyen. Nada de lo que aparece es real: no intentéis resolver, visitar ni contactar nada.</li>
-          <li><b>Los datos son hostiles.</b> Cadenas pensadas para romper analizadores, visores y asistentes de IA; pistas falsas plantadas. Verificad siempre con evidencia.</li>
+          <li><b>Los datos son sintéticos y solo para este reto.</b> No se publican ni se redistribuyen. Nada de lo que aparece es real: no intentéis resolver, visitar ni contactar nada.</li>
+          <li><b>Los datos son hostiles.</b> Cadenas pensadas para romper analizadores, visores y asistentes de IA, y pistas falsas plantadas. Verificad siempre con evidencia.</li>
           <li><b>Herramientas libres, incluida la IA.</b> Sois responsables de lo que entregáis; una respuesta inventada a partir de una pista falsa cuenta como trampa.</li>
           <li><b>No se ataca nada que no sea vuestro:</b> ni la organización, ni otros equipos, ni los dominios del dataset.</li>
           <li><b>Entregas:</b> formato obligatorio y validado; cuenta la hora del <i>push</i>; nada de <code>push --force</code>.</li>
           <li><b>Respeto</b> entre equipos, mentores y organización.</li>
         </ul>
-        <p style="margin-top:10px"><a id="lnkNormas" href="#" target="_blank" rel="noopener">Normas completas (NORMAS.md)</a></p>
+        <p style="margin-top:10px"><a id="lnkNormas" href="#" target="_blank" rel="noopener">Normas completas</a></p>
       </div></div>
-      <div class="note red"><b>Sobre el escenario.</b> Este reto es una obra de ficción con fines docentes. La red, las personas, las cuentas, los socios, los casos y los datos de GSEC‑LAB son inventados; la arquitectura corresponde a una red de laboratorio aislada y deliberadamente clásica, <b>no</b> a la infraestructura real de Google ni del GSEC de Málaga. Cualquier parecido con personas o sistemas reales es pura coincidencia.</div>
+      <div class="note red"><b>Sobre el escenario.</b> Obra de ficción con fines docentes. La red, las personas, las cuentas, los socios, los casos y los datos de GSEC-LAB son inventados; la arquitectura corresponde a una red de laboratorio aislada y deliberadamente clásica, <b>no</b> a la infraestructura real de Google ni del GSEC de Málaga. Cualquier parecido con personas o sistemas reales es coincidencia.</div>
     </div>
   </section>
 
   <footer>
-    <span>MalakaTotal · IV Malackathon · «Incidente en el GSEC» · Telemetría sintética de GSEC‑LAB</span>
-    <span id="buildInfo"></span>
+    <span>MalakaTotal es un servicio ficticio de la organización del IV Malackathon. <span id="buildInfo"></span></span>
+    <nav><a id="fEnunciado" href="#" target="_blank" rel="noopener">Enunciado</a><a id="fNormas" href="#" target="_blank" rel="noopener">Normas</a><a id="fFormato" href="#" target="_blank" rel="noopener">Formato de entrega</a><a id="fReleases" href="#" target="_blank" rel="noopener">Releases</a><a id="fRepo" href="#" target="_blank" rel="noopener">Repositorio</a></nav>
   </footer>
 </main>
 
@@ -340,18 +351,25 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
   const fmtInt = (n) => (n == null ? '—' : Number(n).toLocaleString('es-ES'));
   const fmtBytes = (b) => { if (b == null) return '—'; const u = ['B','KB','MB','GB']; let i = 0, v = b; while (v >= 1000 && i < u.length - 1) { v /= 1000; i++; } return v.toLocaleString('es-ES', { maximumFractionDigits: v < 10 ? 1 : 0 }) + ' ' + u[i]; };
   const fmtDate = (iso, opts) => { try { return new Date(iso).toLocaleString('es-ES', Object.assign({ dateStyle: 'medium', timeStyle: 'short' }, opts || {})); } catch { return iso; } };
-  const COLORS = { firewall: '#3B4FFF', proxy: '#1AAB5B', dns: '#F29900', edr: '#E03C31', winsec: '#8E24AA', dbaudit: '#00ACC1', vpn: '#FB8C00', email: '#6D4C41', sandbox: '#9AA0A6', badges: '#5F6368', contexto: '#B0B6BC' };
+  const ago = (iso) => { const s = (Date.now() - new Date(iso)) / 1000; if (!(s >= 0)) return ''; if (s < 3600) return `hace ${Math.max(1, Math.round(s / 60))} min`; if (s < 86400) return `hace ${Math.round(s / 3600)} h`; return `hace ${Math.round(s / 86400)} días`; };
+  const COLORS = { firewall: '#3B4FFF', proxy: '#1AAB5B', dns: '#F29900', edr: '#E03C31', winsec: '#8E24AA', dbaudit: '#00ACC1', vpn: '#FB8C00', email: '#8D6E63', sandbox: '#9AA0A6', badges: '#5F6368' };
   const FTYPE = (a) => a.kind === 'doc' ? 'MD' : /jsonl/i.test(a.format) ? 'JSONL' : /csv/i.test(a.format) ? 'CSV' : 'TAR';
   const CHECK = '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
 
-  // ---------------------------------------------------------------- manifest
+  // theme toggle
+  const applyTheme = (t) => { document.documentElement.dataset.theme = t; $('.i-sun').style.display = t === 'dark' ? '' : 'none'; $('.i-moon').style.display = t === 'dark' ? 'none' : ''; };
+  applyTheme(document.documentElement.dataset.theme || 'light');
+  $('#themeBtn').addEventListener('click', () => { const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; applyTheme(t); try { localStorage.setItem('mt-theme', t); } catch {} });
+  document.addEventListener('keydown', (e) => { if (e.key === '/' && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); } });
+
+  // manifest
   let m;
   try {
     const r = await fetch('data/manifest.json', { cache: 'no-store' });
     if (!r.ok) throw new Error(r.status);
     m = await r.json();
   } catch (e) {
-    const inline = document.getElementById('manifest-inline');   // present only in the standalone copy
+    const inline = document.getElementById('manifest-inline');   // standalone copy only
     if (inline && inline.textContent.trim()) {
       m = JSON.parse(inline.textContent);
     } else {
@@ -366,33 +384,33 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
   const t = m.totals || {};
   const assets = m.assets || [];
   const srcAssets = assets.filter(a => a.kind === 'source' && a.rows);
+  const waves = m.waves || [];
 
   // links
-  $('#repoLink').href = base; $('#cloneUrl').textContent = base; $('#repoName').textContent = repo.split('/')[1] || 'repo';
-  $('#hlTag').textContent = m.tag_base; $('#hlRepo').textContent = `github.com/${repo}/releases/${m.tag_base}`;
-  $('#lnkReadme').href = dl(m.tag_base, 'README_DATASET_ES.md'); $('#lnkSchema').href = raw('docs/esquema_canonico.sql');
-  $('#lnkStarter').href = raw('starter-kit/README_ES.md'); $('#lnkEnunciado').href = raw('ENUNCIADO.md'); $('#lnkEnunciadoTop').href = raw('ENUNCIADO.md');
-  $('#lnkFormato').href = raw('starter-kit/FORMATO_ENTREGA_ES.md'); $('#lnkNormas').href = raw('NORMAS.md'); $('#lnkNormasTop').href = raw('NORMAS.md');
-  $('#btnWatch').href = `${base}/releases`;
+  for (const [id, href] of [['repoLink', base], ['fRepo', base], ['btnWatch', `${base}/releases`], ['fReleases', `${base}/releases`],
+      ['lnkReadme', dl(m.tag_base, 'README_DATASET_ES.md')], ['lnkSchema', raw('docs/esquema_canonico.sql')], ['lnkStarter', raw('starter-kit/README_ES.md')],
+      ['lnkEnunciado', raw('ENUNCIADO.md')], ['lnkEnunciadoTop', raw('ENUNCIADO.md')], ['fEnunciado', raw('ENUNCIADO.md')],
+      ['lnkFormato', raw('starter-kit/FORMATO_ENTREGA_ES.md')], ['lnkFormatoTop', raw('starter-kit/FORMATO_ENTREGA_ES.md')], ['fFormato', raw('starter-kit/FORMATO_ENTREGA_ES.md')],
+      ['lnkNormas', raw('NORMAS.md')], ['lnkNormasTop', raw('NORMAS.md')], ['fNormas', raw('NORMAS.md')]]) { const el = document.getElementById(id); if (el) el.href = href; }
+  $('#cloneUrl').textContent = base; $('#hlTag').textContent = m.tag_base; $('#crumbTag').textContent = m.tag_base;
+  $('#hlRepo').textContent = `github.com/${repo}/releases/tag/${m.tag_base}`;
   if (m.contact) $('#contact').textContent = m.contact;
   if (m.submission_channel) $('#channel').textContent = m.submission_channel;
   if (m.deadline) $('#deadlineTxt').textContent = fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)';
-  $('#buildInfo').textContent = m.generated_at ? `Build ${fmtDate(m.generated_at)} · seed ${m.seed ?? '—'}` : '';
+  if (m.generated_at) $('#buildInfo').textContent = `Build ${fmtDate(m.generated_at)} (${ago(m.generated_at)}) · semilla ${m.seed ?? '—'}.`;
 
-  // header: ring = files with published digest
+  // header
   const withHash = assets.filter(a => a.sha256).length;
   const R = 50, C = 2 * Math.PI * R, frac = assets.length ? withHash / assets.length : 0;
-  $('#ringSvg').innerHTML = `<circle cx="60" cy="60" r="${R}" fill="none" stroke="#E5E8EC" stroke-width="10"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="#1AAB5B" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C * frac} ${C}"/>`;
+  $('#ringSvg').innerHTML = `<circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--line)" stroke-width="10"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--green)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C * frac} ${C}"/>`;
   $('#ringNum').textContent = withHash; $('#ringDen').textContent = assets.length;
   $('#metaline').innerHTML = [fmtBytes(t.bytes_compressed), `${fmtInt(t.files)} ficheros`, `${fmtInt(t.rows)} filas`,
-    m.window ? `ventana ${fmtDate(m.window.start, { dateStyle: 'medium', timeStyle: undefined })} → ${fmtDate(m.window.end, { dateStyle: 'medium', timeStyle: undefined })}` : null,
-    m.generated_at ? `última build ${fmtDate(m.generated_at)}` : null].filter(Boolean).map(esc).join('<span class="dot"> · </span>');
-  const fmts = [...new Set(srcAssets.map(a => a.format.toLowerCase().includes('jsonl') ? 'jsonl' : 'csv'))];
-  $('#chips').innerHTML = ['<span class="chip">sintetico</span>', '<span class="chip">ficcion-docente</span>', '<span class="chip red">datos-hostiles</span>',
-    '<span class="chip amber">uso-exclusivo-del-reto</span>', ...fmts.map(f => `<span class="chip">${f}</span>`), '<span class="chip">gzip</span>', '<span class="chip green">sha256</span>',
-    `<span class="chip blue">${esc(m.tag_base)}</span>`].join('');
+    m.window ? `${fmtDate(m.window.start, { dateStyle: 'medium', timeStyle: undefined })} → ${fmtDate(m.window.end, { dateStyle: 'medium', timeStyle: undefined })}` : null,
+    m.generated_at ? `publicado ${fmtDate(m.generated_at, { dateStyle: 'medium', timeStyle: undefined })}` : null].filter(Boolean).map(esc).join('<span class="dot">·</span>');
+  const fmts = [...new Set(srcAssets.map(a => /jsonl/i.test(a.format) ? 'jsonl' : 'csv'))];
+  $('#chips').innerHTML = ['sintetico', ...fmts, 'gzip', 'sha256', 'es-ES'].map(c => `<span class="chip">${esc(c)}</span>`).join('');
 
-  // downloads table (vendor-analysis look)
+  // downloads
   $('#assets tbody').innerHTML = assets.filter(a => a.kind !== 'doc').map(a => `
     <tr class="row" data-q="${esc((a.name + ' ' + a.source + ' ' + a.label + ' ' + a.format + ' ' + a.sha256).toLowerCase())}">
       <td><span class="ftype">${FTYPE(a)}</span></td>
@@ -400,30 +418,29 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
       <td>${esc(a.format)}</td>
       <td class="right num">${fmtInt(a.rows)}</td>
       <td class="right num">${fmtBytes(a.size)}</td>
-      <td><span class="hash" title="${esc(a.sha256)}">${esc((a.sha256 || '').slice(0, 14))}…<button class="copy" data-text="${esc(a.sha256)}">copiar</button></span></td>
-      <td><span class="ok">${CHECK}SHA‑256 publicado</span></td>
+      <td><span class="hash" title="${esc(a.sha256)}">${esc((a.sha256 || '').slice(0, 14))}…<button class="copy" data-text="${esc(a.sha256)}" title="Copiar SHA-256">copiar</button></span></td>
+      <td><span class="ok">${CHECK}SHA-256 publicado</span></td>
       <td class="right"><a class="btn sm primary" href="${dl(m.tag_base, a.name)}">Descargar</a></td>
     </tr>`).join('') || '<tr><td colspan="8" class="empty">Sin ficheros en el manifiesto.</td></tr>';
   $('#nAssets').textContent = assets.length;
-  $('#dlSummary').textContent = `${fmtInt(t.rows)} filas · ${fmtBytes(t.bytes_compressed)} · ${esc(m.tag_base)}`;
-  const extras = [['SHA256SUMS', 'Sumas de verificación de todos los ficheros'], ['manifest.json', 'Inventario legible por máquina (nombres, tamaños, hashes, filas)'], ['README_DATASET_ES.md', 'Diccionario de datos y convenciones']];
+  $('#dlSummary').textContent = `${fmtInt(t.rows)} filas · ${fmtBytes(t.bytes_compressed)}`;
+  const extras = [['SHA256SUMS', 'Sumas de verificación de todos los ficheros'], ['manifest.json', 'Inventario legible por máquina: nombres, tamaños, hashes, filas'], ['README_DATASET_ES.md', 'Diccionario de datos y convenciones']];
   $('#extras tbody').innerHTML = extras.map(([n, d]) => `<tr><td class="name" style="width:40%"><b>${n}</b><span>${d}</span></td><td><span class="ok">${CHECK}publicado</span></td><td class="right"><a class="btn sm" href="${dl(m.tag_base, n)}">Descargar</a></td></tr>`).join('');
 
   // details
   const kv = (rows) => rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
   $('#props tbody').innerHTML = kv([
     ['Release', `<code>${esc(m.tag_base)}</code>`], ['Repositorio', `<a href="${base}" target="_blank" rel="noopener">${esc(repo)}</a>`],
-    ['Tamaño comprimido', fmtBytes(t.bytes_compressed)], ['Ficheros', fmtInt(t.files)], ['Filas (todas las tablas)', fmtInt(t.rows)],
+    ['Tamaño comprimido', fmtBytes(t.bytes_compressed)], ['Ficheros', fmtInt(t.files)], ['Filas, todas las tablas', fmtInt(t.rows)],
     ['Fuentes', `${srcAssets.length} + contexto (inventario, tickets, feed de IOCs)`], ['Formatos', 'CSV gzip · JSONL gzip · CSV · EML · TXT'],
     ['Ventana temporal', m.window ? `<code>${esc(m.window.start)}</code> → <code>${esc(m.window.end)}</code>` : '—'],
-    ['Zona horaria de los registros', 'UTC (<code>Z</code>); laboratorio en hora peninsular'],
-    ['Integridad', `<code>SHA256SUMS</code> · ${assets.length} entradas · <code>manifest.json</code>`],
-    ['Naturaleza', 'Sintético · obra de ficción docente · datos hostiles a propósito'],
+    ['Zona horaria de los registros', 'UTC (<code>Z</code>); el laboratorio opera en hora peninsular'],
+    ['Integridad', `<code>SHA256SUMS</code> con ${assets.length} entradas · <code>manifest.json</code>`],
+    ['Naturaleza', 'Sintético, obra de ficción docente; datos hostiles a propósito'],
   ]);
-  const waves = m.waves || [];
   $('#history tbody').innerHTML = kv([
     ['Build del dataset', m.generated_at ? fmtDate(m.generated_at) : '—'], ['Semilla', String(m.seed ?? '—')],
-    ...waves.map((w, i) => [`Oleada ${i + 1} (<code>${esc(w.tag)}</code>)`, `${fmtDate(w.release_at, { timeZone: 'Europe/Madrid' })} (hora peninsular) · <code>${esc(w.release_at)}</code>`]),
+    ...waves.map((w, i) => [`Oleada ${i + 1} · <code>${esc(w.tag)}</code>`, `${fmtDate(w.release_at, { timeZone: 'Europe/Madrid' })} (hora peninsular) · <code>${esc(w.release_at)}</code>`]),
     ['Cierre de entregas', m.deadline ? fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)' : '—'],
   ]);
   $('#sources tbody').innerHTML = (m.sources || []).map(s => `<tr><td><code>${esc(s.id)}</code></td><td><code>${esc(s.path)}</code></td><td>${esc(s.format)}</td><td class="right num">${fmtInt(s.rows)}</td><td style="color:var(--muted)">${esc(s.description)}</td></tr>`).join('');
@@ -442,31 +459,27 @@ python3 starter-kit/load_duckdb.py --waves output/waves</pre>
         <td><span class="pill ${on ? 'live' : 'pending'}">${on ? 'Publicada' : 'Pendiente'}</span></td>
         <td class="cd" data-at="${esc(w.release_at)}" data-on="${on ? 1 : 0}">—</td>
         <td><code>fetch_dataset.py --wave ${n}</code></td>
-        <td class="right">${on ? `<a class="btn sm primary" href="${dl(w.tag, w.asset || 'wave' + n + '.tar.gz')}">Descargar</a> <a class="btn sm" href="${dl(w.tag, 'SHA256SUMS')}">SHA256SUMS</a>` : `<span class="btn sm" style="opacity:.5; cursor:default">No disponible</span>`}</td>
+        <td class="right">${on ? `<a class="btn sm primary" href="${dl(w.tag, w.asset || 'wave' + n + '.tar.gz')}">Descargar</a> <a class="btn sm" href="${dl(w.tag, 'SHA256SUMS')}">SHA256SUMS</a>` : `<span style="color:var(--muted-2); font-size:12.5px">todavía no disponible</span>`}</td>
       </tr>`; }).join('');
   };
   renderWaves(new Set());
-  try {  // published waves appear as non-draft releases; drafts are invisible to the public API
+  try {  // published waves are non-draft releases; drafts are invisible to the public API
     const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=20`, { headers: { Accept: 'application/vnd.github+json' } });
     if (r.ok) { const rel = await r.json(); renderWaves(new Set(rel.filter(x => !x.draft).map(x => x.tag_name))); }
-  } catch { /* offline or private repo: keep the planned schedule */ }
+  } catch { /* offline or private repo: planned schedule stays */ }
   const tick = () => { document.querySelectorAll('.cd').forEach(el => { if (el.dataset.on === '1') { el.textContent = 'disponible'; el.style.color = 'var(--green)'; return; } const d = new Date(el.dataset.at) - Date.now(); if (isNaN(d)) { el.textContent = '—'; return; } if (d <= 0) { el.textContent = 'publicándose…'; el.style.color = 'var(--amber)'; return; } const h = Math.floor(d / 3.6e6), mi = Math.floor(d % 3.6e6 / 6e4), s = Math.floor(d % 6e4 / 1e3); el.textContent = h > 48 ? `${Math.floor(h / 24)} d ${h % 24} h` : `${String(h).padStart(2, '0')}:${String(mi).padStart(2, '0')}:${String(s).padStart(2, '0')}`; }); };
   tick(); setInterval(tick, 1000);
 
-  // tabs
+  // tabs, search, copy
   const showTab = (name) => { document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x.dataset.tab === name)); document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'tab-' + name)); };
   document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => { showTab(b.dataset.tab); history.replaceState(null, '', '#' + b.dataset.tab); }));
   const h = location.hash.slice(1); if (h && document.querySelector(`#tabs button[data-tab="${h}"]`)) showTab(h);
-  $('#btnAll').addEventListener('click', (e) => { e.preventDefault(); showTab('downloads'); window.scrollTo({ top: $('#tabs').offsetTop - 70, behavior: 'smooth' }); });
-
-  // search
+  $('#btnAll').addEventListener('click', (e) => { e.preventDefault(); showTab('downloads'); window.scrollTo({ top: $('#tabs').offsetTop - 64, behavior: 'smooth' }); });
   $('#q').addEventListener('input', (e) => { const q = e.target.value.trim().toLowerCase(); document.querySelectorAll('#assets tr.row').forEach(tr => { tr.style.display = !q || tr.dataset.q.includes(q) ? '' : 'none'; }); if (q) showTab('downloads'); });
-
-  // copy buttons
   document.addEventListener('click', (e) => {
     const b = e.target.closest('.copy'); if (!b) return;
     const txt = b.dataset.text || (b.dataset.copy ? Array.from(document.querySelector(b.dataset.copy).childNodes).filter(n => n !== b).map(n => n.textContent).join('') : '');
-    navigator.clipboard?.writeText(txt).then(() => { b.classList.add('ok2'); b.textContent = 'copiado'; setTimeout(() => { b.classList.remove('ok2'); b.textContent = 'copiar'; }, 1400); });
+    navigator.clipboard?.writeText(txt).then(() => { b.classList.add('done'); b.textContent = 'copiado'; setTimeout(() => { b.classList.remove('done'); b.textContent = 'copiar'; }, 1400); });
   });
 })();
 </script>
