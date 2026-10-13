@@ -2,20 +2,20 @@
   "repo": "SergioCyber/malackathon-2026-incidente-gsec",
   "tag_base": "dataset-v1",
   "wave_tag_prefix": "oleada-",
-  "generated_at": "2026-10-13T08:06:30+00:00",
+  "generated_at": "2026-10-13T08:19:21+00:00",
   "seed": 2026,
   "window": {
     "start": "2026-09-07T00:00:00+02:00",
     "end": "2026-10-06T12:00:00+02:00"
   },
-  "event_start": "2026-10-28T09:00:00+02:00",
-  "deadline": "2026-10-29T21:00:00+02:00",
+  "event_start": "2026-10-15T10:15:00+02:00",
+  "deadline": "2026-10-15T19:30:00+02:00",
   "contact": "el canal de la organización del Malackathon (por confirmar)",
   "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
   "totals": {
     "rows": 9128017,
     "files": 244,
-    "bytes_compressed": 276912338
+    "bytes_compressed": 276912448
   },
   "assets": [
     {
@@ -136,8 +136,8 @@
       "format": "CSV · TXT",
       "rows": 32271,
       "files": 13,
-      "size": 670401,
-      "sha256": "9a39fb97f304d98ebe80af919460b7d1d7e6c6452c6b7c4cfb0547fabedf7e03"
+      "size": 670428,
+      "sha256": "7ec4a507779317bb4c1f9e67432bd13c2189802683a850e643e74e487086b816"
     },
     {
       "kind": "doc",
@@ -147,8 +147,8 @@
       "format": "Markdown",
       "rows": null,
       "files": 1,
-      "size": 9462,
-      "sha256": "2cd51b6a720cac61560608e7c06ea04c0e49307eac57d7875306d3670e07af2b"
+      "size": 9545,
+      "sha256": "6afc28a8bccc6c75a58ef209ff9a86cc721fb7a5f551e9c8fbbdecf3cb188c48"
     }
   ],
   "waves": [
@@ -156,24 +156,24 @@
       "id": "wave1",
       "tag": "oleada-1",
       "label": "Oleada 1",
-      "release_at": "2026-10-28T16:00:00.000Z",
-      "release_at_local": "2026-10-28T18:00:00+02:00",
+      "release_at": "2026-10-15T08:15:00.000Z",
+      "release_at_local": "2026-10-15T10:15:00+02:00",
       "asset": "wave1.tar.gz"
     },
     {
       "id": "wave2",
       "tag": "oleada-2",
       "label": "Oleada 2",
-      "release_at": "2026-10-29T08:00:00.000Z",
-      "release_at_local": "2026-10-29T10:00:00+02:00",
+      "release_at": "2026-10-15T11:15:00.000Z",
+      "release_at_local": "2026-10-15T13:15:00+02:00",
       "asset": "wave2.tar.gz"
     },
     {
       "id": "wave3",
       "tag": "oleada-3",
       "label": "Oleada 3",
-      "release_at": "2026-10-29T14:00:00.000Z",
-      "release_at_local": "2026-10-29T16:00:00+02:00",
+      "release_at": "2026-10-15T14:15:00.000Z",
+      "release_at_local": "2026-10-15T16:15:00+02:00",
       "asset": "wave3.tar.gz"
     }
   ],

@@ -37,11 +37,11 @@ python3 starter-kit/load_duckdb.py              # lo carga en un fichero DuckDB 
 
 | Cuándo | Qué |
 |---|---|
-| miércoles 28/10/2026 08:00 (hora peninsular) | Apertura: dataset disponible en la *release* `dataset-v1` |
-| miércoles 28/10/2026 17:00 (hora peninsular) | **Oleada 1** (`python3 starter-kit/fetch_dataset.py --wave 1`) |
-| jueves 29/10/2026 09:00 (hora peninsular) | **Oleada 2** (`--wave 2`) |
-| jueves 29/10/2026 15:00 (hora peninsular) | **Oleada 3** (`--wave 3`) |
-| jueves 29/10/2026 20:00 (hora peninsular) | Cierre de `respuestas.json` y de los reportes de oleada |
+| Apertura del evento | Dataset disponible en la *release* `dataset-v1` |
+| jueves 15/10/2026 10:15 (hora peninsular) | **Oleada 1** (`python3 starter-kit/fetch_dataset.py --wave 1`) |
+| jueves 15/10/2026 13:15 (hora peninsular) | **Oleada 2** (`--wave 2`) |
+| jueves 15/10/2026 16:15 (hora peninsular) | **Oleada 3** (`--wave 3`) |
+| jueves 15/10/2026 19:30 (hora peninsular) | Cierre de `respuestas.json` y de los reportes de oleada |
 | Final del evento | Presentación: 10 min + 10 min de defensa |
 
 Las oleadas se publican como *releases* `oleada-1`, `oleada-2` y `oleada-3` a la hora indicada

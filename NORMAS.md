@@ -34,7 +34,7 @@
 - **Marca temporal:** cuenta la hora del *push* registrada por GitHub, no la de vuestro
   ordenador. No reescribáis el historial (`push --force`) del repositorio de entrega: se trata
   como entrega inválida.
-- **Cierre del cuestionario y de los reportes de oleada: jueves 29/10/2026 20:00 (hora peninsular).** Los cambios
+- **Cierre del cuestionario y de los reportes de oleada: jueves 15/10/2026 19:30 (hora peninsular).** Los cambios
   posteriores en esos ficheros no se tienen en cuenta. El informe, el resumen ejecutivo y el
   plan de respuesta pueden actualizarse hasta el inicio de las presentaciones.
 - Para el reto A (detección en vivo), cada oleada se reporta en su propio fichero

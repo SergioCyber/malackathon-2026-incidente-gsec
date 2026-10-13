@@ -1,0 +1,83 @@
+# Publica las releases-borrador de las oleadas a su hora (o a mano).
+#
+# Plantilla: publish/public_repo_template/.github/workflows/publish_wave.yml; la versión que
+# vive en el repositorio público la genera tools/build_release.py con el calendario del evento:
+#   oleada 1 · jueves 15/10/2026 10:15 (hora peninsular) · 2026-10-15T08:15:00Z
+#   oleada 2 · jueves 15/10/2026 13:15 (hora peninsular) · 2026-10-15T11:15:00Z
+#   oleada 3 · jueves 15/10/2026 16:15 (hora peninsular) · 2026-10-15T14:15:00Z
+#
+# Dos disparadores: manual (Actions → «Publicar oleada» → Run workflow → elegir la oleada, que se
+# publica en el acto) y programado (cada 15 min, en UTC, durante los días del evento). Cada
+# ejecución publica toda oleada cuya hora ya ha pasado y siga en borrador; es idempotente, así que
+# da igual que un cron se retrase, se repita o se pierda. Sin checkout ni acciones de terceros:
+# el runner ya trae `gh`, que se autentica con el token del propio workflow.
+name: Publicar oleada
+
+on:
+  workflow_dispatch:
+    inputs:
+      oleada:
+        description: "Oleada que se publica AHORA (sin esperar a su hora)"
+        required: true
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - "3"
+  schedule:
+    - cron: "*/15 * 15 10 *"   # 2026-10-15 (UTC), cada 15 min
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-oleada
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  PREFIJO_OLEADA: "oleada-"
+  # número=hora UTC de publicación (ISO-8601); el dataset base es la release dataset-v1
+  OLEADAS: "1=2026-10-15T08:15:00Z 2=2026-10-15T11:15:00Z 3=2026-10-15T14:15:00Z"
+
+jobs:
+  publicar:
+    name: Publicar las oleadas que ya tocan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Comprobar borradores y publicar
+        shell: bash
+        env:
+          FORZAR: ${{ github.event.inputs.oleada }}
+        run: |
+          set -euo pipefail
+          ahora=$(date -u +%s)
+          echo "Ahora: $(date -u +%Y-%m-%dT%H:%M:%SZ) · repo: ${GH_REPO} · forzar: ${FORZAR:-no}"
+          fallos=0
+          for par in ${OLEADAS}; do
+            n="${par%%=*}"
+            cuando="${par#*=}"
+            tag="${PREFIJO_OLEADA}${n}"
+            debido=$(date -u -d "${cuando}" +%s)
+            if [ -n "${FORZAR}" ]; then
+              [ "${FORZAR}" = "${n}" ] || continue
+              echo "${tag}: publicación forzada a mano"
+            elif [ "${ahora}" -lt "${debido}" ]; then
+              echo "${tag}: prevista para ${cuando}; todavía no toca"
+              continue
+            fi
+            if ! borrador=$(gh release view "${tag}" --json isDraft --jq .isDraft 2>/dev/null); then
+              echo "::error::${tag}: la release no existe (crearla con tools/publish_github.py draft-waves)"
+              fallos=$((fallos + 1))
+              continue
+            fi
+            if [ "${borrador}" = "true" ]; then
+              gh release edit "${tag}" --draft=false --latest=false
+              echo "${tag}: PUBLICADA a las $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            else
+              echo "${tag}: ya estaba publicada"
+            fi
+          done
+          exit "${fallos}"

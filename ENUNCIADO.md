@@ -68,7 +68,7 @@ solo vuestro equipo y el jurado tienen acceso). Todo lo que se evalúa vive ahí
 Los ficheros JSON tienen **formato obligatorio** y se corrigen automáticamente. Antes de hacer
 *push*, validadlos con `python3 starter-kit/validar_respuestas.py respuestas.json`: el repositorio
 de entrega ejecuta la misma comprobación en cada *push* y os avisa si el formato no es válido.
-El cierre del cuestionario y de los reportes de oleada es el **jueves 29/10/2026 20:00 (hora peninsular)**; los
+El cierre del cuestionario y de los reportes de oleada es el **jueves 15/10/2026 19:30 (hora peninsular)**; los
 *commits* posteriores a esa hora no se tienen en cuenta.
 
 ## RETOS BÁSICOS
@@ -174,8 +174,8 @@ Entregables:
 ### A.- «El ataque continúa» · Detección en vivo *(reto bandera)*
 
 Durante el evento, la organización publicará **tres oleadas de nueva telemetría** en momentos
-anunciados pero con contenido desconocido (miércoles 28/10/2026 17:00 (hora peninsular), jueves 29/10/2026 09:00 (hora peninsular) y
-jueves 29/10/2026 15:00 (hora peninsular)). Cada oleada aparece como una *release* de este repositorio y se descarga con
+anunciados pero con contenido desconocido (jueves 15/10/2026 10:15 (hora peninsular), jueves 15/10/2026 13:15 (hora peninsular) y
+jueves 15/10/2026 16:15 (hora peninsular)). Cada oleada aparece como una *release* de este repositorio y se descarga con
 `python3 starter-kit/fetch_dataset.py --wave N`. Los equipos deberán detectar y reportar la
 actividad maliciosa (qué, cuándo, dónde, técnica ATT&CK, evidencia) en el fichero `oleadaN.json`
 de su repositorio de entrega; **la hora del *push* es la hora de detección**. Se puntúa el
