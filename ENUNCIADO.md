@@ -57,8 +57,21 @@ despliegue es de libre elección.
 
 ## Cómo se entrega todo
 
-Cada equipo dispone de un **repositorio privado de entrega** en GitHub (lo crea la organización;
-solo vuestro equipo y el jurado tienen acceso). Todo lo que se evalúa vive ahí:
+Cada equipo entrega en **su propio repositorio privado de GitHub**, que crea el equipo al empezar
+(5 minutos, lo hace una sola persona):
+
+1. Entrad en la plantilla pública **`https://github.com/SergioCyber/entrega-plantilla`** y pulsad **Use this template → Create a new
+   repository**. Propietario: cualquier miembro del equipo. Nombre sugerido: `entrega-<equipo>`.
+   Visibilidad: **Private** (obligatorio).
+2. En el repositorio nuevo, **Settings → Collaborators → Add people**: añadid a **`SergioCyber`** y a
+   **`alegp-google`** (organización y jurado) y al resto del equipo. Sin esos dos colaboradores no
+   podemos recoger ni corregir vuestra entrega.
+3. Enviad la **URL del repositorio** y el nombre del equipo por el canal de la organización del Malackathon (por confirmar) **antes de la primera
+   entrega** (idealmente en la primera hora).
+
+Mantened el repositorio **privado**, con los dos colaboradores y **sin reescribir el historial**
+(`force-push`, borrado de ramas) hasta que se publiquen los resultados: los *commits* son vuestra
+marca temporal. Todo lo que se evalúa vive ahí:
 
 | Fichero | Qué es | Reto |
 |---|---|---|
@@ -69,10 +82,10 @@ solo vuestro equipo y el jurado tienen acceso). Todo lo que se evalúa vive ahí
 | `informe/` | Informe técnico (máx. 6 páginas) + resumen ejecutivo (1 página) + plan de respuesta (2 páginas) | 3 y C |
 
 Los ficheros JSON tienen **formato obligatorio** y se corrigen automáticamente. Antes de hacer
-*push*, validadlos con `python3 starter-kit/validar_respuestas.py respuestas.json`: el repositorio
-de entrega ejecuta la misma comprobación en cada *push* y os avisa si el formato no es válido.
-El cierre del cuestionario y de los reportes de oleada es el **jueves 15/10/2026 19:30 (hora peninsular)**; los
-*commits* posteriores a esa hora no se tienen en cuenta.
+*push*, validadlos con `python3 starter-kit/validar_respuestas.py respuestas.json`: la plantilla
+incluye una acción de GitHub que ejecuta la misma comprobación en cada *push* y os avisa si el
+formato no es válido. El cierre del cuestionario y de los reportes de oleada es el
+**jueves 15/10/2026 19:30 (hora peninsular)**; los *commits* posteriores a esa hora no se tienen en cuenta.
 
 ## RETOS BÁSICOS
 

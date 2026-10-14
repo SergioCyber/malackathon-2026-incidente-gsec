@@ -50,7 +50,10 @@ Releases») para recibir el aviso.
 
 ## Entregas
 
-Cada equipo tiene un **repositorio privado de entrega** (repositorio privado `entrega-<equipo>` creado por la organización en GitHub). Ahí van
+Cada equipo entrega en **su propio repositorio privado de GitHub**: se crea desde
+`https://github.com/SergioCyber/entrega-plantilla` con *Use this template* (visibilidad **Private**), se añade a `SergioCyber` y `alegp-google`
+como colaboradores en *Settings → Collaborators* y se envía la URL a la organización (detalle en
+`ENUNCIADO.md`, «Cómo se entrega todo»). Ahí van
 `ENTREGA.md`, `respuestas.json`, `oleadaN.json`, `BITACORA.md` e `informe/`. Los JSON tienen
 formato obligatorio: validadlos antes de subirlos.
 

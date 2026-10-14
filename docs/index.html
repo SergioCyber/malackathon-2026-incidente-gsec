@@ -289,7 +289,7 @@
             <tr><td><code>informe/</code></td><td>Informe técnico (≤ 6 pág.), resumen ejecutivo (1 pág.), plan de respuesta (≤ 2 pág.)</td><td>3 y C</td></tr>
           </tbody>
         </table>
-        <div class="body" style="border-top:1px solid var(--line)">Todo va en el <b>repositorio privado de entrega</b> del equipo (<span id="channel">lo crea la organización</span>); solo el equipo y el jurado tienen acceso. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</div>
+        <div class="body" style="border-top:1px solid var(--line)">Todo va en el <b>repositorio privado de GitHub que crea cada equipo</b>: <a id="lnkTemplate" href="#" target="_blank" rel="noopener">plantilla</a> → <i>Use this template</i> (visibilidad <b>Private</b>) → <i>Settings → Collaborators</i>: añadir a <span id="organisers"><code>SergioCyber</code> y <code>alegp-google</code></span> → enviar la URL a la organización antes de la primera entrega. Privado y sin reescribir el historial hasta los resultados. Cierre del cuestionario y de los reportes de oleada: <b id="deadlineTxt">—</b>.</div>
       </div>
       <div class="stack">
         <div class="card"><h2>Validar antes del push</h2><div class="body">
@@ -372,7 +372,8 @@
   document.title = `${m.tag_base} · Incidente en el GSEC — MalakaTotal`;
   const inlineCode = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
   if (m.contact) $('#contact').innerHTML = inlineCode(m.contact);
-  if (m.submission_channel) $('#channel').innerHTML = inlineCode(m.submission_channel);
+  if (m.template_url && /^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(m.template_url)) { const el = $('#lnkTemplate'); el.href = m.template_url; el.textContent = m.template_url.replace('https://github.com/', ''); }
+  if (Array.isArray(m.organisers) && m.organisers.length) $('#organisers').innerHTML = m.organisers.map(x => `<code>${esc(String(x))}</code>`).join(' y ');
   if (m.deadline) $('#deadlineTxt').textContent = fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)';
   if (m.generated_at) $('#buildInfo').textContent = `Build ${fmtDate(m.generated_at)} (${ago(m.generated_at)}) · semilla ${m.seed ?? '—'}.`;
 

@@ -137,6 +137,10 @@
   "deadline": "2026-10-15T19:30:00+02:00",
   "event_start": "2026-10-15T10:15:00+02:00",
   "generated_at": "2026-10-14T10:13:53+00:00",
+  "organisers": [
+    "SergioCyber",
+    "alegp-google"
+  ],
   "repo": "SergioCyber/malackathon-2026-incidente-gsec",
   "seed": 2026,
   "sources": [
@@ -288,8 +292,10 @@
       "rows": 20000
     }
   ],
-  "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
+  "submission_channel": "el repositorio privado de GitHub que crea cada equipo desde la plantilla, con `SergioCyber` y `alegp-google` como colaboradores",
   "tag_base": "dataset-v1.1",
+  "template_repo": "SergioCyber/entrega-plantilla",
+  "template_url": "https://github.com/SergioCyber/entrega-plantilla",
   "totals": {
     "bytes_compressed": 277381134,
     "files": 244,

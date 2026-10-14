@@ -20,9 +20,9 @@
 ## 2. Equipos y herramientas
 
 - Equipos de **4 a 5 personas** (mínimo 4, máximo 5). Cada miembro necesita una cuenta de GitHub:
-  el acceso al repositorio de entrega se concede por usuario. Todo el trabajo se realiza durante la
-  ventana del evento, salvo la lectura del enunciado y la preparación del entorno (instalar
-  herramientas, crear cuentas).
+  el repositorio de entrega es privado y el acceso se concede por usuario. Todo el trabajo se
+  realiza durante la ventana del evento, salvo la lectura del enunciado y la preparación del
+  entorno (instalar herramientas, crear cuentas).
 - **Libertad total de herramientas**, incluidos asistentes de IA. Sois responsables de lo que
   entregáis: una respuesta inventada por un asistente a partir de una pista falsa cuenta como
   trampa. Documentad en la bitácora qué herramientas habéis usado y para qué.
@@ -31,8 +31,12 @@
 
 ## 3. Entregas y plazos
 
-- Todo se entrega en el **repositorio privado de entrega** de cada equipo. La organización y el
-  jurado tienen acceso de lectura; nadie más.
+- Todo se entrega en el **repositorio privado de GitHub que crea cada equipo** a partir de la
+  plantilla pública `https://github.com/SergioCyber/entrega-plantilla` (*Use this template*, visibilidad **Private**), con
+  `SergioCyber` y `alegp-google` añadidos como **colaboradores** (organización y jurado). La URL del repositorio se
+  comunica a la organización antes de la primera entrega. El repositorio se mantiene privado, con
+  esos colaboradores y sin reescribir el historial hasta la publicación de los resultados; un
+  repositorio público o sin acceso para la organización no se puede evaluar.
 - `respuestas.json` y `oleadaN.json` tienen **formato obligatorio** (ver
   `starter-kit/FORMATO_ENTREGA_ES.md`). Un fichero que no valide no puntúa. El repositorio de
   entrega os avisa en cada *push*; también podéis validar en local con
