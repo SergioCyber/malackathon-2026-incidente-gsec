@@ -38,7 +38,7 @@ env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
   PREFIJO_OLEADA: "oleada-"
-  # número=hora UTC de publicación (ISO-8601); el dataset base es la release dataset-v1
+  # número=hora UTC de publicación (ISO-8601); el dataset base es la release dataset-v1.1
   OLEADAS: "1=2026-10-15T08:15:00Z 2=2026-10-15T11:15:00Z 3=2026-10-15T14:15:00Z"
 
 jobs:

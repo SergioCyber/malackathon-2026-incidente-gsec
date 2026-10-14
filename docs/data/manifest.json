@@ -6,9 +6,9 @@
       "kind": "source",
       "label": "Cortafuegos perimetral e interno",
       "name": "base_firewall.tar.gz",
-      "rows": 2471081,
-      "sha256": "df07a3142a19baf5309ff7da22c17167d7c23fdf17869a70f519af6ce977acf9",
-      "size": 64753640,
+      "rows": 2468377,
+      "sha256": "2c7afb0d015b2d54d89b7a0fb88237dd791fe35141dc230e5515a9c19aa01f27",
+      "size": 64700588,
       "source": "firewall"
     },
     {
@@ -28,9 +28,9 @@
       "kind": "source",
       "label": "Proxy web",
       "name": "base_proxy.tar.gz",
-      "rows": 1960640,
-      "sha256": "5f8dbe6f88cd62e86d3f468cff6a33fdb38be29374f4fa7e7754be868d9582a2",
-      "size": 70718002,
+      "rows": 1960091,
+      "sha256": "4a2d5800b90bde0ae3a9fb50c07026a7fa09b6fadadc941440bf78df50e63c46",
+      "size": 70802055,
       "source": "proxy"
     },
     {
@@ -39,9 +39,9 @@
       "kind": "source",
       "label": "Resolutores DNS (internos + sandbox)",
       "name": "base_dns.tar.gz",
-      "rows": 2427238,
-      "sha256": "2c3865d90dd0f38583766a7d5199b011b1f6db2af58f62d8673463af7c8f91fb",
-      "size": 43572527,
+      "rows": 2426718,
+      "sha256": "3b75b7cfc957c9ea8cd1634344d674586f4045a44166581639c1c464b3aed737",
+      "size": 43798775,
       "source": "dns"
     },
     {
@@ -95,8 +95,8 @@
       "label": "Detonaciones del sandbox farm",
       "name": "base_sandbox.tar.gz",
       "rows": 52844,
-      "sha256": "b11b385906b6648c1478186f4e7d55220edd1be4a0e5f452bca50b9a9545626c",
-      "size": 5804658,
+      "sha256": "21779da53d22aa3cddd47e198b0a219fcd769ac6abd553ee2e9e6183597c8f8c",
+      "size": 6007848,
       "source": "sandbox"
     },
     {
@@ -116,9 +116,9 @@
       "kind": "context",
       "label": "Inventario, turnos, casos, tickets, feed de IOCs, GeoIP sintético y notas de guardia",
       "name": "base_contexto.tar.gz",
-      "rows": 32271,
-      "sha256": "c4afeff55cebd650477e73e9ad80a2ddd74be857d4edde6fc1d8024766ad1730",
-      "size": 670428,
+      "rows": 32431,
+      "sha256": "9931444fb7cb52dee9af93ae8dc6d768562a6fd393a99676c2e3d2929d200b4f",
+      "size": 677499,
       "source": "contexto"
     },
     {
@@ -136,7 +136,7 @@
   "contact": "el canal de la organización del Malackathon (por confirmar)",
   "deadline": "2026-10-15T19:30:00+02:00",
   "event_start": "2026-10-15T10:15:00+02:00",
-  "generated_at": "2026-10-13T08:46:22+00:00",
+  "generated_at": "2026-10-14T08:40:27+00:00",
   "repo": "SergioCyber/malackathon-2026-incidente-gsec",
   "seed": 2026,
   "sources": [
@@ -145,7 +145,7 @@
       "format": "CSV gzip",
       "id": "firewall",
       "path": "firewall/fw_AAAA-MM-DD.csv.gz",
-      "rows": 2471081
+      "rows": 2468377
     },
     {
       "description": "Concentrador VPN (conexiones, autenticación, MFA, sesiones)",
@@ -159,14 +159,14 @@
       "format": "CSV gzip",
       "id": "proxy",
       "path": "proxy/proxy_AAAA-MM-DD.csv.gz",
-      "rows": 1960640
+      "rows": 1960091
     },
     {
       "description": "Resolutores DNS internos y resolutor de la granja de sandbox (consultas y respuestas)",
       "format": "JSONL gzip",
       "id": "dns",
       "path": "dns/dns_AAAA-MM-DD.jsonl.gz",
-      "rows": 2427238
+      "rows": 2426718
     },
     {
       "description": "Pasarela de correo: mensajes entrantes y salientes, veredictos, adjuntos y acciones",
@@ -222,7 +222,7 @@
       "format": "CSV",
       "id": "ti_feed",
       "path": "ti/iocs.csv",
-      "rows": 401
+      "rows": 561
     },
     {
       "description": "Algunos mensajes completos (texto plano UTF-8)",
@@ -289,11 +289,11 @@
     }
   ],
   "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
-  "tag_base": "dataset-v1",
+  "tag_base": "dataset-v1.1",
   "totals": {
-    "bytes_compressed": 276912448,
+    "bytes_compressed": 277379958,
     "files": 244,
-    "rows": 9160288
+    "rows": 9156675
   },
   "wave_tag_prefix": "oleada-",
   "waves": [

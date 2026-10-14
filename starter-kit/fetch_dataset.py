@@ -176,7 +176,7 @@ class Downloader:
     def _contexts(self) -> list[tuple[str, ssl.SSLContext]]:
         out: list[tuple[str, ssl.SSLContext]] = [("sistema", ssl.create_default_context())]
         try:
-            import certifi  # type: ignore[import-not-found]  # optional dependency
+            import certifi  # type: ignore[import-not-found,unused-ignore]  # optional dependency
             out.append(("certifi", ssl.create_default_context(cafile=certifi.where())))
         except Exception:  # noqa: S110  (certifi absent or broken: simply not an option)
             pass

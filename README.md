@@ -16,7 +16,7 @@ python3 starter-kit/fetch_dataset.py            # descarga y verifica el dataset
 python3 starter-kit/load_duckdb.py              # lo carga en un fichero DuckDB en ~20 s
 ```
 
-- `fetch_dataset.py` descarga los ficheros de la *release* `dataset-v1`, comprueba su SHA-256
+- `fetch_dataset.py` descarga los ficheros de la *release* `dataset-v1.1`, comprueba su SHA-256
   y los extrae. Sin GitHub a mano (o si la wifi falla), funciona también desde el pendrive de la
   acreditación: `--from-dir /Volumes/MALACKATHON`.
 - `load_duckdb.py` es solo un atajo: podéis usar el motor que queráis (PostgreSQL, ClickHouse,
@@ -37,7 +37,7 @@ python3 starter-kit/load_duckdb.py              # lo carga en un fichero DuckDB 
 
 | Cuándo | Qué |
 |---|---|
-| Apertura del evento | Dataset disponible en la *release* `dataset-v1` |
+| Apertura del evento | Dataset disponible en la *release* `dataset-v1.1` |
 | jueves 15/10/2026 10:15 (hora peninsular) | **Oleada 1** (`python3 starter-kit/fetch_dataset.py --wave 1`) |
 | jueves 15/10/2026 13:15 (hora peninsular) | **Oleada 2** (`--wave 2`) |
 | jueves 15/10/2026 16:15 (hora peninsular) | **Oleada 3** (`--wave 3`) |
