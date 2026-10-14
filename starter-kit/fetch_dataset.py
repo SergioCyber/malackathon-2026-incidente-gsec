@@ -80,7 +80,7 @@ class Source:
 
 def load_source_defaults(script_dir: Path) -> Source:
     """Defaults written by the organisers next to this script (missing file => no defaults)."""
-    source = Source(repo=None, tag_base="dataset-v1", wave_tag_prefix="oleada-")
+    source = Source(repo=None, tag_base="dataset-v1.1", wave_tag_prefix="oleada-")
     path = script_dir / SOURCE_FILE
     if not path.is_file():
         return source
