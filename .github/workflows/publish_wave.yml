@@ -6,21 +6,24 @@
 #   oleada 2 · jueves 15/10/2026 13:15 (hora peninsular) · 2026-10-15T11:15:00Z
 #   oleada 3 · jueves 15/10/2026 16:15 (hora peninsular) · 2026-10-15T14:15:00Z
 #
-# Dos disparadores: manual (Actions → «Publicar oleada» → Run workflow → elegir la oleada, que se
-# publica en el acto) y programado (cada 15 min, en UTC, durante los días del evento). Cada
-# ejecución publica toda oleada cuya hora ya ha pasado y siga en borrador; es idempotente, así que
-# da igual que un cron se retrase, se repita o se pierda. Sin checkout ni acciones de terceros:
-# el runner ya trae `gh`, que se autentica con el token del propio workflow.
+# Dos disparadores: manual (Actions → «Publicar oleada» → Run workflow → «auto» publica las que
+# ya tocan; «1»/«2»/«3» publica esa oleada en el acto) y programado (cada 15 min, en UTC, durante
+# los días del evento). Cada ejecución publica toda oleada cuya hora ya ha pasado y siga en
+# borrador; es idempotente, así que da igual que un cron se retrase, se repita o se pierda. Sin
+# checkout ni acciones de terceros: el runner ya trae `gh`, que se autentica con el token del
+# propio workflow.
 name: Publicar oleada
 
 on:
   workflow_dispatch:
     inputs:
       oleada:
-        description: "Oleada que se publica AHORA (sin esperar a su hora)"
+        description: "auto = publicar las que ya tocan · 1/2/3 = publicar esa oleada AHORA"
         required: true
         type: choice
+        default: "auto"
         options:
+          - "auto"
           - "1"
           - "2"
           - "3"
@@ -54,6 +57,7 @@ jobs:
         run: |
           set -euo pipefail
           ahora=$(date -u +%s)
+          [ "${FORZAR:-}" = "auto" ] && FORZAR=""
           echo "Ahora: $(date -u +%Y-%m-%dT%H:%M:%SZ) · repo: ${GH_REPO} · forzar: ${FORZAR:-no}"
           fallos=0
           for par in ${OLEADAS}; do
