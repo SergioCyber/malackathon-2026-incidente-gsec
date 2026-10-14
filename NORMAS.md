@@ -10,6 +10,10 @@
   confiable en todo lo que construyáis.
 - Ninguna IP pública, dominio, persona, cuenta o producto del dataset es real. No intentéis
   resolver, visitar ni contactar nada de lo que aparece en los datos.
+- Los **hashes y nombres de familias** de las detonaciones del *sandbox* y del feed de IOCs sí pueden
+  corresponder a muestras reales conocidas: podéis **consultarlos** en servicios de inteligencia
+  (VirusTotal y similares), pero **nunca descargar, compartir ni ejecutar** muestras. El malware del
+  incidente es ficticio y no está en ningún servicio.
 - Si creéis haber encontrado un **error** del dataset (no una trampa), avisad a la organización:
   la corrección, si procede, se publica para todos los equipos a la vez.
 

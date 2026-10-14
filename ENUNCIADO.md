@@ -36,7 +36,10 @@ despliegue es de libre elección.
 > ℹ️ **Sobre el escenario.** Este reto es una obra de ficción con fines docentes. La red, los
 > sistemas, las personas, los dominios y los datos son inventados. La arquitectura corresponde a
 > una red de laboratorio aislada y deliberadamente clásica (Windows, VPN, SMB), **no** a la
-> infraestructura real de Google ni del GSEC.
+> infraestructura real de Google ni del GSEC. Única excepción: las muestras que detona el *sandbox* del
+> laboratorio (y el feed de IOCs) llevan **hashes y nombres de familias reales** para que podáis
+> contextualizarlas en servicios como VirusTotal; sus dominios e IPs siguen siendo ficticios y el malware
+> del incidente que investigáis es inventado (sus hashes no existen fuera de este dataset).
 
 **¿Qué aprenderás participando?**
 

@@ -117,8 +117,8 @@
       "label": "Inventario, turnos, casos, tickets, feed de IOCs, GeoIP sintético y notas de guardia",
       "name": "base_contexto.tar.gz",
       "rows": 32431,
-      "sha256": "9931444fb7cb52dee9af93ae8dc6d768562a6fd393a99676c2e3d2929d200b4f",
-      "size": 677499,
+      "sha256": "a2b7d65a701fceb8672494319b4976d4d4fec74686d816bf35904ba5203ceed1",
+      "size": 677871,
       "source": "contexto"
     },
     {
@@ -128,15 +128,15 @@
       "label": "Diccionario de datos",
       "name": "README_DATASET_ES.md",
       "rows": null,
-      "sha256": "2b6e053a8a3bbdb365b0366ab58e1c71b2b49c6e6247a11c284d24b1b9d377ba",
-      "size": 9545,
+      "sha256": "91134387ac4fd65988ddc85de8665ed1abf552cce10fa14a257ce9f61d546521",
+      "size": 10349,
       "source": "doc"
     }
   ],
   "contact": "el canal de la organización del Malackathon (por confirmar)",
   "deadline": "2026-10-15T19:30:00+02:00",
   "event_start": "2026-10-15T10:15:00+02:00",
-  "generated_at": "2026-10-14T08:40:27+00:00",
+  "generated_at": "2026-10-14T10:13:53+00:00",
   "repo": "SergioCyber/malackathon-2026-incidente-gsec",
   "seed": 2026,
   "sources": [
@@ -291,7 +291,7 @@
   "submission_channel": "repositorio privado `entrega-<equipo>` creado por la organización en GitHub",
   "tag_base": "dataset-v1.1",
   "totals": {
-    "bytes_compressed": 277379958,
+    "bytes_compressed": 277381134,
     "files": 244,
     "rows": 9156675
   },
