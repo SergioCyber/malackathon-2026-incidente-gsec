@@ -28,10 +28,10 @@ El reto básico consiste en cargar y modelar la telemetría en **la base de dato
 explorarla, e **investigar el incidente**. El resto de herramientas, frameworks y plataformas de
 despliegue es de libre elección.
 
-> ⚠️ **Los datos del reto son hostiles.** Contienen cadenas diseñadas para romper analizadores y
-> visores y para confundir a asistentes automáticos. Tratadlos como lo que son: datos controlados
-> por un atacante. Verificad siempre con evidencia. Y recordad dónde estáis: en un laboratorio de
-> malware **no todo el tráfico malicioso es un ataque**; parte es trabajo legítimo del centro.
+> ⚠️ **Tratad los datos como lo que son: datos controlados por un atacante.** Entrada no confiable
+> para vuestras consultas, vuestra consola y las herramientas o asistentes que uséis. Verificad
+> siempre con evidencia. Y recordad dónde estáis: en un laboratorio de malware **no todo el tráfico
+> malicioso es un ataque**; parte es trabajo legítimo del centro.
 
 > ℹ️ **Sobre el escenario.** Este reto es una obra de ficción con fines docentes. La red, los
 > sistemas, las personas, los dominios y los datos son inventados. La arquitectura corresponde a

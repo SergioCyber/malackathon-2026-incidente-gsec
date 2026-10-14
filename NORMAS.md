@@ -5,9 +5,8 @@
 - El conjunto de datos es **sintético y ficticio**. Se entrega exclusivamente para este reto: no
   puede publicarse, redistribuirse ni usarse para otros fines fuera del evento. Podéis conservar
   vuestro código; borrad los datos al terminar si la organización lo pide.
-- Los datos son **hostiles a propósito**: contienen cadenas pensadas para romper analizadores,
-  visores web y asistentes de IA, además de pistas falsas plantadas. Tratadlos como entrada no
-  confiable en todo lo que construyáis.
+- Tratad los datos como **entrada no confiable** en todo lo que construyáis (consultas, consola,
+  herramientas y asistentes que uséis) y **verificad siempre con evidencia** antes de afirmar algo.
 - Ninguna IP pública, dominio, persona, cuenta o producto del dataset es real. No intentéis
   resolver, visitar ni contactar nada de lo que aparece en los datos.
 - Los **hashes y nombres de familias** de las detonaciones del *sandbox* y del feed de IOCs sí pueden
