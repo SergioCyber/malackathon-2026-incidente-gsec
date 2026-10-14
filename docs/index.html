@@ -58,8 +58,6 @@
 
   /* ----- page ----- */
   main.wrap { padding: 14px 0 48px; }
-  .crumbs { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; display: flex; gap: 6px; align-items: center; }
-  .crumbs a { color: var(--muted); } .crumbs .sep { color: var(--muted-2); }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
   .card > h2 { margin: 0; height: 44px; padding: 0 16px; font-size: 13.5px; font-weight: 500; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
   .card > h2 .sp { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 12.5px; }
@@ -67,22 +65,14 @@
   .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
 
   /* report header */
-  .report { display: grid; grid-template-columns: 112px minmax(0, 1fr) 272px; gap: 20px; align-items: start; padding: 18px 20px; }
-  .gauge { width: 112px; }
-  .gauge svg { width: 112px; height: 64px; display: block; }
-  .gauge .v { text-align: center; margin-top: -30px; font-size: 26px; font-weight: 500; color: var(--green); line-height: 1; }
-  .gauge .k { text-align: center; font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
-  .idline { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .idline .tag { color: var(--text); font-weight: 500; }
-  .ttl { font-size: 18px; font-weight: 500; margin: 4px 0 2px; letter-spacing: -.01em; }
+  .report { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 24px; align-items: center; padding: 18px 20px; }
+  .ttl { font-size: 18px; font-weight: 500; margin: 2px 0 4px; letter-spacing: -.01em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; height: 24px; padding: 0 10px; border-radius: 3px; font-size: 12px; background: var(--chip); color: var(--muted); }
+  .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; } .chip.warn i { background: var(--amber); }
+  .chip.mono { font-family: var(--mono); color: var(--text); }
   .meta { color: var(--muted); font-size: 13px; }
   .meta span + span::before { content: "·"; color: var(--muted-2); margin: 0 7px; }
-  .verdicts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .desc { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; max-width: 76ch; }
-  .vd { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px 0 8px; border-radius: 3px; font-size: 12.5px; font-weight: 500; border: 1px solid transparent; }
-  .vd i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; display: inline-block; }
-  .vd small { font-weight: 400; opacity: .8; }
-  .vd.green { background: var(--green-bg); color: var(--green); } .vd.red { background: var(--red-bg); color: var(--red); } .vd.amber { background: var(--amber-bg); color: var(--amber); } .vd.grey { background: var(--chip); color: var(--muted); }
   .side { border-left: 1px solid var(--line); padding-left: 20px; min-width: 0; }
   .side h4 { margin: 0 0 4px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .wave { display: flex; align-items: center; gap: 9px; height: 30px; border-top: 1px solid var(--line); font-size: 13px; }
@@ -90,9 +80,6 @@
   .dot-s { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); flex: none; } .dot-s.on { background: var(--green); } .dot-s.base { background: var(--blue); }
   .wave .t { margin-left: auto; color: var(--muted); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; }
   .side .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
-  .stat { padding: 12px 20px; border-left: 1px solid var(--line); } .stat:first-child { border-left: 0; }
-  .stat .k { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); } .stat .v { font-size: 18px; font-weight: 500; margin-top: 2px; } .stat .s { font-size: 12px; color: var(--muted); }
 
   /* tabs */
   .tabs { display: flex; gap: 2px; margin: 14px 0 0; background: var(--card); border: 1px solid var(--line); border-bottom: 0; border-radius: var(--r) var(--r) 0 0; padding: 0 8px; overflow-x: auto; }
@@ -114,10 +101,8 @@
   .fname { min-width: 0; }
   .fname b { display: block; font-weight: 500; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .fname span { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .fname .sha { font-family: var(--mono); font-size: 11.5px; color: var(--muted-2); display: flex; align-items: center; gap: 6px; }
-  .fname .sha em { font-style: normal; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  col.c-rows { width: 104px; } col.c-size { width: 88px; } col.c-int { width: 150px; } col.c-act { width: 104px; }
-  .ok .short { display: none; }
+  col.c-rows { width: 104px; } col.c-size { width: 88px; } col.c-int { width: 168px; } col.c-act { width: 104px; }
+  td.int { white-space: nowrap; } td.int .copy { margin-left: 8px; vertical-align: middle; }
   .ok { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 500; white-space: nowrap; font-size: 12.5px; }
   .ok svg { width: 14px; height: 14px; fill: var(--green); flex: none; }
   .copy { border: 1px solid var(--line-2); background: transparent; color: var(--muted); border-radius: 3px; padding: 0 6px; height: 20px; font-size: 11px; line-height: 18px; flex: none; }
@@ -143,9 +128,9 @@
   footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
   footer nav { display: flex; gap: 14px; flex-wrap: wrap; } footer nav a { color: var(--muted); } footer nav a:hover { color: var(--text); }
   .empty { padding: 24px; text-align: center; color: var(--muted); }
-  @media (max-width: 1240px) { .cols { grid-template-columns: minmax(0, 1fr) 288px; } col.c-rows { width: 92px; } col.c-size { width: 80px; } col.c-int { width: 104px; } col.c-act { width: 100px; } .ok .long { display: none; } .ok .short { display: inline; } }
+  @media (max-width: 1240px) { .cols { grid-template-columns: minmax(0, 1fr) 288px; } col.c-rows { width: 92px; } col.c-size { width: 80px; } col.c-int { width: 104px; } col.c-act { width: 100px; } .ok .long { display: none; } td.int .copy { margin-left: 4px; } }
   @media (max-width: 1100px) { .nav .lnk { display: none; } }
-  @media (max-width: 960px) { .report { grid-template-columns: 112px minmax(0, 1fr); } .side { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; } .cols { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; } .stat { border-top: 1px solid var(--line); } .search { display: none; } }
+  @media (max-width: 960px) { .report { grid-template-columns: minmax(0, 1fr); } .side { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; } .cols { grid-template-columns: 1fr; } .search { display: none; } }
 </style>
 </head>
 <body>
@@ -175,21 +160,12 @@
 </header>
 
 <main class="wrap">
-  <div class="crumbs"><a href="#">MalakaTotal</a><span class="sep">/</span><span>Releases</span><span class="sep">/</span><span id="crumbTag" class="mono">dataset-v1</span></div>
-
   <section class="card">
     <div class="report">
-      <div class="gauge">
-        <svg viewBox="0 0 120 70" id="gaugeSvg"></svg>
-        <div class="v" id="gaugeVal">—</div>
-        <div class="k">integridad<br><span id="gaugeSub">—</span></div>
-      </div>
       <div style="min-width:0">
-        <div class="idline"><span class="tag" id="hlTag">dataset-v1</span> · <span id="hlRepo">github.com/ORG/REPO</span></div>
         <div class="ttl">Incidente en el GSEC — telemetría de la red de laboratorio GSEC-LAB</div>
         <div class="meta" id="metaline"></div>
-        <div class="verdicts" id="verdicts"></div>
-        <p class="desc">Telemetría sintética de 30 días de una red de laboratorio universitaria: cortafuegos, VPN, proxy, DNS, correo, EDR, Windows, auditoría de BD, sandbox y accesos físicos, más el contexto (inventario, turnos, tickets, IOCs). Se publica por oleadas; verifica cada fichero con su SHA-256 antes de analizarlo.</p>
+        <div class="chips"><span class="chip"><i></i>Datos sintéticos · ficción docente</span><span class="chip warn"><i></i>Datos hostiles: verifica con evidencia</span><span class="chip mono" id="hlTag">dataset-v1</span></div>
       </div>
       <aside class="side">
         <h4>Publicación</h4>
@@ -200,7 +176,6 @@
         </div>
       </aside>
     </div>
-    <div class="stats" id="stats"></div>
   </section>
 
   <nav class="tabs" id="tabs" aria-label="Secciones">
@@ -393,34 +368,23 @@
       ['lnkEnunciado', raw('ENUNCIADO.md')], ['lnkEnunciadoTop', raw('ENUNCIADO.md')], ['fEnunciado', raw('ENUNCIADO.md')],
       ['lnkFormato', raw('starter-kit/FORMATO_ENTREGA_ES.md')], ['lnkFormatoTop', raw('starter-kit/FORMATO_ENTREGA_ES.md')], ['fFormato', raw('starter-kit/FORMATO_ENTREGA_ES.md')],
       ['lnkNormas', raw('NORMAS.md')], ['lnkNormasTop', raw('NORMAS.md')], ['fNormas', raw('NORMAS.md')]]) { const el = document.getElementById(id); if (el) el.href = href; }
-  $('#cloneUrl').textContent = base; $('#hlTag').textContent = m.tag_base; $('#crumbTag').textContent = m.tag_base;
-  $('#hlRepo').textContent = `github.com/${repo}/releases/tag/${m.tag_base}`;
+  $('#cloneUrl').textContent = base; $('#hlTag').textContent = m.tag_base;
   const inlineCode = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
   if (m.contact) $('#contact').innerHTML = inlineCode(m.contact);
   if (m.submission_channel) $('#channel').innerHTML = inlineCode(m.submission_channel);
   if (m.deadline) $('#deadlineTxt').textContent = fmtDate(m.deadline, { timeZone: 'Europe/Madrid' }) + ' (hora peninsular)';
   if (m.generated_at) $('#buildInfo').textContent = `Build ${fmtDate(m.generated_at)} (${ago(m.generated_at)}) · semilla ${m.seed ?? '—'}.`;
 
-  // gauge (half ring) = files with a published digest
-  const withHash = assets.filter(a => a.sha256).length, frac = assets.length ? withHash / assets.length : 0;
-  const arc = (p) => { const a = Math.PI * (1 - p), x = 60 + 50 * Math.cos(a), y = 62 - 50 * Math.sin(a); return `M10 62 A50 50 0 0 1 ${x.toFixed(2)} ${y.toFixed(2)}`; };
-  $('#gaugeSvg').innerHTML = `<path d="M10 62 A50 50 0 0 1 110 62" fill="none" stroke="var(--line)" stroke-width="9" stroke-linecap="round"/><path d="${arc(Math.max(frac, 0.001))}" fill="none" stroke="var(--green)" stroke-width="9" stroke-linecap="round"/>`;
-  $('#gaugeVal').textContent = Math.round(frac * 100); $('#gaugeSub').textContent = `${withHash}/${assets.length} ficheros con SHA-256`;
-  $('#metaline').innerHTML = [fmtBytes(t.bytes_compressed), `${fmtInt(t.files)} ficheros`, `${fmtInt(t.rows)} filas`, m.generated_at ? `publicado ${fmtDate(m.generated_at, { dateStyle: 'medium', timeStyle: undefined })}` : null].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('');
-  $('#verdicts').innerHTML = `<span class="vd green"><i></i>Veredicto <small>sintético</small></span><span class="vd red"><i></i>Hostilidad <small>alta · XSS, prompt injection, pistas falsas</small></span><span class="vd amber"><i></i>Uso <small>exclusivo del reto</small></span><span class="vd grey"><i></i>Ficción docente</span>`;
   const days = m.window ? Math.round((new Date(m.window.end) - new Date(m.window.start)) / 864e5) : null;
-  $('#stats').innerHTML = [['Eventos', fmtInt(t.rows), 'todas las tablas'], ['Fuentes', `${srcAssets.length} + contexto`, 'inventario, tickets, IOCs'],
-    ['Ventana', days ? `${days} días` : '—', m.window ? `${fmtDate(m.window.start, { dateStyle: 'short', timeStyle: undefined })} → ${fmtDate(m.window.end, { dateStyle: 'short', timeStyle: undefined })}` : ''],
-    ['Oleadas', String(waves.length), waves.length ? `${fmtDate(waves[0].release_at, { timeZone: 'Europe/Madrid', dateStyle: 'short', timeStyle: 'short' })} → ${fmtDate(waves[waves.length - 1].release_at, { timeZone: 'Europe/Madrid', timeStyle: 'short', dateStyle: undefined })}` : '']]
-    .map(([k, v, s]) => `<div class="stat"><div class="k">${k}</div><div class="v">${esc(v)}</div><div class="s">${esc(s)}</div></div>`).join('');
+  $('#metaline').innerHTML = [days ? `${days} días de telemetría` : null, `${srcAssets.length} fuentes + contexto`, `${fmtInt(t.rows)} filas`, fmtBytes(t.bytes_compressed), m.generated_at ? `publicado ${fmtDate(m.generated_at, { dateStyle: 'medium', timeStyle: undefined })}` : null].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('');
 
   // downloads
   $('#assets tbody').innerHTML = assets.filter(a => a.kind !== 'doc').map(a => `
     <tr class="row" data-q="${esc((a.name + ' ' + a.source + ' ' + a.label + ' ' + a.format + ' ' + a.sha256).toLowerCase())}">
-      <td><div class="fcell"><span class="ftype">${FTYPE(a)}</span><div class="fname"><b title="${esc(a.name)}">${esc(a.name)}</b><span>${esc(a.label)} · ${esc(a.format)}${a.files ? ` · ${a.files} fichero${a.files > 1 ? 's' : ''}` : ''}</span><span class="sha" title="${esc(a.sha256)}"><em>${esc((a.sha256 || '').slice(0, 24))}…</em><button class="copy" data-text="${esc(a.sha256)}" title="Copiar SHA-256">copiar</button></span></div></div></td>
+      <td><div class="fcell"><span class="ftype">${FTYPE(a)}</span><div class="fname"><b title="${esc(a.name)}">${esc(a.name)}</b><span>${esc(a.label)} · ${esc(a.format)}${a.files ? ` · ${a.files} fichero${a.files > 1 ? 's' : ''}` : ''}</span></div></div></td>
       <td class="right num">${fmtInt(a.rows)}</td>
       <td class="right num">${fmtBytes(a.size)}</td>
-      <td><span class="ok">${CHECK}<span class="long">SHA-256 publicado</span><span class="short">SHA-256</span></span></td>
+      <td class="int"><span class="ok" title="${esc(a.sha256)}">${CHECK}<span class="long">SHA-256</span></span><button class="copy" data-text="${esc(a.sha256)}" title="Copiar SHA-256">copiar</button></td>
       <td class="right"><a class="btn sm primary" href="${dl(m.tag_base, a.name)}">Descargar</a></td>
     </tr>`).join('') || '<tr><td colspan="5" class="empty">Sin ficheros en el manifiesto.</td></tr>';
   $('#nAssets').textContent = assets.length;
